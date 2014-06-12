@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 // Database
 var mongo = require('mongoskin');
-var db = mongo.db("mongodb://localhost:27017/Tutorial1", {native_parser:true});
+var db = mongo.db("mongodb://localhost:27017/EZ-Food", {native_parser:true});
 
 var app = express();
 

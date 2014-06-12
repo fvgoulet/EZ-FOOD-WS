@@ -1,6 +1,62 @@
+header {
+    min-width: 960px;
+    width:100%;
+    height: 100px;
+    background-color: black;
+    position:relative;
+}
+
+nav{
+    position: absolute;
+    display:inline-block;
+    text-align: right;
+    min-width: 100%;
+    bottom: 0;
+    right: 0;
+}
+
+nav ul{
+    list-style-type: none;
+    margin: 0px;
+}
+
+nav ul li{
+    text-align: center;
+    display: inline-block;
+    min-width: 125px;
+    background-color: lightgrey;
+    color:black;
+    margin:0px 5px 5px 0px;
+    padding:5px;
+}
+
+#Logo{
+    color:white;
+    font-size: 2.5em;
+    font-family: Arial;
+    padding: 5px 0px 0px 15px;
+}
+
+#UserSalutation{
+    padding: 10px 10px 0px 0px;
+    text-align: right;
+    color:white;
+    float:right;
+}
+
+#Motto{
+    font-size: 0.3em
+
+}
+
+
+
 body {
-    padding: 30px;
+    padding: 0px;
+    margin: 0px;
+
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: white;
 }
 
 h2 {

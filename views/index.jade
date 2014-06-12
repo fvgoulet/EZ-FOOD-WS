@@ -1,5 +1,12 @@
 extends layout
 block content
+
+    - var user = {name : ''}
+
+    if user.name == ''
+        include ClientHeader
+    else
+        include DisconnectHeader
     h1= title
     p Welcome to our test
     // Wrapper

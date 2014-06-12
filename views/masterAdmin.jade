@@ -1,0 +1,94 @@
+extends layout
+
+
+
+block content
+
+
+    h1 EZ-Food
+    p Please fill the fields to create your account.
+    br
+    // Wrapper
+    #wrapper
+        // Create Account
+        h2 Create Account
+        #createAccountFields
+            if username
+                form(name="account", action="/createAccount/confirmAccount", method="post")
+                    br
+                    | Username :
+                    input(name='username', type='text', placeholder='Username', value='#{username}')
+                    | Password :
+                    input(name='userPassword', type='password', placeholder='Password', value='#{userPassword}')
+
+                    br
+                    | First Name :
+                    input(name='userFirstName', type='text', placeholder='First Name', value='#{userFirstName}')
+                    | Second Name :
+                    input(name='userSecondName', type='text', placeholder='Second Name', value='#{userSecondName}')
+                    | Birth Date :
+                    input(name='userBirthDate', type='text', placeholder='Birth Date', value='#{userBirthDate}')
+
+                    br
+                    | Email :
+                    input(name='userEmail', type='text', placeholder='Email', value='#{userEmail}')
+                    | Phone Number :
+                    input(name='userPhoneNumber', type='text', placeholder='Phone Number', value='#{userPhoneNumber}')
+
+                    br
+                    | Civic No. :
+                    input(name='userCivicNumber', type='text', placeholder='Civic No.', value='#{userCivicNumber}')
+                    | Appartment :
+                    input(name='userAppNumber', type='text', placeholder='App. No.', value='#{userAppNumber}')
+                    br
+                    | Street :
+                    input(name='userStreet', type='text', placeholder='Street', value='#{userStreet}')
+                    | City :
+                    input(name='userCity', type='text', placeholder='City', value='#{userCity}')
+                    | Province :
+                    input(name='userProvince', type='text', placeholder='Province', value='#{userProvince}')
+                    | ZIP Code :
+                    input(name='userZipCode', type='text', placeholder='ZIP Code', value='#{userZipCode}')
+
+                    br
+                    input#btnSubmitAccount(type="submit", value="Create Account")
+            else
+                form(name="account", action="/createAccount/confirmAccount", method="post")
+                    br
+                    | Username :
+                    input(name='username', type='text', placeholder='Username')
+                    | Password :
+                    input(name='userPassword', type='password', placeholder='Password')
+                    br
+                    | First Name :
+                    input(name='userFirstName', type='text', placeholder='First Name')
+                    | Second Name :
+                    input(name='userSecondName', type='text', placeholder='Second Name')
+                    | Birth Date :
+                    input(name='userBirthDate', type='text', placeholder='Birth Date')
+                    br
+                    | Email :
+                    input(name='userEmail', type='text', placeholder='Email')
+                    | Phone Number :
+                    input(name='userPhoneNumber', type='text', placeholder='Phone Number')
+                    br
+                    | Civic No. :
+                    input(name='userCivicNumber', type='text', placeholder='Civic No.')
+                    | Appartment :
+                    input(name='userAppNumber', type='text', placeholder='App. No.')
+                    br
+                    | Street :
+                    input(name='userStreet', type='text', placeholder='Street')
+                    | City :
+                    input(name='userCity', type='text', placeholder='City')
+                    | Province :
+                    input(name='userProvince', type='text', placeholder='Province')
+                    | ZIP Code :
+                    input(name='userZipCode', type='text', placeholder='ZIP Code')
+                    br
+                    input#btnSubmitAccount(type="submit", value="Create Account")
+
+        // /Create Account
+    // /WRAPPER
+
+    script(src='/javascripts/validateAccountFields.js')

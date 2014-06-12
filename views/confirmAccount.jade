@@ -1,0 +1,57 @@
+extends layout
+block content
+    include DisconnectHeader
+
+    p Please confirm your informations.
+    br
+    // Confirm Account
+    h2 Confirm Account
+    p Username :     #{username}
+    p Password :     #{userPassword}
+    p First Name :   #{userFirstName}
+    p Last Name :  #{userSecondName}
+    p Birth Date :   #{userBirthDate}
+    p Email :        #{userEmail}
+    p Phone Number : #{userPhoneNumber}
+    p Civic Number : #{userCivicNumber}
+    p App. Number :  #{userAppNumber}
+    p Street :       #{userStreet}
+    p City :         #{userCity}
+    p Province :     #{userProvince}
+    p ZIP Code :     #{userZipCode}
+
+    // /Confirm Account
+
+    form(name="editAccount", action="/createAccount", method="post")
+        input(name='username', type='hidden', value='#{username}')
+        input(name='userPassword', type='hidden', value='#{userPassword}')
+        input(name='userFirstName', type='hidden', value='#{userFirstName}')
+        input(name='userSecondName', type='hidden', value='#{userSecondName}')
+        input(name='userBirthDate', type='hidden', value='#{userBirthDate}')
+        input(name='userEmail', type='hidden', value='#{userEmail}')
+        input(name='userPhoneNumber', type='hidden', value='#{userPhoneNumber}')
+        input(name='userCivicNumber', type='hidden', value='#{userCivicNumber}')
+        input(name='userAppNumber', type='hidden', value='#{userAppNumber}')
+        input(name='userStreet', type='hidden', value='#{userStreet}')
+        input(name='userCity', type='hidden', value='#{userCity}')
+        input(name='userProvince', type='hidden', value='#{userProvince}')
+        input(name='userZipCode', type='hidden', value='#{userZipCode}')
+        input(type="submit", value="Edit Account", class="btn btn-lg btn-primary btn-block")
+    br
+    form(name="confirmAccount", action="/createAccount/confirmed", method="post")
+        input(name='username', type='hidden', value='#{username}')
+        input(name='userPassword', type='hidden', value='#{userPassword}')
+        input(name='userFirstName', type='hidden', value='#{userFirstName}')
+        input(name='userSecondName', type='hidden', value='#{userSecondName}')
+        input(name='userBirthDate', type='hidden', value='#{userBirthDate}')
+        input(name='userEmail', type='hidden', value='#{userEmail}')
+        input(name='userPhoneNumber', type='hidden', value='#{userPhoneNumber}')
+        input(name='userCivicNumber', type='hidden', value='#{userCivicNumber}')
+        input(name='userAppNumber', type='hidden')
+        input(name='userStreet', type='hidden', value='#{userStreet}')
+        input(name='userCity', type='hidden', value='#{userCity}')
+        input(name='userProvince', type='hidden', value='#{userProvince}')
+        input(name='userZipCode', type='hidden', value='#{userZipCode}')
+        input(type="submit", value="Confirm Account", class="btn btn-lg btn-primary btn-block")
+
+

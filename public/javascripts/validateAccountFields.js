@@ -3,11 +3,10 @@ $(document).ready(function() {
 
 
     // Submit account button click
-    $('#btnSubmitAccount').on('click', validateAccountFields);
+    //$('#btnSubmitAccount').on('click', validateAccountFields);
 
 
 });
-
 
 // Functions =============================================================
 
@@ -31,7 +30,7 @@ function validateAccountFields(event) {
     var emptyErrorCount = 0;
     var lengthErrorCount = 0;
     $('#createAccountFields input').each(function(index, val) {
-        if($(this).val() === '') {
+        if(($(this).val() == '') && ($(this).name != 'userAppNumber')){
             emptyErrorCount++;
         }
 

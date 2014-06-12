@@ -4,11 +4,14 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 // Database
 var mongo = require('mongoskin');
 var db = mongo.db("mongodb://localhost:27017/EZ-Food", {native_parser:true});
 
 var app = express();
+
+
 
 // Make our db accessible to our router
 app.use(function(req,res,next){
@@ -17,8 +20,9 @@ app.use(function(req,res,next){
 });
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
-
+var createAccount = require('./routes/createAccount');
+var modifyAccount = require('./routes/modifyAccount');
+var signIn = require('./routes/signIn');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -29,9 +33,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({secret: '1234567890QWERTY'}));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/createAccount', createAccount);
+app.use('/signIn', signIn);
+app.use('/modifyAccount', modifyAccount);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

@@ -3,9 +3,12 @@
 
 
 header
-    div#Logo Ez-Food
+    div#Logo
+        a(href='/') Ez-Food
         div#Motto All the food at the tip of your finger!
     nav
         ul
-            li Login
-            li Create Account
+            li
+                a(href='/createAccount', data-link='ajax') Create Account
+            li
+                a(href='/signIn', data-link='ajax') Sign In

@@ -2,14 +2,17 @@
    Created by Gabriel on 2014-06-06.
 
 header
-    div#UserSalutation Hello, Asshole!
-    div#Logo Ez-Food
+    div#UserSalutation Hello, #{username}
+    div#Logo
+        a(href="/") Ez-Food
         div#Motto All the food at the tip of your finger!
 
 
     nav
         ul
             li Restaurant
-            li Je sais pas
-            li Jm'en caliss
+            li
+                a(href="/modifyAccount") Modify Account
+            li
+                a(href="/disconnect") Disconnect
 

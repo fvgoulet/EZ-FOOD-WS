@@ -35,7 +35,10 @@ function DBHandler()
     {
         if(!this.accountExist(account))
         {
-            this.db.collection("Accounts").insert(account.getJSONDefinition());
+            this.db.collection('Accounts').insert(account.getJSONDefinition(), function(err, result) {
+                if (err) throw err;
+                if (result) console.log('Added!');
+            });
             return true;
         }
         else
@@ -48,8 +51,21 @@ function DBHandler()
     //Find if the account exists
     this.accountExist = function(account)
     {
-        console.log(this.db.collection("Accounts").find(account.getJSONUsername()));
-        return this.db.collection("Accounts").find(account.getJSONUsername()) != {};
+        var result =this.db.collection('Accounts').findOne(account.getJSONUsername(),function(err, result) {
+            if (err) throw err;
+            console.log(result);
+        });
+
+
+        if (result)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
     };
 
     //Save an account to the DB

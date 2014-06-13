@@ -1,12 +1,16 @@
 var express = require('express');
 var router = express.Router();
-var account = require('../public/Utilities/Account');
+//var account = require('../public/Utilities/Account');
 /*
  * GET .
  */
 router.get('/', function(req, res) {
-    var db = req.db;
-    res.render('modifyAccount', { title: 'EZ-Food' });
+    var account;
+
+    if((req.session.account)){
+        account = JSON.parse(req.session.account);
+    }
+    res.render('modifyAccount', {account: account });
 });
 
 
@@ -39,7 +43,7 @@ router.post('/confirmAccount', function(req, res) {
 /*
  * POST to .
  */
-router.post('/confirmed', function(req, res) {
+/*router.post('/confirmed', function(req, res) {
     //var db = req.db;
     console.log('Add user to DB');
 
@@ -72,7 +76,7 @@ router.post('/confirmed', function(req, res) {
     res.redirect('/');
     //res.render('confirmAccount', newUser );
 
-});
+});*/
 
 /*
  * POST to /.

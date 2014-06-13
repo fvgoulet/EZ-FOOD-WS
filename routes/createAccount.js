@@ -64,10 +64,11 @@ router.post('/confirmed', function(req, res) {
         new_account.setAddress(req.body.userCivicNumber + ' ' + req.body.userStreet +
             ', ' + req.body.userCity + ', ' +  req.body.userProvince + ', ' + req.body.userZipCode);
     }
-
+    console.log("///// test ////////");
     var bd = new bd_handler.DBHandler();
     bd.Construct();
     console.log(bd.insertAccount(new_account));
+    console.log("///// test ////////");
 
     req.session.account = JSON.stringify(new_account);
     req.session.username = new_account.getUsername();

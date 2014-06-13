@@ -12,6 +12,28 @@ function Account()
     this.phoneNumber = null;
     this.address = null;
 
+    //Construct the object
+    this.Construct = function(JSONDefinition)
+    {
+        this.username = JSONDefinition.username;
+        this.password = JSONDefinition.password;
+        this.firstName = JSONDefinition.firstName;
+        this.lastName = JSONDefinition.lastName;
+        this.birthDate = JSONDefinition.birthDate;
+        this.email = JSONDefinition.email;
+        this.phoneNumber = JSONDefinition.phoneNumber;
+        this.address = JSONDefinition.address;
+    }
+
+    //return the object as JSON representation
+    this.getJSONDefinition = function ()
+    {
+        return this.toJSON();
+        /*return {Id: this.Id,
+         Name: this.Name,
+         Description: this.Description };*/
+    }
+
     /* This function sets the username.*/
     this.setUsername = function(username)
     {

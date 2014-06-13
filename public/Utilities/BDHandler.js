@@ -14,7 +14,7 @@ function DBHandler() {
     //Save an account to the DB
     this.saveAccount = function(account)
     {
-        db["Accounts"].update()
+        db["Accounts"].update(account.getJSONDefinition())
     }
 
     /* This function returns the Id.*/

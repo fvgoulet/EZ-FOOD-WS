@@ -1,25 +1,20 @@
 /**
+ * Created by mn             yyyyy on 2014-06-12.
+ */
+/**
  * Created by Alex on 2014-06-11.
  */
-function Category() {
-    this.Id = null;
-    this.Name = null;
-    this.Description = null;
+function DBHandler() {
 
-    this.Construct = function(JSONDefinition)
+    this.Construct = function(DB)
     {
-        this.Id = JSONDefinition.Id;
-        this.Name = JSONDefinition.Name;
-        this.Description = JSONDefinition.Description;
+        this.db = DB;
     }
 
-    //return the object as JSON representation
-    this.getJSONDefinition = function ()
+    //Save an account to the DB
+    this.saveAccount = function(account)
     {
-        return this.toJSON();
-        /*return {Id: this.Id,
-                Name: this.Name,
-                Description: this.Description };*/
+        db["Accounts"].update()
     }
 
     /* This function returns the Id.*/
@@ -53,4 +48,4 @@ function Category() {
     }
 }
 
-module.exports.Category = Category;
+module.exports.DBHandler = DBHandler;

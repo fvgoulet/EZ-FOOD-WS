@@ -62,8 +62,6 @@ function DBHandler()
             return false;
         }
     }
-
-    this.
 }
 
 module.exports.DBHandler = DBHandler;

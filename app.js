@@ -6,8 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 // Database
-var mongo = require('mongoskin');
-var db = mongo.db("mongodb://localhost:27017/EZ-Food", {native_parser:true});
 
 var app = express();
 
@@ -15,7 +13,6 @@ var app = express();
 
 // Make our db accessible to our router
 app.use(function(req,res,next){
-    req.db = db;
     next();
 });
 

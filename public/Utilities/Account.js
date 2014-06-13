@@ -5,6 +5,7 @@ function Account()
 {
     this.username = null;
     this.password = null;
+    this.categoryId = null;
     this.firstName = null;
     this.lastName = null;
     this.birthDate = null;
@@ -17,6 +18,7 @@ function Account()
     {
         this.username = JSONDefinition.username;
         this.password = JSONDefinition.password;
+        this.categoryId = JSONDefinition.categoryId;
         this.firstName = JSONDefinition.firstName;
         this.lastName = JSONDefinition.lastName;
         this.birthDate = JSONDefinition.birthDate;
@@ -34,9 +36,6 @@ function Account()
     this.getJSONDefinition = function ()
     {
         return this.toJSON();
-        /*return {Id: this.Id,
-         Name: this.Name,
-         Description: this.Description };*/
     }
 
     /* This function sets the username.*/
@@ -59,6 +58,17 @@ function Account()
     this.getPassword = function()
     {
         return this.password;
+    }
+
+    /* This function sets the categoryId.*/
+    this.setCategoryId = function(categoryId)
+    {
+        this.categoryId = categoryId;
+    }
+    /* This function returns the categoryId.*/
+    this.getCategoryId = function()
+    {
+        return this.categoryId;
     }
 
     /* This function sets the firstName.*/

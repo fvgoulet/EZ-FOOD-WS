@@ -2,7 +2,8 @@
  * Created by Felix on 2014-06-12.
  */
 
-var acc = require("Account");
+var accountClass = require("Account");
+var categoryClass = retuire("Category")
 var mongo = require('mongoskin');
 
 function DBHandler()
@@ -16,7 +17,7 @@ function DBHandler()
     this.selectAccount = function(username)
     {
         var jsonUsername = {username: username};
-        var account = new acc.Account();
+        var account = new accountClass.Account();
         return account.Construct(db.get("Accounts").find(jsonUsername))
     }
 
@@ -60,6 +61,14 @@ function DBHandler()
         {
             return false;
         }
+    }
+
+    //return an instance of Category
+    this.getCategory = function(categoryId)
+    {
+        var jsonCategoryId = {categoryId: categoryId};
+        var category = new categoryClass.Category();
+        return category.Construct(db.get("Categories").find(jsonCategoryId))
     }
 }
 

@@ -11,12 +11,12 @@ function Category() {
         this.Id = JSONDefinition.Id;
         this.Name = JSONDefinition.Name;
         this.Description = JSONDefinition.Description;
-    }
+    };
 
     this.getJSONId = function()
     {
         return {Id: this.Id};
-    }
+    };
 
     //return the object as JSON representation
     this.getJSONDefinition = function ()
@@ -25,37 +25,43 @@ function Category() {
         /*return {Id: this.Id,
                 Name: this.Name,
                 Description: this.Description };*/
-    }
+    };
 
     /* This function returns the Id.*/
-    this.getId = function () {
+    this.getId = function ()
+    {
         return this.Id;
-    }
+    };
 
     /* This function returns the Name.*/
-    this.getName = function () {
+    this.getName = function ()
+    {
         return this.Name;
-    }
+    };
 
     /* This function returns the username.*/
-    this.getDescription = function () {
+    this.getDescription = function ()
+    {
         return this.Description;
-    }
+    };
 
     /* This function sets the username.*/
-    this.setId = function (Id) {
+    this.setId = function (Id)
+    {
         this.Id = Id;
-    }
+    };
 
     /* This function sets the username.*/
-    this.setName = function (Name) {
+    this.setName = function (Name)
+    {
         this.Name = Name;
-    }
+    };
 
     /* This function sets the username.*/
-    this.setDescription = function (Description) {
+    this.setDescription = function (Description)
+    {
         this.Description = Description;
-    }
+    };
 }
 
 module.exports.Category = Category;

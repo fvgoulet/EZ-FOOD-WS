@@ -21,6 +21,11 @@ function DBHandler()
         return account.Construct(db.get("Accounts").find(jsonUsername))
     };
 
+    this.selectAllAccount = function(username)
+    {
+        var accounts = account.Construct(db.get("Accounts").find())
+    };
+
     // Insert a new account, true if added, false if username already exists
     this.insertAccount = function(account)
     {

@@ -1,0 +1,11 @@
+{
+    "username": null,
+    "password": null,
+    "categoryId": null,
+    "firstName": null,
+    "lastName": null,
+    "birthDate": null,
+    "email": null,
+    "phoneNumber": null,
+    "address": null
+}

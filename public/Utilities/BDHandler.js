@@ -2,8 +2,8 @@
  * Created by Felix on 2014-06-12.
  */
 
-var accountClass = require("Account");
-var categoryClass = require("Category")
+var accountClass = require("./Account");
+var categoryClass = require("./Category")
 var mongo = require('mongoskin');
 
 function DBHandler()
@@ -26,7 +26,7 @@ function DBHandler()
     {
         if(!this.accountExist(account))
         {
-            db.collection("Accounts").insert(account.getJSONDefinition());
+            this.db.collection("Accounts").insert(account.getJSONDefinition());
             return true;
         }
         else
@@ -39,7 +39,8 @@ function DBHandler()
     //Find if the account exists
     this.accountExist = function(account)
     {
-        return db.collection("Accounts").find(account.getJSONUsername()) != {};
+        console.log(this.db.collection("Accounts").find(account.getJSONUsername()));
+        return this.db.collection("Accounts").find(account.getJSONUsername()) != {};
     };
 
     //Save an account to the DB
@@ -47,7 +48,7 @@ function DBHandler()
     {
         if(this.accountExist(account))
         {
-            db.collection("Accounts").update(account.getJSONUsername(),account.getJSONDefinition());
+            this.db.collection("Accounts").update(account.getJSONUsername(),account.getJSONDefinition());
             return true;
         }
         else

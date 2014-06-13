@@ -3,10 +3,10 @@ block content
     include DisconnectHeader
 
     h2 Sign In.
-    form(name="signIn", action="/validate", method="post")
+    form(name="signIn", action="signIn/validate", method="post")
         br
-        input(name='username', type='text', placeholder='Username',class='form-control', required autofocus)
-        input(name='userPassword', type='password', placeholder='Password',class='form-control', required autofocus)
+        input(name='username', type='text', placeholder='Username',class='form-control', required autofocus, autocomplete="off")
+        input(name='userPassword', type='password', placeholder='Password',class='form-control', required autofocus, autocomplete="off")
         br
         input(type="submit", value="Sign In", class="btn btn-lg btn-primary btn-block")
 

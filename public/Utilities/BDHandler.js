@@ -61,7 +61,6 @@ function DBHandler()
             console.log(result);
         });
 
-
         if (result)
         {
             return true;

@@ -26,7 +26,7 @@ function DBHandler()
     {
         if(!this.accountExist(account))
         {
-            db.get("Accounts").insert(account.getJSONDefinition());
+            db.collection("Accounts").insert(account.getJSONDefinition());
             return true;
         }
         else
@@ -39,7 +39,7 @@ function DBHandler()
     //Find if the account exists
     this.accountExist = function(account)
     {
-        if(db.get("Accounts").find(account.getJSONUsername()) != {})
+        if(db.collection("Accounts").find(account.getJSONUsername()) != {})
         {
             return true;
         }
@@ -54,7 +54,7 @@ function DBHandler()
     {
         if(this.accountExist(account))
         {
-            db.get("Accounts").update(account.getJSONUsername(),account.getJSONDefinition());
+            db.collection("Accounts").update(account.getJSONUsername(),account.getJSONDefinition());
             return true;
         }
         else
@@ -68,7 +68,7 @@ function DBHandler()
     {
         var jsonCategoryId = {categoryId: categoryId};
         var category = new categoryClass.Category();
-        return category.Construct(db.get("Categories").find(jsonCategoryId))
+        return category.Construct(db.collection("Categories").find(jsonCategoryId))
     }
 }
 

@@ -1,17 +1,16 @@
 /**
- * Created by mn             yyyyy on 2014-06-12.
+ * Created by Felix on 2014-06-12.
  */
-/**
- * Created by Alex on 2014-06-11.
- */
-var acc = require("Account")
+
+var acc = require("Account");
+var mongo = require('mongoskin');
 
 function DBHandler()
 {
 
-    this.Construct = function(db)
+    this.Construct = function()
     {
-        this.db = db;
+        this.db = mongo.db("mongodb://localhost:27017/EZ-Food", {native_parser:true});
     }
 
     this.selectAccount = function(username)

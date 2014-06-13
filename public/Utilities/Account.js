@@ -29,13 +29,24 @@ function Account()
 
     this.getJSONUsername = function()
     {
-        return {username: this.username};
+        return {"username" : this.username};
     };
 
     //return the object as JSON representation
     this.getJSONDefinition = function ()
     {
-        return this.toJSON();
+        var json = {
+            "username": this.username,
+            "password": this.password,
+            "categoryId": this.categoryId,
+            "firstName": this.firstName,
+            "lastName": this.lastName,
+            "birthDate": this.birthDate,
+            "email": this.email,
+            "phoneNumber": this.phoneNumber,
+            "address": this.address
+        };
+        return json;
     };
 
     /* This function sets the username.*/

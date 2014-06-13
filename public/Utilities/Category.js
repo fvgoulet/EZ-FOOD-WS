@@ -15,16 +15,17 @@ function Category() {
 
     this.getJSONId = function()
     {
-        return {Id: this.Id};
+        return {"Id": this.Id};
     };
 
     //return the object as JSON representation
     this.getJSONDefinition = function ()
     {
-        return this.toJSON();
-        /*return {Id: this.Id,
-                Name: this.Name,
-                Description: this.Description };*/
+        var json = {
+            "Id": this.Id,
+            "Name": this.Name,
+            "Description": this.Description
+        }
     };
 
     /* This function returns the Id.*/

@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var account = require('../public/Utilities/Account');
-
+var bd_handler = require('../public/Utilities/BDHandler');
 /*
  * GET .
  */
 router.get('/', function(req, res) {
-    res.render('createAccount');
+    var db = req.db;
+    res.render('createAccount', { title: 'EZ-Food' });
 });
 
 
@@ -63,14 +64,18 @@ router.post('/confirmed', function(req, res) {
         new_account.setAddress(req.body.userCivicNumber + ' ' + req.body.userStreet +
             ', ' + req.body.userCity + ', ' +  req.body.userProvince + ', ' + req.body.userZipCode);
     }
-    //console.log("///// test ////////");
-    //var bd = new bd_handler.DBHandler();
-    //bd.Construct();
-    //console.log(bd.insertAccount(new_account));
-    //console.log("///// test ////////");
-
-    req.session.account = JSON.stringify(new_account);
-    res.redirect('/');
+    if(new_account.save())
+    {
+        req.session.account = JSON.stringify(new_account);
+        req.session.username = new_account.getUsername();
+        req.session.password = new_account.getPassword();
+        // Show a confirmation of the creation.
+        res.redirect('/');
+    }
+        else
+    {
+        res.redirect('/');
+    }
 
 });
 

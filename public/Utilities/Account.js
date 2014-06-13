@@ -1,17 +1,74 @@
 /**
  * Created by Alex on 2014-06-11.
  */
-function Account()
+
+function Account(JSONaccount, mongoose)
 {
-    this.username = null;
-    this.password = null;
-    this.firstName = null;
-    this.lastName = null;
-    this.birthDate = null;
-    this.email = null;
-    this.phoneNumber = null;
-    this.address = null;
-    this.category = null;
+    this.schema = mongoose.Schema({
+        username : String,
+        password: String,
+        categoryId: String,
+        firstName: String,
+        lastName: String,
+        birthDate: String,
+        email: String,
+        phoneNumber: String,
+        address: String
+    });
+
+
+    this.model = mongoose.model("Account",this.schema);
+
+    //Constructor
+    this.account = new this.model(JSONaccount);
+    this.mongoose = mongoose;
+
+    this.accountExist = function(user)
+    {
+        return this.account.find({username : user }, function(err,returnValue)
+        {
+            if(err)
+            {
+                console.log(err);
+                return null;
+            }
+            return returnValue;
+        });
+    };
+
+    this.insertToDB = function()
+    {
+        if(!this.accountExist(this.account.username))
+        {
+            this.account.save(function(err)
+            {
+               if(err)
+               {
+                   console.log(err);
+                   return false;
+               }
+            });
+            return true;
+        }
+        return false;
+    };
+
+    this.updateInDB = function()
+    {
+        if(this.accountExist(this.account.username))
+        {
+            this.account.save(function(err)
+            {
+                if(err)
+                {
+                    console.log(err);
+                    return false;
+                }
+            });
+            return true;
+        }
+        return false;
+    };
 
     /* This function sets the username.*/
     this.setUsername = function(username)
@@ -32,7 +89,18 @@ function Account()
     /* This function returns the password.*/
     this.getPassword = function()
     {
-        return this.password;
+        return this.account.password;
+    };
+
+    /* This function sets the categoryId.*/
+    this.setCategoryId = function(categoryId)
+    {
+        this.account.categoryId = categoryId;
+    };
+    /* This function returns the categoryId.*/
+    this.getCategoryId = function()
+    {
+        return this.account.categoryId;
     };
 
     /* This function sets the firstName.*/

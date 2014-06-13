@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
         account = JSON.parse(req.session.account);
     }
 
-    res.render('index', {account: account });
+    res.render('index', {account: account});
 });
 
 /* GET home page. */

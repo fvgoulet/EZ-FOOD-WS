@@ -5,49 +5,13 @@ function Account()
 {
     this.username = null;
     this.password = null;
-    this.categoryId = null;
     this.firstName = null;
     this.lastName = null;
     this.birthDate = null;
     this.email = null;
     this.phoneNumber = null;
     this.address = null;
-
-    //Construct the object
-    this.Construct = function(JSONDefinition)
-    {
-        this.username = JSONDefinition.username;
-        this.password = JSONDefinition.password;
-        this.categoryId = JSONDefinition.categoryId;
-        this.firstName = JSONDefinition.firstName;
-        this.lastName = JSONDefinition.lastName;
-        this.birthDate = JSONDefinition.birthDate;
-        this.email = JSONDefinition.email;
-        this.phoneNumber = JSONDefinition.phoneNumber;
-        this.address = JSONDefinition.address;
-    };
-
-    this.getJSONUsername = function()
-    {
-        return {"username" : this.username};
-    };
-
-    //return the object as JSON representation
-    this.getJSONDefinition = function ()
-    {
-        var json = {
-            "username": this.username,
-            "password": this.password,
-            "categoryId": this.categoryId,
-            "firstName": this.firstName,
-            "lastName": this.lastName,
-            "birthDate": this.birthDate,
-            "email": this.email,
-            "phoneNumber": this.phoneNumber,
-            "address": this.address
-        };
-        return json;
-    };
+    this.category = null;
 
     /* This function sets the username.*/
     this.setUsername = function(username)
@@ -69,17 +33,6 @@ function Account()
     this.getPassword = function()
     {
         return this.password;
-    };
-
-    /* This function sets the categoryId.*/
-    this.setCategoryId = function(categoryId)
-    {
-        this.categoryId = categoryId;
-    };
-    /* This function returns the categoryId.*/
-    this.getCategoryId = function()
-    {
-        return this.categoryId;
     };
 
     /* This function sets the firstName.*/

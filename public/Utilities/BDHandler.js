@@ -4,48 +4,66 @@
 /**
  * Created by Alex on 2014-06-11.
  */
-function DBHandler() {
+var acc = require("Account")
 
-    this.Construct = function(DB)
+function DBHandler()
+{
+
+    this.Construct = function(db)
     {
-        this.db = DB;
+        this.db = db;
+    }
+
+    this.selectAccount = function(username)
+    {
+        var jsonUsername = {username: username};
+        var account = new acc.Account();
+        return account.Construct(db.get("Accounts").find(jsonUsername))
+    }
+
+    // Insert a new account, true if added, false if username already exists
+    this.insertAccount = function(account)
+    {
+        if(!this.accountExist(account))
+        {
+            db.get("Accounts").insert(account.getJSONDefinition());
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    //Find if the account exists
+    this.accountExist = function(account)
+    {
+        if(db.get("Accounts").find(account.getJSONUsername()) != {})
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     //Save an account to the DB
-    this.saveAccount = function(account)
+    this.updateAccount = function(account)
     {
-        db["Accounts"].update(account.getJSONDefinition())
+        if(this.accountExist(account))
+        {
+            db["Accounts"].update(account.getJSONUsername(),account.getJSONDefinition());
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
-    /* This function returns the Id.*/
-    this.getId = function () {
-        return this.Id;
-    }
-
-    /* This function returns the Name.*/
-    this.getName = function () {
-        return this.Name;
-    }
-
-    /* This function returns the username.*/
-    this.getDescription = function () {
-        return this.Description;
-    }
-
-    /* This function sets the username.*/
-    this.setId = function (Id) {
-        this.Id = Id;
-    }
-
-    /* This function sets the username.*/
-    this.setName = function (Name) {
-        this.Name = Name;
-    }
-
-    /* This function sets the username.*/
-    this.setDescription = function (Description) {
-        this.Description = Description;
-    }
+    this.
 }
 
 module.exports.DBHandler = DBHandler;

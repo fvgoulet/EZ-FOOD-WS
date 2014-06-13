@@ -13,6 +13,11 @@ function Category() {
         this.Description = JSONDefinition.Description;
     }
 
+    this.getJSONId = function()
+    {
+        return {Id: this.Id};
+    }
+
     //return the object as JSON representation
     this.getJSONDefinition = function ()
     {

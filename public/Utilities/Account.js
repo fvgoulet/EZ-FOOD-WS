@@ -25,6 +25,11 @@ function Account()
         this.address = JSONDefinition.address;
     }
 
+    this.getJSONUsername = function()
+    {
+        return {username: this.username};
+    }
+
     //return the object as JSON representation
     this.getJSONDefinition = function ()
     {

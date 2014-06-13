@@ -11,6 +11,7 @@ function Account()
     this.email = null;
     this.phoneNumber = null;
     this.address = null;
+    this.category = null;
 
     /* This function sets the username.*/
     this.setUsername = function(username)
@@ -56,7 +57,6 @@ function Account()
         return this.lastName;
     }
 
-
     /* This function sets the birthDate.*/
     this.setBirthDate = function(birthDate)
     {
@@ -101,7 +101,26 @@ function Account()
         return this.address;
     }
 
-
+    /* This function sets the address.*/
+    this.setCategory = function(category)
+    {
+        this.category = category;
+    }
+    /* This function returns the address.*/
+    this.getCategory = function()
+    {
+        return this.category;
+    }
+}
+/*
+Account.prototype.toJSON = function(){
+    return {}
 }
 
+Account.prototype.equals = function(account){
+    if(account != null && account.prototype == this){
+        if(this.)
+    }
+}
+*/
 module.exports.Account = Account;

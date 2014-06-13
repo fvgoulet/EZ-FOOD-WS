@@ -1,13 +1,15 @@
 extends layout
 block content
-    include DisconnectHeader
+    include Header
 
-    p Please fill the fields to create your account.
-    br
-    // Create Account
+
+
+
     h2 Create Account
+    br
+    p Please fill the fields to create your account.
 
-    if username
+    if account
 
         form(name="account", action="/createAccount/confirmAccount", method="post")
             br

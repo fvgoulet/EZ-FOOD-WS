@@ -52,6 +52,7 @@ router.post('/confirmed', function(req, res) {
     new_account.setBirthDate(req.body.userBirthDate);
     new_account.setEmail(req.body.userEmail);
     new_account.setPhoneNumber(req.body.userPhoneNumber);
+    new_account.setCategory(3);
     if("" != req.body.userAppNumber)
     {
         new_account.setAddress(req.body.userCivicNumber + ' ' + req.body.userStreet + ', App. ' + req.body.userAppNumber +
@@ -65,7 +66,7 @@ router.post('/confirmed', function(req, res) {
 
 
     console.log(new_account);
-
+    req.session.account = JSON.stringify(new_account);
     req.session.username = new_account.getUsername();
     req.session.password = new_account.getPassword();
     // Show a confirmation of the creation.

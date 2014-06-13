@@ -1,0 +1,60 @@
+//
+   Created by Gabriel on 2014-06-12.
+
+header
+    if account != null
+        div#UserSalutation Hello, #{account.firstName} #{account.lastName}
+        div#Logo
+            a(href="/") Ez-Food
+            div#Motto All the food at the tip of your finger!
+
+        // Differents categories
+        // admin - 0
+        // entrepreneur -1
+        // restaurateur -2
+        // client - 3
+        // livreur - 4
+        case account.category
+            when 0
+                nav
+                    ul
+                        li
+                            a(href="/disconnect") Disconnect
+            when 1
+                nav
+                    ul
+                        li
+                            a(href="/disconnect") Disconnect
+            when 2
+                nav
+                    ul
+                        li
+                            a(href="/disconnect") Disconnect
+            when 3
+                nav
+                    ul
+                        li Restaurant
+                        li
+                            a(href="/modifyAccount") Modify Account
+                        li
+                            a(href="/disconnect") Disconnect
+            when 4
+                nav
+                    ul
+                        li
+                            a(href="/disconnect") Disconnect
+            default
+                nav
+                    ul
+                        li
+                            a(href="/disconnect") Disconnect
+    else
+        div#Logo
+            a(href='/') Ez-Food
+            div#Motto All the food at the tip of your finger!
+        nav
+            ul
+                li
+                    a(href='/createAccount') Create Account
+                li
+                    a(href='/signIn') Sign In

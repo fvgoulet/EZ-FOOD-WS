@@ -54,7 +54,7 @@ function DBHandler()
     {
         if(this.accountExist(account))
         {
-            db["Accounts"].update(account.getJSONUsername(),account.getJSONDefinition());
+            db.get("Accounts").update(account.getJSONUsername(),account.getJSONDefinition());
             return true;
         }
         else

@@ -16,18 +16,23 @@ function DBHandler()
 
     this.selectAccount = function(username)
     {
-        var jsonUsername = {username: username};
+        var jsonUsername = {"username": username};
         var account = new accountClass.Account();
-        return account.Construct(db.get("Accounts").find(jsonUsername))
+        account.Construct(db.get("Accounts").find(jsonUsername))
+        return account;
     };
 
     this.selectAllAccount = function()
     {
-        var accounts = account.Construct(db.get("Accounts").find())
-        forEach (acc in accounts)
+        var accounts = account.Construct(db.get("Accounts").find());
+        var list = [];
+        forEach(acc in accounts)
         {
-
+            var temp = new accountClass.Account();
+            temp.Construct(acc);
+            list.push(temp);
         }
+        return list;
     };
 
     // Insert a new account, true if added, false if username already exists
@@ -69,7 +74,7 @@ function DBHandler()
     //return an instance of Category
     this.getCategory = function(categoryId)
     {
-        var jsonCategoryId = {categoryId: categoryId};
+        var jsonCategoryId = {"categoryId": categoryId};
         var category = new categoryClass.Category();
         return category.Construct(db.collection("Categories").find(jsonCategoryId))
     };

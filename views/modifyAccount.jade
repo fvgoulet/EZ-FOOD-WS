@@ -10,21 +10,21 @@ block content
     form(name="account", action="/modifyAccount/confirmAccount", method="post")
 
         | Password :
-        input(name='userPassword', type='password', placeholder='Password', value='#{userPassword}',class='form-control', required autofocus, autocomplete="off")
+        input(name='userPassword', type='password', placeholder='Password', value='#{account.password}',class='form-control', required autofocus, autocomplete="off")
 
         br
         | First Name :
-        input(name='userFirstName', type='text', placeholder='First Name', value='#{userFirstName}',class='form-control', required autofocus, autocomplete="off")
+        input(name='userFirstName', type='text', placeholder='First Name', value='#{account.firstName}',class='form-control', required autofocus, autocomplete="off")
         | Last Name :
-        input(name='userSecondName', type='text', placeholder='Last Name', value='#{userSecondName}',class='form-control', required autofocus, autocomplete="off")
+        input(name='userSecondName', type='text', placeholder='Last Name', value='#{account.lastName}',class='form-control', required autofocus, autocomplete="off")
         | Birth Date :
-        input(name='userBirthDate', type='text', placeholder='YYYY-MM-DD', value='#{userBirthDate}',class='form-control', required autofocus, autocomplete="off")
+        input(name='userBirthDate', type='text', placeholder='YYYY-MM-DD', value='#{account.birthDate}',class='form-control', required autofocus, autocomplete="off")
 
         br
         | Email :
-        input(name='userEmail', type='text', placeholder='Email', value='#{userEmail}',class='form-control', required autofocus, autocomplete="off")
+        input(name='userEmail', type='text', placeholder='Email', value='#{account.email}',class='form-control', required autofocus, autocomplete="off")
         | Phone Number :
-        input(name='userPhoneNumber', type='text', placeholder='###-###-####', value='#{userPhoneNumber}',class='form-control', required autofocus, autocomplete="off")
+        input(name='userPhoneNumber', type='text', placeholder='###-###-####', value='#{account.phoneNumber}',class='form-control', required autofocus, autocomplete="off")
 
         br
         | Civic No. :

@@ -1,9 +1,8 @@
 /**
  * Created by Alex on 2014-06-11.
  */
-var mongoose = require("mongoose");
 
-function Account(JSONaccount)
+function Account(JSONaccount, mongoose)
 {
     this.schema = mongoose.Schema({
         username : String,
@@ -17,10 +16,12 @@ function Account(JSONaccount)
         address: String
     });
 
+
     this.model = mongoose.model("Account",this.schema);
 
     //Constructor
     this.account = new this.model(JSONaccount);
+    this.mongoose = mongoose;
 
     this.accountExist = function(user)
     {
@@ -52,7 +53,7 @@ function Account(JSONaccount)
         return false;
     };
 
-    this.updateInDB = finction()
+    this.updateInDB = function()
     {
         if(this.accountExist(this.account.username))
         {

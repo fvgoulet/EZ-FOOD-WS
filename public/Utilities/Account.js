@@ -1,163 +1,183 @@
 /**
  * Created by Alex on 2014-06-11.
  */
-function Account()
+var mongoose = require("mongoose");
+
+function Account(JSONaccount)
 {
-    this.username = null;
-    this.password = null;
-    this.categoryId = null;
-    this.firstName = null;
-    this.lastName = null;
-    this.birthDate = null;
-    this.email = null;
-    this.phoneNumber = null;
-    this.address = null;
+    this.schema = mongoose.Schema({
+        username : String,
+        password: String,
+        categoryId: String,
+        firstName: String,
+        lastName: String,
+        birthDate: String,
+        email: String,
+        phoneNumber: String,
+        address: String
+    });
 
-    //Construct the object
-    this.Construct = function(JSONDefinition)
+    this.model = mongoose.model("Account",this.schema);
+
+    //Constructor
+    this.account = new this.model(JSONaccount);
+
+    this.accountExist = function(user)
     {
-        this.username = JSONDefinition.username;
-        this.password = JSONDefinition.password;
-        this.categoryId = JSONDefinition.categoryId;
-        this.firstName = JSONDefinition.firstName;
-        this.lastName = JSONDefinition.lastName;
-        this.birthDate = JSONDefinition.birthDate;
-        this.email = JSONDefinition.email;
-        this.phoneNumber = JSONDefinition.phoneNumber;
-        this.address = JSONDefinition.address;
+        return this.account.find({username : user }, function(err,returnValue)
+        {
+            if(err)
+            {
+                console.log(err);
+                return null;
+            }
+            return returnValue;
+        });
     };
 
-    this.getJSONUsername = function()
+    this.insertToDB = function()
     {
-        return {"username" : this.username};
+        if(!this.accountExist(this.account.username))
+        {
+            this.account.save(function(err)
+            {
+               if(err)
+               {
+                   console.log(err);
+                   return false;
+               }
+            });
+            return true;
+        }
+        return false;
     };
 
-    //return the object as JSON representation
-    this.getJSONDefinition = function ()
+    this.updateInDB = finction()
     {
-        var json = {
-            "username": this.username,
-            "password": this.password,
-            "categoryId": this.categoryId,
-            "firstName": this.firstName,
-            "lastName": this.lastName,
-            "birthDate": this.birthDate,
-            "email": this.email,
-            "phoneNumber": this.phoneNumber,
-            "address": this.address
-        };
-        return json;
+        if(this.accountExist(this.account.username))
+        {
+            this.account.save(function(err)
+            {
+                if(err)
+                {
+                    console.log(err);
+                    return false;
+                }
+            });
+            return true;
+        }
+        return false;
     };
 
     /* This function sets the username.*/
     this.setUsername = function(username)
     {
-        this.username = username;
+        this.account.username = username;
     };
     /* This function returns the username.*/
     this.getUsername = function()
     {
-        return this.username;
+        return this.account.username;
     };
 
     /* This function sets the password.*/
     this.setPassword = function(password)
     {
-        this.password = password;
+        this.account.password = password;
     };
     /* This function returns the password.*/
     this.getPassword = function()
     {
-        return this.password;
+        return this.account.password;
     };
 
     /* This function sets the categoryId.*/
     this.setCategoryId = function(categoryId)
     {
-        this.categoryId = categoryId;
+        this.account.categoryId = categoryId;
     };
     /* This function returns the categoryId.*/
     this.getCategoryId = function()
     {
-        return this.categoryId;
+        return this.account.categoryId;
     };
 
     /* This function sets the firstName.*/
     this.setFirstName = function(firstName)
     {
-        this.firstName = firstName;
+        this.account.firstName = firstName;
     };
     /* This function returns the firstName.*/
     this.getFirstName = function()
     {
-        return this.firstName;
+        return this.account.firstName;
     };
 
     /* This function sets the lastName.*/
     this.setLastName = function(lastName)
     {
-        this.lastName = lastName;
+        this.account.lastName = lastName;
     };
     /* This function returns the lastName.*/
     this.getLastName = function()
     {
-        return this.lastName;
+        return this.account.lastName;
     };
 
 
     /* This function sets the birthDate.*/
     this.setBirthDate = function(birthDate)
     {
-        this.birthDate = birthDate;
+        this.account.birthDate = birthDate;
     };
     /* This function returns the birthDate.*/
     this.getBirthDate = function()
     {
-        return this.birthDate;
+        return this.account.birthDate;
     };
 
     /* This function sets the email.*/
     this.setEmail = function(email)
     {
-        this.email = email;
+        this.account.email = email;
     };
     /* This function returns the email.*/
     this.getEmail = function()
     {
-        return this.email;
+        return this.account.email;
     };
 
     /* This function sets the phoneNumber.*/
     this.setPhoneNumber = function(phoneNumber)
     {
-        this.phoneNumber = phoneNumber;
+        this.account.phoneNumber = phoneNumber;
     };
     /* This function returns the phoneNumber.*/
     this.getPhoneNumber = function()
     {
-        return this.phoneNumber;
+        return this.account.phoneNumber;
     };
 
     /* This function sets the address.*/
     this.setAddress = function(address)
     {
-        this.address = address;
+        this.account.address = address;
     };
     /* This function returns the address.*/
     this.getAddress = function()
     {
-        return this.address;
+        return this.account.address;
     };
 
     /* This function sets the address.*/
     this.setCategory = function(category)
     {
-        this.category = category;
+        this.account.category = category;
     };
     /* This function returns the address.*/
     this.getCategory = function()
     {
-        return this.category;
+        return this.account.category;
     };
 }
 

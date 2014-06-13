@@ -18,13 +18,13 @@ function DBHandler()
     {
         var jsonUsername = {"username": username};
         var account = new accountClass.Account();
-        account.Construct(db.get("Accounts").find(jsonUsername))
+        account.Construct(db.collection("Accounts").find(jsonUsername))
         return account;
     };
 
     this.selectAllAccount = function()
     {
-        var accounts = account.Construct(db.get("Accounts").find());
+        var accounts = db.collection("Accounts").find();
         var list = [];
         forEach(acc in accounts)
         {

@@ -22,7 +22,7 @@ block content
 
     // /Confirm Account
 
-    form(name="editAccount", action="/createAccount", method="post")
+    form(name="editAccount", action="/modifyAccount", method="post")
         input(name='username', type='hidden', value='#{username}')
         input(name='userPassword', type='hidden', value='#{userPassword}')
         input(name='userFirstName', type='hidden', value='#{userFirstName}')
@@ -38,7 +38,7 @@ block content
         input(name='userZipCode', type='hidden', value='#{userZipCode}')
         input(type="submit", value="Edit Account", class="btn btn-lg btn-primary btn-block")
     br
-    form(name="confirmAccount", action="/createAccount/confirmed", method="post")
+    form(name="confirmAccount", action="/modifyAccount/confirmed", method="post")
         input(name='username', type='hidden', value='#{username}')
         input(name='userPassword', type='hidden', value='#{userPassword}')
         input(name='userFirstName', type='hidden', value='#{userFirstName}')

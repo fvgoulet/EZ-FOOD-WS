@@ -24,10 +24,14 @@ router.get('/', function(req, res) {
  * POST to confirmAccount.
  */
 router.post('/confirmAccount', function(req, res) {
-    //var db = req.db;
+    var actual_account;
+
+    if((req.session.account)){
+        actual_account = JSON.parse(req.session.account).account;
+    }
     console.log(req.body.username);
-    var newUser = {
-        'username' : req.body.username ,
+    var user = {
+        'username' : actual_account.username ,
         'userPassword': req.body.userPassword,
         'userFirstName': req.body.userFirstName,
         'userSecondName': req.body.userSecondName,
@@ -42,47 +46,65 @@ router.post('/confirmAccount', function(req, res) {
         'userEmail':req.body.userEmail
     }
 
-    res.render('confirmAccount', newUser );
+    res.render('confirmAccountModifications', user );
 
 });
 
 /*
  * POST to .
  */
-/*router.post('/confirmed', function(req, res) {
+router.post('/confirmed', function(req, res) {
     //var db = req.db;
     console.log('Add user to DB');
 
-    var new_account = new account.Account();
 
-    new_account.setUsername(req.body.username);
-    new_account.setPassword(req.body.userPassword);
-    new_account.setFirstName(req.body.userFirstName);
-    new_account.setLastName(req.body.userSecondName);
-    new_account.setBirthDate(req.body.userBirthDate);
-    new_account.setEmail(req.body.userEmail);
-    new_account.setPhoneNumber(req.body.userPhoneNumber);
-    if("" != req.body.userAppNumber)
-    {
-        new_account.setAddress(req.body.userCivicNumber + ' ' + req.body.userStreet + ', App. ' + req.body.userAppNumber +
-            ', ' + req.body.userCity + ', ' +  req.body.userProvince + ', ' + req.body.userZipCode);
-    }
-    else
-    {
-        new_account.setAddress(req.body.userCivicNumber + ' ' + req.body.userStreet +
-            ', ' + req.body.userCity + ', ' +  req.body.userProvince + ', ' + req.body.userZipCode);
+    var old_account;
+
+    if((req.session.account)){
+        old_account = JSON.parse(req.session.account).account;
     }
 
+    var actual_account = new account.Account();
+    actual_account.getAccount(old_account.username, old_account.password, function(err, found_account)
+    {
+        if ( err ) return console.error( err );
+        if(null != found_account)
+        {
+            console.log('Found account : ');
+            console.log(found_account);
+            actual_account.setAccount(found_account);
+        }
+        actual_account.closeConnection();
 
-    console.log(new_account);
+        actual_account.setPassword(req.body.userPassword);
+        actual_account.setFirstName(req.body.userFirstName);
+        actual_account.setLastName(req.body.userSecondName);
+        actual_account.setBirthDate(req.body.userBirthDate);
+        actual_account.setEmail(req.body.userEmail);
+        actual_account.setPhoneNumber(req.body.userPhoneNumber);
 
-    req.session.username = new_account.getUsername();
-    req.session.password = new_account.getPassword();
-    // Show a confirmation of the creation.
-    res.redirect('/');
-    //res.render('confirmAccount', newUser );
+        if("" != req.body.userAppNumber)
+        {
+            actual_account.setAddress(req.body.userCivicNumber + ' ' + req.body.userStreet + ', App. ' + req.body.userAppNumber +
+                ', ' + req.body.userCity + ', ' +  req.body.userProvince + ', ' + req.body.userZipCode);
+        }
+        else {
+            actual_account.setAddress(req.body.userCivicNumber + ' ' + req.body.userStreet +
+                ', ' + req.body.userCity + ', ' + req.body.userProvince + ', ' + req.body.userZipCode);
+        }
+        if(actual_account.save())
+        {
+            req.session.account = JSON.stringify(actual_account);
+            req.session.username = actual_account.getUsername();
+            req.session.password = actual_account.getPassword();
+            // Show a confirmation of the creation.
+            res.redirect('/');
+        }
 
-});*/
+
+    });
+
+});
 
 /*
  * POST to /.

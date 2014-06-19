@@ -1,12 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var account = require('../public/Utilities/Account');
-var bd_handler = require('../public/Utilities/BDHandler');
 /*
  * GET .
  */
 router.get('/', function(req, res) {
-    var db = req.db;
     res.render('createAccount', { title: 'EZ-Food' });
 });
 
@@ -44,7 +42,8 @@ router.post('/confirmed', function(req, res) {
     //var db = req.db;
     console.log('Add user to DB');
 
-    var new_account = new account.Account(null,db);
+
+    var new_account = new account.Account();
 
     new_account.setUsername(req.body.username);
     new_account.setPassword(req.body.userPassword);

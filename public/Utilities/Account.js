@@ -1,31 +1,32 @@
 /**
  * Created by Alex on 2014-06-11.
  */
+var mongoose = require( 'mongoose' );
+schema = mongoose.Schema({
+    username : String,
+    password: String,
+    category: String,
+    firstName: String,
+    lastName: String,
+    birthDate: String,
+    email: String,
+    phoneNumber: String,
+    address: String
+});
+account_model = mongoose.model( 'accounts', schema );
 
-function Account(JSONaccount, mongoose)
+function Account()
 {
-    this.schema = mongoose.Schema({
-        username : String,
-        password: String,
-        categoryId: String,
-        firstName: String,
-        lastName: String,
-        birthDate: String,
-        email: String,
-        phoneNumber: String,
-        address: String
-    });
-
-
-    this.model = mongoose.model("Account",this.schema);
 
     //Constructor
-    this.account = new this.model(JSONaccount);
-    this.mongoose = mongoose;
+    //this.account = new this.model(JSONaccount);
 
-    this.accountExist = function(user)
+
+    this.account = new account_model();
+
+    /*this.accountExist = function(user)
     {
-        return this.account.find({username : user }, function(err,returnValue)
+        return this.accounts.find({username : user }, function(err,returnValue)
         {
             if(err)
             {
@@ -34,25 +35,58 @@ function Account(JSONaccount, mongoose)
             }
             return returnValue;
         });
-    };
-
-    this.insertToDB = function()
+    };*/
+    this.openConnection = function()
     {
-        if(!this.accountExist(this.account.username))
+        mongoose.connect( 'mongodb://localhost/EZ-Food' );
+    }
+
+    this.save = function()
+    {
+        this.openConnection();
+        console.log('Save Account.');
+        console.log(this.account);
+        this.account.save(function(err)
         {
-            this.account.save(function(err)
-            {
-               if(err)
-               {
-                   console.log(err);
-                   return false;
-               }
-            });
-            return true;
-        }
-        return false;
+           console.log('Account saved.');
+           if(err)
+           {
+               console.log(err);
+           }
+            mongoose.connection.close()
+        });
+        return true;
+
     };
 
+    this.getAccount = function(username, password, callback)
+    {
+        this.openConnection();
+        account_model.findOne( { username: username , password: password}, callback); /*function ( err, found_account )
+        {
+            if ( err ) return console.error( err );
+            if(null != found_account)
+            {
+                this.account = found_account;
+                console.log('Found account : ');
+                console.log(found_account);
+
+
+            }
+            mongoose.connection.close();
+        });*/
+
+    };
+
+    this.setAccount = function(account)
+    {
+        this.account = account;
+    }
+    this.closeConnection = function()
+    {
+        mongoose.connection.close();
+    }
+/*
     this.updateInDB = function()
     {
         if(this.accountExist(this.account.username))
@@ -68,7 +102,7 @@ function Account(JSONaccount, mongoose)
             return true;
         }
         return false;
-    };
+    };*/
 
     /* This function sets the username.*/
     this.setUsername = function(username)
@@ -93,14 +127,14 @@ function Account(JSONaccount, mongoose)
     };
 
     /* This function sets the categoryId.*/
-    this.setCategoryId = function(categoryId)
+    this.setCategory = function(categoryId)
     {
-        this.account.categoryId = categoryId;
+        this.account.category = categoryId;
     };
     /* This function returns the categoryId.*/
     this.getCategoryId = function()
     {
-        return this.account.categoryId;
+        return this.account.category;
     };
 
     /* This function sets the firstName.*/
@@ -179,6 +213,12 @@ function Account(JSONaccount, mongoose)
     this.getCategory = function()
     {
         return this.account.category;
+    };
+
+
+    this.getJSON = function()
+    {
+        return JSON.stringify(this.account).account;
     };
 }
 

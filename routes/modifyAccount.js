@@ -1,21 +1,22 @@
 var express = require('express');
 var router = express.Router();
-var bd_handler = require('../public/Utilities/BDHandler');
-//var account = require('../public/Utilities/Account');
+
+var account = require('../public/Utilities/Account');
 /*
  * GET .
  */
 router.get('/', function(req, res) {
-    var account;
+    var actual_account;
 
     if((req.session.account)){
-        account = JSON.parse(req.session.account);
+        actual_account = JSON.parse(req.session.account).account;
     }
-
+    console.log("Modify account :");
+    console.log(actual_account);
     /*var bd = new bd_handler.DBHandler();
     bd.Construct();
     bd.selectAccount(account);*/
-    res.render('modifyAccount', {account: account });
+    res.render('modifyAccount', {account: actual_account });
 });
 
 

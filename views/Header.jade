@@ -3,7 +3,7 @@
 
 header
     if account != null
-        div#UserSalutation Hello, #{account.firstName} #{account.lastName}
+        div#UserSalutation Hello, #{account.firstName} #{account.lastName} #{account.category}
         div#Logo
             a(href="/") Ez-Food
             div#Motto All the food at the tip of your finger!
@@ -14,23 +14,24 @@ header
         // restaurateur -2
         // client - 3
         // livreur - 4
-        case account.category
-            when 0
+        - var account_category = account.category
+        case account_category
+            when '0'
                 nav
                     ul
                         li
                             a(href="/disconnect") Disconnect
-            when 1
+            when '1'
                 nav
                     ul
                         li
                             a(href="/disconnect") Disconnect
-            when 2
+            when '2'
                 nav
                     ul
                         li
                             a(href="/disconnect") Disconnect
-            when 3
+            when '3'
                 nav
                     ul
                         li Restaurant
@@ -38,7 +39,7 @@ header
                             a(href="/modifyAccount") Modify Account
                         li
                             a(href="/disconnect") Disconnect
-            when 4
+            when '4'
                 nav
                     ul
                         li

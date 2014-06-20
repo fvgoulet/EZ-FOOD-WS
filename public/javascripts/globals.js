@@ -5,6 +5,9 @@ $(document).ready(function() {
     // Submit account button click
     $('#btnSubmitAccount').on('click', validateAccountFields);
 
+    $('#btnSubmitModifications').on('click', validateAccountFields);
+
+
 
 });
 

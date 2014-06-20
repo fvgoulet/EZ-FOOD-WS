@@ -13,9 +13,7 @@ router.get('/', function(req, res) {
     }
     console.log("Modify account :");
     console.log(actual_account);
-    /*var bd = new bd_handler.DBHandler();
-    bd.Construct();
-    bd.selectAccount(account);*/
+
     res.render('modifyAccount', {account: actual_account });
 });
 
@@ -103,25 +101,15 @@ router.post('/confirmed', function(req, res) {
  * POST to /.
  */
 router.post('/', function(req, res) {
+    var actual_account;
 
-
-
-    var newUser = {
-        'username' : req.body.username ,
-        'userPassword': req.body.userPassword,
-        'userFirstName': req.body.userFirstName,
-        'userSecondName': req.body.userSecondName,
-        'userBirthDate': req.body.userBirthDate,
-        'userPhoneNumber': req.body.userPhoneNumber,
-        'userCivicNumber': req.body.userCivicNumber,
-        'userAppNumber': req.body.userAppNumber,
-        'userStreet': req.body.userStreet,
-        'userCity': req.body.userCity,
-        'userProvince': req.body.userProvince,
-        'userZipCode': req.body.userZipCode,
-        'userEmail':req.body.userEmail
+    if((req.session.account)){
+        actual_account = JSON.parse(req.session.account).account;
     }
-    res.render('modifyAccount', newUser );
+    console.log("Modify account :");
+    console.log(actual_account);
+
+    res.render('modifyAccount', {account: actual_account });
 });
 
 module.exports = router;

@@ -27,14 +27,9 @@ router.post('/validate', function(req, res) {
             console.log('Found account : ');
             console.log(found_account);
             actual_account.setAccount(found_account);
+            req.session.account = JSON.stringify(actual_account);
         }
         actual_account.closeConnection();
-
-        console.log('Connected Account :');
-
-        req.session.account = JSON.stringify(actual_account);
-        req.session.username = actual_account.getUsername();
-        req.session.password = actual_account.getPassword();
 
         res.redirect('/' );
 

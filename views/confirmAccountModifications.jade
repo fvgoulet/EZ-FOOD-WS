@@ -23,19 +23,6 @@ block content
     // /Confirm Account
 
     form(name="editAccount", action="/modifyAccount", method="post")
-        input(name='username', type='hidden', value='#{username}')
-        input(name='userPassword', type='hidden', value='#{userPassword}')
-        input(name='userFirstName', type='hidden', value='#{userFirstName}')
-        input(name='userSecondName', type='hidden', value='#{userSecondName}')
-        input(name='userBirthDate', type='hidden', value='#{userBirthDate}')
-        input(name='userEmail', type='hidden', value='#{userEmail}')
-        input(name='userPhoneNumber', type='hidden', value='#{userPhoneNumber}')
-        input(name='userCivicNumber', type='hidden', value='#{userCivicNumber}')
-        input(name='userAppNumber', type='hidden', value='#{userAppNumber}')
-        input(name='userStreet', type='hidden', value='#{userStreet}')
-        input(name='userCity', type='hidden', value='#{userCity}')
-        input(name='userProvince', type='hidden', value='#{userProvince}')
-        input(name='userZipCode', type='hidden', value='#{userZipCode}')
         input(type="submit", value="Edit Account", class="btn btn-lg btn-primary btn-block")
     br
     form(name="confirmAccount", action="/modifyAccount/confirmed", method="post")
@@ -47,7 +34,7 @@ block content
         input(name='userEmail', type='hidden', value='#{userEmail}')
         input(name='userPhoneNumber', type='hidden', value='#{userPhoneNumber}')
         input(name='userCivicNumber', type='hidden', value='#{userCivicNumber}')
-        input(name='userAppNumber', type='hidden')
+        input(name='userAppNumber', type='hidden', value='#{userAppNumber}')
         input(name='userStreet', type='hidden', value='#{userStreet}')
         input(name='userCity', type='hidden', value='#{userCity}')
         input(name='userProvince', type='hidden', value='#{userProvince}')

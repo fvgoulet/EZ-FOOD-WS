@@ -10,8 +10,8 @@ header
 
         // Differents categories
         // admin - 0
-        // entrepreneur -1
-        // restaurateur -2
+        // entrepreneur - 1
+        // restaurateur - 2
         // client - 3
         // livreur - 4
         case account.category
@@ -19,15 +19,29 @@ header
                 nav
                     ul
                         li
+                            a(href="/disconnect") Manage Account
+                        li
                             a(href="/disconnect") Disconnect
             when 1
                 nav
                     ul
                         li
+                            a(href="/disconnect") Create Restaurateur
+                        li
+                            a(href="/disconnect") Manage Restaurateur
+                        li
+                            a(href="/disconnect") Create Restaurant
+                        li
+                            a(href="/disconnect") Manage Restaurant
+                        li
                             a(href="/disconnect") Disconnect
             when 2
                 nav
                     ul
+                        li
+                            a(href="/disconnect") Create Menu
+                        li
+                            a(href="/disconnect") Manage Menu
                         li
                             a(href="/disconnect") Disconnect
             when 3

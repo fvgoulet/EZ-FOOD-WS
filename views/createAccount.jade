@@ -14,7 +14,7 @@ block content
         form(name="account", action="/createAccount/confirmAccount", method="post")
             br
             | Username :
-            input(name='username', type='text', placeholder='Username', value='#{username}',class='form-control', required autofocus, autocomplete="off")
+            input(name='username', type='text', placeholder='Username', value='#{username}',class='form-control', required autofocus, autocomplete="off",onblur="checkAccountExist();")
             | Password :
             input(name='userPassword', type='password', placeholder='Password', value='#{userPassword}',class='form-control', required autofocus, autocomplete="off")
 
@@ -52,7 +52,7 @@ block content
         form(name="account", action="/createAccount/confirmAccount", method="post")
             br
             | Username :
-            input(name='username',class='form-control' , type='text', placeholder='Username', required autofocus, autocomplete="off")
+            input(name='username',class='form-control' , type='text', placeholder='Username', required autofocus, autocomplete="off", onblur="checkAccountExist();")
             | Password :
             input(name='userPassword',class='form-control', type='password', placeholder='Password', required autofocus, autocomplete="off")
             br

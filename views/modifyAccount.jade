@@ -28,17 +28,17 @@ block content
 
         br
         | Civic No. :
-        input(name='userCivicNumber', type='text', placeholder='Civic No.', value='#{userCivicNumber}',class='form-control', required autofocus, autocomplete="off")
+        input(name='userCivicNumber', type='text', placeholder='Civic No.', value='#{account.civicNo}',class='form-control', required autofocus, autocomplete="off")
         | Appartment :
-        input(name='userAppNumber', type='text', placeholder='App. No. (Optional)', value='#{userAppNumber}',class='form-control', required autofocus, autocomplete="off")
+        input(name='userAppNumber', type='text', placeholder='App. No. (Optional)', value='#{account.appartment}',class='form-control', required autofocus, autocomplete="off")
         | Street :
-        input(name='userStreet', type='text', placeholder='Street', value='#{userStreet}',class='form-control', required autofocus, autocomplete="off")
+        input(name='userStreet', type='text', placeholder='Street', value='#{account.street}',class='form-control', required autofocus, autocomplete="off")
         | City :
-        input(name='userCity', type='text', placeholder='City', value='#{userCity}',class='form-control', required autofocus, autocomplete="off")
+        input(name='userCity', type='text', placeholder='City', value='#{account.city}',class='form-control', required autofocus, autocomplete="off")
         | Province :
-        input(name='userProvince', type='text', placeholder='Province', value='#{userProvince}',class='form-control', required autofocus, autocomplete="off")
+        input(name='userProvince', type='text', placeholder='Province', value='#{account.province}',class='form-control', required autofocus, autocomplete="off")
         | ZIP Code :
-        input(name='userZipCode', type='text', placeholder='ZIP Code', value='#{userZipCode}',class='form-control', required autofocus, autocomplete="off")
+        input(name='userZipCode', type='text', placeholder='ZIP Code', value='#{account.zipCode}',class='form-control', required autofocus, autocomplete="off")
 
         br
         input#btnSubmitModifications(type="submit", value="Modify Account",class="btn btn-lg btn-primary btn-block")

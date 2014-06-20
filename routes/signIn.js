@@ -31,7 +31,6 @@ router.post('/validate', function(req, res) {
         actual_account.closeConnection();
 
         console.log('Connected Account :');
-        console.log(actual_account.getAddress());
 
         req.session.account = JSON.stringify(actual_account);
         req.session.username = actual_account.getUsername();

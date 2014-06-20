@@ -5,13 +5,18 @@ var mongoose = require( 'mongoose' );
 schema = mongoose.Schema({
     username : String,
     password: String,
-    category: String,
+    category: Number,
     firstName: String,
     lastName: String,
     birthDate: String,
     email: String,
     phoneNumber: String,
-    address: String
+    civicNo: String,
+    appartment: String,
+    street: String,
+    city: String,
+    province: String,
+    zipCode: String
 });
 account_model = mongoose.model( 'accounts', schema );
 
@@ -193,16 +198,7 @@ function Account()
         return this.account.phoneNumber;
     };
 
-    /* This function sets the address.*/
-    this.setAddress = function(address)
-    {
-        this.account.address = address;
-    };
-    /* This function returns the address.*/
-    this.getAddress = function()
-    {
-        return this.account.address;
-    };
+
 
     /* This function sets the address.*/
     this.setCategory = function(category)
@@ -219,6 +215,77 @@ function Account()
     this.getJSON = function()
     {
         return JSON.stringify(this.account).account;
+    };
+
+
+    /* This function sets the address.*/
+    this.setCivicNo = function(civic_no)
+    {
+        this.account.civicNo = civic_no;
+    };
+    /* This function returns the address.*/
+    this.getCivicNo = function()
+    {
+        return this.account.civicNo;
+    };
+
+    /* This function sets the address.*/
+    this.setAppartment = function(appartment)
+    {
+        this.account.appartment = appartment;
+    };
+    /* This function returns the address.*/
+    this.getAppartment = function()
+    {
+        return this.account.appartment;
+    };
+
+
+    /* This function sets the address.*/
+    this.setStreet = function(street)
+    {
+        this.account.street = street;
+    };
+    /* This function returns the address.*/
+    this.getStreet = function()
+    {
+        return this.account.street;
+    };
+
+    /* This function sets the address.*/
+    this.setCity = function(city)
+    {
+        this.account.city = city;
+    };
+    /* This function returns the address.*/
+    this.getCity = function()
+    {
+        return this.account.city;
+    };
+
+
+
+    /* This function sets the address.*/
+    this.setProvince = function(province)
+    {
+        this.account.province = province;
+    };
+    /* This function returns the address.*/
+    this.getProvince = function()
+    {
+        return this.account.province;
+    };
+
+
+    /* This function sets the address.*/
+    this.setZipCode = function(zip_code)
+    {
+        this.account.zipCode = zip_code;
+    };
+    /* This function returns the address.*/
+    this.getZipCode = function()
+    {
+        return this.account.zipCode;
     };
 }
 

@@ -83,27 +83,20 @@ router.post('/confirmed', function(req, res) {
         actual_account.setEmail(req.body.userEmail);
         actual_account.setPhoneNumber(req.body.userPhoneNumber);
 
-        if("" != req.body.userAppNumber)
-        {
-            actual_account.setAddress(req.body.userCivicNumber + ' ' + req.body.userStreet + ', App. ' + req.body.userAppNumber +
-                ', ' + req.body.userCity + ', ' +  req.body.userProvince + ', ' + req.body.userZipCode);
-        }
-        else {
-            actual_account.setAddress(req.body.userCivicNumber + ' ' + req.body.userStreet +
-                ', ' + req.body.userCity + ', ' + req.body.userProvince + ', ' + req.body.userZipCode);
-        }
+        actual_account.setCivicNo(req.body.userCivicNumber);
+        actual_account.setAppartment(req.body.userAppNumber);
+        actual_account.setStreet(req.body.userStreet);
+        actual_account.setCity(req.body.userCity);
+        actual_account.setProvince(req.body.userProvince);
+        actual_account.setZipCode(req.body.userZipCode);
+
         if(actual_account.save())
         {
             req.session.account = JSON.stringify(actual_account);
-            req.session.username = actual_account.getUsername();
-            req.session.password = actual_account.getPassword();
             // Show a confirmation of the creation.
             res.redirect('/');
         }
-
-
     });
-
 });
 
 /*
@@ -128,9 +121,7 @@ router.post('/', function(req, res) {
         'userZipCode': req.body.userZipCode,
         'userEmail':req.body.userEmail
     }
-
     res.render('modifyAccount', newUser );
-
 });
 
 module.exports = router;

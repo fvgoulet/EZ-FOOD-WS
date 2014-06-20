@@ -5,8 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost/EZ-Food');
+//var mongoose = require("mongoose");
+//mongoose.connect('mongodb://localhost/EZ-Food');
 // Database
 
 var app = express();
@@ -14,10 +14,10 @@ var app = express();
 
 
 // Make our db accessible to our router
-app.use(function(req,res,next){
+/*app.use(function(req,res,next){
     req = mongoose;
     next();
-});
+});*/
 
 var routes = require('./routes/index');
 var createAccount = require('./routes/createAccount');

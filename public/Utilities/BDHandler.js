@@ -3,28 +3,70 @@
  */
 
 var accountClass = require("./Account");
-var categoryClass = require("./Category")
-var mongo = require('mongoskin');
+var categoryClass = require("./Category");
+var mongoose = require( 'mongoose' );
+
+var account_schema = new mongoose.Schema(
+{
+    username: String
+    ,password: String
+    ,categoryId: String
+    ,firstName: String
+    ,lastName: String
+    ,birthDate: String
+    ,email: String
+    ,phoneNumber: String
+    ,address: String
+
+});
 
 function DBHandler()
 {
 
+    this.accounts = null;
+
     this.Construct = function()
     {
-        this.db = mongo.db("mongodb://localhost:27017/EZ-Food", {native_parser:true});
+
+        mongoose.connect( 'mongodb://localhost/EZ-Food' );
+
+
+        this.accounts = mongoose.model( 'Accounts', account_schema );
+
+        //this.new_account = null;
     };
 
     this.selectAccount = function(username)
     {
         var jsonUsername = {"username": username};
+        console.log(jsonUsername);
+        this.accounts.find(jsonUsername,  function(err, result)
+        {
+
+            if (err) return console.error(err);
+            console.log("Sign in :");
+            console.log(result);
+
+        });
+       /* var jsonUsername = {"username": username};
+
         var account = new accountClass.Account();
-        account.Construct(db.collection("Accounts").find(jsonUsername))
-        return account;
+
+
+
+        this.db.collection('Accounts').findOne(jsonUsername, function (err, result) {
+                if (err) throw err;
+        });
+;
+        console.log(test);
+        account.Construct(read);
+
+        return account;*/
     };
 
     this.selectAllAccount = function()
     {
-        var accounts = db.collection("Accounts").find();
+        /*var accounts = db.collection("Accounts").find();
         var list = [];
         forEach(acc in accounts)
         {
@@ -32,50 +74,46 @@ function DBHandler()
             temp.Construct(acc);
             list.push(temp);
         }
-        return list;
+        return list;*/
     };
 
     // Insert a new account, true if added, false if username already exists
     this.insertAccount = function(account)
     {
-        if(!this.accountExist(account))
+        console.log(this.accounts);
+        this.new_account = new this.accounts(account);
+        console.log(account.getJSONUsername());
+        this.accounts.find(account.getJSONUsername(),  function(err, result)
         {
-            this.db.collection('Accounts').insert(account.getJSONDefinition(), function(err, result) {
-                if (err) throw err;
-                if (result) console.log('Added!');
-            });
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+            if (err) return console.error(err);
+            console.log(result);
+            if (result)
+            {
+                console.log("Create new account");
+                console.log(this.new_account);
+                this.new_account.save(function (err, new_account)
+                {
+                    if (err) return console.error(err);
+                    console.log("Created new account");
+                });
+            }
+            else
+            {
+                console.log("else");
+            }
+
+        });
+
 
     };
 
     //Find if the account exists
-    this.accountExist = function(account)
-    {
-        var result =this.db.collection('Accounts').findOne(account.getJSONUsername(),function(err, result) {
-            if (err) throw err;
-            console.log(result);
-        });
 
-        if (result)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
-    };
 
     //Save an account to the DB
     this.updateAccount = function(account)
     {
-        if(this.accountExist(account))
+       /* if(this.accountExist(account))
         {
             this.db.collection("Accounts").update(account.getJSONUsername(),account.getJSONDefinition());
             return true;
@@ -83,15 +121,15 @@ function DBHandler()
         else
         {
             return false;
-        }
+        }*/
     };
 
     //return an instance of Category
     this.getCategory = function(categoryId)
     {
-        var jsonCategoryId = {"categoryId": categoryId};
+        /*var jsonCategoryId = {"categoryId": categoryId};
         var category = new categoryClass.Category();
-        return category.Construct(db.collection("Categories").find(jsonCategoryId))
+        return category.Construct(db.collection("Categories").find(jsonCategoryId))*/
     };
 }
 

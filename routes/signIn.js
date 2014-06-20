@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var bd_handler = require('../public/Utilities/BDHandler');
+var account = require('../public/Utilities/Account');
+
 /* GET home page. */
 router.get('/', function(req, res) {
     res.render('signIn');
@@ -13,13 +14,32 @@ router.post('/validate', function(req, res) {
 
     var user = {
         'username' : req.body.username ,
-        'userPassword': req.body.userPassword
+        'password': req.body.userPassword
     }
-    var bd = new bd_handler.DBHandler();
-    bd.Construct();
-    bd.selectAccount(user.username);
 
-    res.redirect('/' );
+
+    var actual_account = new account.Account();
+    actual_account.getAccount(user.username, user.password, function(err, found_account)
+    {
+        if ( err ) return console.error( err );
+        if(null != found_account)
+        {
+            console.log('Found account : ');
+            console.log(found_account);
+            actual_account.setAccount(found_account);
+        }
+        actual_account.closeConnection();
+
+        console.log('Connected Account :');
+
+        req.session.account = JSON.stringify(actual_account);
+        req.session.username = actual_account.getUsername();
+        req.session.password = actual_account.getPassword();
+
+        res.redirect('/' );
+
+    });
+
 });
 
 module.exports = router;

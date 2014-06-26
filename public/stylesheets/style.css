@@ -41,6 +41,7 @@ nav ul li{
     color:black;
     margin:0px 5px 5px 0px;
     padding:5px;
+    border-radius: 5px;
 }
 
 header div a,header div a:hover{
@@ -138,6 +139,37 @@ a {
 }
 
 fieldset {
-    border:0;
-    padding:0; margin:0;
+    border-radius: 5px;
+    border:2px solid;
+    padding: 5px;
+    margin:0;
+    width:75%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+legend{
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+#warningCreateAccount{
+    font-size:0.75em;
+    color:red;
+    font-weight: bold;
+    font-style:italic;
+}
+
+input{
+    border-radius: 5px;
+}
+
+input[type=submit]{
+    border:0px;
+    color:black;
+    font-weight: bold;
+    min-width: 125px;
+    background-color: lightgrey;
+    margin:0px 5px 5px 0px;
+    padding:5px;
 }

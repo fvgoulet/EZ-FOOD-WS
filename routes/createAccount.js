@@ -63,17 +63,11 @@ router.post('/confirmed', function(req, res) {
     new_account.setProvince(req.body.userProvince);
     new_account.setZipCode(req.body.userZipCode);
 
-    if(new_account.save())
-    {
+    if(new_account.save()) {
         req.session.account = JSON.stringify(new_account);
         // Show a confirmation of the creation.
-        res.redirect('/');
     }
-    else
-    {
-        res.redirect('/');
-    }
-
+    res.redirect('/');
 });
 
 /*

@@ -8,6 +8,16 @@ router.get('/', function(req, res) {
     res.render('createAccount', { title: 'EZ-Food' });
 });
 
+/*
+ * GET .
+ */
+router.get('/isAccountExist', function(req, res) {
+    console.log("is account exist");
+    console.log(req);
+    console.log(res);
+    res.render('createAccount', { title: 'EZ-Food' });
+});
+
 
 /*
  * POST to confirmAccount.

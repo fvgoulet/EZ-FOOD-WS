@@ -5,6 +5,9 @@ $(document).ready(function() {
     // Submit account button click
     $('#btnSubmitAccount').on('click', validateAccountFields);
 
+    $('#btnSubmitModifications').on('click', validateAccountFields);
+
+
 
 });
 
@@ -103,3 +106,27 @@ function validateAccountFields(event) {
 
     }
 };
+
+function checkAccountExist()
+{
+    var username = document.getElementsByName('username')[0].value ;
+
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+        }
+    }
+    xmlhttp.open("GET","/createAccount/isAccountExist",true);
+    xmlhttp.send("username=" + username);
+}

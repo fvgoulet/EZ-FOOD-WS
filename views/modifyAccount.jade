@@ -8,7 +8,7 @@ block content
     h2 Modify Account
 
     form(name="account", action="/modifyAccount/confirmAccount", method="post")
-
+        input(name='username', type='hidden', value='#{account.username}',class='form-control')
         | Password :
         input(name='userPassword', type='password', placeholder='Password', value='#{account.password}',class='form-control', required autofocus, autocomplete="off")
 

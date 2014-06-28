@@ -8,7 +8,7 @@ block content
     h2 Create Account
     br
     p Please fill the fields to create your account.
-
+    #myDiv
     if username
 
         form(name="account", action="/createAccount/confirmAccount", method="post")
@@ -47,7 +47,7 @@ block content
             input(name='userZipCode', type='text', placeholder='ZIP Code', value='#{userZipCode}',class='form-control', required autofocus, autocomplete="off")
 
             br
-            input#btnSubmitAccount(type="submit", value="Create Account",class="btn btn-lg btn-primary btn-block")
+            input#btnSubmitAccount(name="submit", type="submit", value="Create Account",class="btn btn-lg btn-primary btn-block")
     else
         form(name="account", action="/createAccount/confirmAccount", method="post")
             br
@@ -81,7 +81,7 @@ block content
             | ZIP Code :
             input(name='userZipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
             br
-            input#btnSubmitAccount(type="submit", value="Create Account", class="btn btn-lg btn-primary btn-block")
+            input#btnSubmitAccount(name="submit",type="submit", value="Create Account", class="btn btn-lg btn-primary btn-block")
 
 
 

@@ -120,13 +120,26 @@ function checkAccountExist()
     {// code for IE6, IE5
         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     }
+    // Callback on response.e
     xmlhttp.onreadystatechange=function()
     {
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
-            document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+            if("true" == xmlhttp.responseText)
+            {
+                // TODO : Add simili pop-up.
+                document.getElementsByName("username")[0].setAttribute("style","background:red");
+                document.getElementsByName("submit")[0].disabled = true;
+            }
+            else
+            {
+                // TODO : Remove simili pop-up.
+                document.getElementsByName("username")[0].setAttribute("style","background:white");
+                document.getElementsByName("submit")[0].disabled = false;
+            }
+
         }
     }
-    xmlhttp.open("GET","/createAccount/isAccountExist",true);
+    xmlhttp.open("POST","/createAccount/isAccountExist",true);
     xmlhttp.send("username=" + username);
 }

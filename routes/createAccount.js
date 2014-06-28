@@ -11,11 +11,25 @@ router.get('/', function(req, res) {
 /*
  * GET .
  */
-router.get('/isAccountExist', function(req, res) {
+router.post('/isAccountExist', function(req, res) {
     console.log("is account exist");
-    console.log(req);
-    console.log(res);
-    res.render('createAccount', { title: 'EZ-Food' });
+    if (req.method == 'POST') {
+        var post_data = '';
+        req.on('data', function (data) {
+            post_data += data;
+        });
+
+        req.on('end', function () {
+
+
+            console.log('RECEIVED THIS DATA:\n' + post_data);
+
+            // Check if account exist;
+            res.send(false);
+
+        });
+    }
+
 });
 
 

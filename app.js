@@ -22,6 +22,7 @@ var app = express();
 var routes = require('./routes/index');
 var createAccount = require('./routes/createAccount');
 var modifyAccount = require('./routes/modifyAccount');
+var manageRestaurateur = require('./routes/manageRestaurateur');
 var signIn = require('./routes/signIn');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -39,6 +40,7 @@ app.use('/', routes);
 app.use('/createAccount', createAccount);
 app.use('/signIn', signIn);
 app.use('/modifyAccount', modifyAccount);
+app.use('/manageRestaurateur', manageRestaurateur);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

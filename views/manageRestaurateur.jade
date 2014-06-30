@@ -1,0 +1,14 @@
+block content
+
+    h2 Manage Restaurateur
+    br
+    div#exitingRetaurateur
+        | Available restaurateur :
+        select
+            option(value='None') None
+        button(type='button') Modify
+        button(type='button') Delete
+
+    div#addNewRestaurateur
+        button(type='button', onClick="showAddNewRestaurateur();") Add new
+

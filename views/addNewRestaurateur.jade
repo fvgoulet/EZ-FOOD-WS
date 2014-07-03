@@ -14,7 +14,7 @@ block content
     hr(align="center", width="85%", size="10", noshade)
     h3 Account
     br
-    form(name="account", action="/manageRestaurateur/addRestaurateur", method="post")
+    form(name="account", action="/manageRestaurateur/addNewRestaurateur/addUser", method="post")
         br
         | Username :
         input(name='username',class='form-control' , type='text', placeholder='Username', required autofocus, autocomplete="off", onblur="checkAccountExist();")
@@ -46,7 +46,7 @@ block content
         | ZIP Code :
         input(name='userZipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
         br
-        input#btnSubmitRestaurateur(name="submit_button",type="submit", value="Create Account", class="btn btn-lg btn-primary btn-block")
+        input#btnSubmitRestaurateur(name="submit_button",type="submit", value="Add Restaurateur", class="btn btn-lg btn-primary btn-block")
 
 
     //script(src='/javascripts/validateAccountFields.js')

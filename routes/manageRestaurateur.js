@@ -15,5 +15,11 @@ router.get('/addNewRestaurateur', function(req, res) {
     res.render('addNewRestaurateur');
 });
 
+/*
+ * POST .
+ */
+router.post('/addNewRestaurateur/addUser', function(req, res) {
+    res.render('addNewRestaurateur');
+});
 
 module.exports = router;

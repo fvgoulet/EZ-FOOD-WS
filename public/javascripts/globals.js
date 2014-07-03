@@ -142,7 +142,7 @@ function checkAccountExist()
         }
     };
     xmlhttp.open("POST","/createAccount/isAccountExist",true);
-    xmlhttp.send("username=" + username);
+    xmlhttp.send('{"username":"' + username + '"}');
 }
 
 function manageRestaurateur()

@@ -22,7 +22,7 @@ var app = express();
 var routes = require('./routes/index');
 var createAccount = require('./routes/createAccount');
 var modifyAccount = require('./routes/modifyAccount');
-var accountManagement = require('./routes/accountManagement');
+//var accountManagement = require('./routes/accountManagement');
 var manageRestaurateur = require('./routes/manageRestaurateur');
 var signIn = require('./routes/signIn');
 // view engine setup
@@ -41,7 +41,7 @@ app.use('/', routes);
 app.use('/createAccount', createAccount);
 app.use('/signIn', signIn);
 app.use('/modifyAccount', modifyAccount);
-app.use('/accountManagement', accountManagement);
+//app.use('/accountManagement', accountManagement);
 app.use('/manageRestaurateur', manageRestaurateur);
 
 /// catch 404 and forwarding to error handler

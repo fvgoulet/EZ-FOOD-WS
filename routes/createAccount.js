@@ -23,9 +23,30 @@ router.post('/isAccountExist', function(req, res) {
 
 
             console.log('RECEIVED THIS DATA:\n' + post_data);
+            var json_data = JSON.parse(post_data);
+            console.log(json_data);
+            console.log(json_data.username);
 
-            // Check if account exist;
-            res.send(false);
+            var virtual_account = new account.Account();
+            virtual_account.getAccountFromUsername(json_data.username,function(err, found_account)
+            {
+                if ( err ) return console.error( err );
+                console.log('Found account : ');
+                console.log(found_account);
+                if(null != found_account)
+                {
+
+                    res.send(true);
+                }
+                else
+                {
+                    res.send(false);
+                }
+                virtual_account.closeConnection();
+
+
+            });
+
 
         });
     }

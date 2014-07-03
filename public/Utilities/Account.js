@@ -18,15 +18,13 @@ schema = mongoose.Schema({
     province: String,
     zipCode: String
 });
-account_model = mongoose.model( 'accounts', schema );
+var account_model = mongoose.model( 'accounts', schema );
 
 function Account()
 {
 
     //Constructor
     //this.account = new this.model(JSONaccount);
-
-
     this.account = new account_model();
 
     /*this.accountExist = function(user)
@@ -44,7 +42,7 @@ function Account()
     this.openConnection = function()
     {
         mongoose.connect( 'mongodb://localhost/EZ-Food' );
-    }
+    };
 
     this.save = function()
     {
@@ -64,7 +62,7 @@ function Account()
 
     };
 
-    this.getAccount = function(username, password, callback)
+    this.getAccount = function(username, password, callback)//function ( err, found_account )
     {
         this.openConnection();
         account_model.findOne( { username: username , password: password}, callback); /*function ( err, found_account )
@@ -80,17 +78,45 @@ function Account()
             }
             mongoose.connection.close();
         });*/
+    };
 
+    this.getAccountFromId = function(id,callback) //where callback = function ( err, found_account )
+    {
+        this.openConnection();
+        account_model.findOne( { _id: id }, callback);
+
+    };
+
+    this.getAccountFromUsername = function(username,callback) //where callback = function ( err, found_account )
+    {
+        this.openConnection();
+        account_model.findOne( { username: username }, callback);
     };
 
     this.setAccount = function(account)
     {
         this.account = account;
-    }
+    };
     this.closeConnection = function()
     {
         mongoose.connection.close();
-    }
+    };
+
+    this.deleteAccount = function(id, callback) //function (err, bool deleted)
+    {
+        this.openConnection();
+        this.account.remove("ObjectId("+ id + ")", callback);
+    };
+
+    this.getAllAccounts = function(callback) //function ( err, found_account )
+    {
+        this.openConnection();
+        this.account.find()
+            .where('category').lt(6)
+            .sort('category')
+            .sort('name')
+            .exec(callback);
+    };
 /*
     this.updateInDB = function()
     {
@@ -197,8 +223,6 @@ function Account()
     {
         return this.account.phoneNumber;
     };
-
-
 
     /* This function sets the address.*/
     this.setCategory = function(category)

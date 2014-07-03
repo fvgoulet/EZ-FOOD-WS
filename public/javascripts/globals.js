@@ -106,7 +106,7 @@ function validateAccountFields(event) {
         }
 
     }
-};
+}
 
 function checkAccountExist()
 {
@@ -140,11 +140,10 @@ function checkAccountExist()
             }
 
         }
-    }
+    };
     xmlhttp.open("POST","/createAccount/isAccountExist",true);
     xmlhttp.send("username=" + username);
 }
-
 
 function manageRestaurateur()
 {
@@ -165,7 +164,7 @@ function manageRestaurateur()
             document.getElementById("content").innerHTML = xmlhttp.responseText;
 
         }
-    }
+    };
 
     xmlhttp.open("GET","/manageRestaurateur",true);
     xmlhttp.send();

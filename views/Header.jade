@@ -17,8 +17,11 @@ header
         - var account_category = account.category
         case account_category
             when 0
+                script(src='./routes/accountManagement.js')
                 nav
                     ul
+                        li
+                            a(href="/accountManagement") Account Management
                         li
                             a(href="/disconnect") Disconnect
             when 1

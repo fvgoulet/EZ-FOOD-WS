@@ -53,7 +53,7 @@ router.post('/confirmAccount', function(req, res) {
         'userProvince': req.body.userProvince,
         'userZipCode': req.body.userZipCode,
         'userEmail':req.body.userEmail
-    }
+    };
 
     res.render('confirmAccount', newUser );
 
@@ -121,7 +121,7 @@ router.post('/', function(req, res) {
         'userProvince': req.body.userProvince,
         'userZipCode': req.body.userZipCode,
         'userEmail':req.body.userEmail
-    }
+    };
 
     res.render('createAccount', newUser );
 

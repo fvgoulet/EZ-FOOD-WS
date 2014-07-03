@@ -15,7 +15,7 @@ router.post('/validate', function(req, res) {
     var user = {
         'username' : req.body.username ,
         'password': req.body.userPassword
-    }
+    };
 
 
     var actual_account = new account.Account();
@@ -31,7 +31,7 @@ router.post('/validate', function(req, res) {
         }
         actual_account.closeConnection();
 
-        res.redirect('/' );
+        res.redirect('/');
 
     });
 

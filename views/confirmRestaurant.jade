@@ -1,0 +1,37 @@
+//
+   Created by Gabriel on 2014-07-04.
+
+extends layout
+block content
+    include DisconnectHeader
+    p Please confirm the information below.
+    br
+    // Confirm Account
+    h2 Confirm Restaurant
+    p Name :     #{name}
+    p Phone Number : #{phoneNumber}
+    p Civic Number : #{civicNumber}
+    p Street :       #{street}
+    p City :         #{city}
+    p Province :     #{province}
+    p ZIP Code :     #{zipCode}
+    // /Confirm Account
+    form(name="editRestaurant", action="/addRestaurant", method="post")
+        input(name='name', type='hidden', value='#{name}')
+        input(name='phoneNumber', type='hidden', value='#{phoneNumber}')
+        input(name='civicNumber', type='hidden', value='#{civicNumber}')
+        input(name='street', type='hidden', value='#{street}')
+        input(name='city', type='hidden', value='#{city}')
+        input(name='province', type='hidden', value='#{province}')
+        input(name='zipCode', type='hidden', value='#{zipCode}')
+        input(type="submit", value="Edit Restaurant", class="btn btn-lg btn-primary btn-block")
+    br
+    form(name="confirmRestaurant", action="/addRestaurant/confirmed", method="post")
+        input(name='name', type='hidden', value='#{name}')
+        input(name='phoneNumber', type='hidden', value='#{phoneNumber}')
+        input(name='civicNumber', type='hidden', value='#{civicNumber}')
+        input(name='street', type='hidden', value='#{street}')
+        input(name='city', type='hidden', value='#{city}')
+        input(name='province', type='hidden', value='#{province}')
+        input(name='zipCode', type='hidden', value='#{zipCode}')
+        input(type="submit", value="Confirm Restaurant", class="btn btn-lg btn-primary btn-block")

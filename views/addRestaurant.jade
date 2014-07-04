@@ -1,0 +1,53 @@
+//
+   Created by Gabriel on 2014-07-04.
+
+extends layout
+block content
+    include Header
+    h2 Add Restaurant
+    br
+    p Please fill the fields to add a restaurant to your account.
+    #myDiv
+    if name
+
+        form(name="restaurant", action="/addRestaurant/confirmRestaurant", method="post")
+            br
+            | Name :
+            input(name='name', type='text', placeholder='Name', value='#{name}',class='form-control', required autofocus, autocomplete="off",onblur="checkRestaurantExist();")
+            | Phone Number :
+            input(name='phoneNumber', type='text', placeholder='###-###-####', value='#{phoneNumber}',class='form-control', required autofocus, autocomplete="off")
+
+            br
+            | Civic No. :
+            input(name='civicNumber', type='text', placeholder='Civic No.', value='#{civicNumber}',class='form-control', required autofocus, autocomplete="off")
+            | Street :
+            input(name='street', type='text', placeholder='Street', value='#{street}',class='form-control', required autofocus, autocomplete="off")
+            | City :
+            input(name='city', type='text', placeholder='City', value='#{city}',class='form-control', required autofocus, autocomplete="off")
+            | Province :
+            input(name='province', type='text', placeholder='Province', value='#{province}',class='form-control', required autofocus, autocomplete="off")
+            | ZIP Code :
+            input(name='zipCode', type='text', placeholder='ZIP Code', value='#{zipCode}',class='form-control', required autofocus, autocomplete="off")
+
+            br
+            input#btnSubmitAccount(name="submit_button", type="submit", value="Add Rerstaurant",class="btn btn-lg btn-primary btn-block")
+    else
+        form(name="Restaurant", action="/addRestaurant/confirmRestaurant", method="post")
+            br
+            | Name :
+            input(name='name',class='form-control' , type='text', placeholder='Name', required autofocus, autocomplete="off", onblur="checkRestaurantExist();")
+            | Phone Number :
+            input(name='phoneNumber',class='form-control', type='text', placeholder='###-###-####', required autofocus, autocomplete="off")
+            br
+            | Civic No. :
+            input(name='civicNumber',class='form-control', type='text', placeholder='Civic No.', required autofocus, autocomplete="off")
+            | Street :
+            input(name='street',class='form-control', type='text', placeholder='Street', required autofocus, autocomplete="off")
+            | City :
+            input(name='city',class='form-control', type='text', placeholder='City', required autofocus, autocomplete="off")
+            | Province :
+            input(name='province',class='form-control', type='text', placeholder='Province', required autofocus, autocomplete="off")
+            | ZIP Code :
+            input(name='zipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
+            br
+            input#btnSubmitRestaurant(name="submit_button",type="submit", value="Add Restaurant", class="btn btn-lg btn-primary btn-block")

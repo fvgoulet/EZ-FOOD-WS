@@ -29,7 +29,6 @@ router.post('/validate', function(req, res) {
             actual_account.setAccount(found_account);
             req.session.account = JSON.stringify(actual_account);
         }
-        actual_account.closeConnection();
 
         res.redirect('/');
 

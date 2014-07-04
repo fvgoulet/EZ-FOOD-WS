@@ -89,10 +89,6 @@ function Account()
     {
         this.account = account;
     };
-    this.closeConnection = function()
-    {
-        mongoose.connection.close();
-    };
 
     this.deleteAccount = function(id, callback) //function (err, bool deleted)
     {

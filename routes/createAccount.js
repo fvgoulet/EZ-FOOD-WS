@@ -42,9 +42,6 @@ router.post('/isAccountExist', function(req, res) {
                 {
                     res.send(false);
                 }
-                virtual_account.closeConnection();
-
-
             });
 
 

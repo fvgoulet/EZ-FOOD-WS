@@ -24,6 +24,7 @@ var createAccount = require('./routes/createAccount');
 var modifyAccount = require('./routes/modifyAccount');
 var accountManagement = require('./routes/accountManagement');
 var manageRestaurateur = require('./routes/manageRestaurateur');
+var addRestaurant = require('./routes/addRestaurant')
 var signIn = require('./routes/signIn');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,6 +41,7 @@ app.use(session({secret: '1234567890QWERTY'}));
 app.use('/', routes);
 app.use('/createAccount', createAccount);
 app.use('/signIn', signIn);
+app.use('/addRestaurant', addRestaurant);
 app.use('/modifyAccount', modifyAccount);
 app.use('/accountManagement', accountManagement);
 app.use('/manageRestaurateur', manageRestaurateur);

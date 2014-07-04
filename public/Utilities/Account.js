@@ -39,14 +39,10 @@ function Account()
             return returnValue;
         });
     };*/
-    this.openConnection = function()
-    {
-        mongoose.connect( 'mongodb://localhost/EZ-Food' );
-    };
+
 
     this.save = function()
     {
-        this.openConnection();
         console.log('Save Account.');
         console.log(this.account);
         this.account.save(function(err)
@@ -59,12 +55,10 @@ function Account()
             mongoose.connection.close()
         });
         return true;
-
     };
 
     this.getAccount = function(username, password, callback)//function ( err, found_account )
     {
-        this.openConnection();
         account_model.findOne( { username: username , password: password}, callback); /*function ( err, found_account )
         {
             if ( err ) return console.error( err );
@@ -82,14 +76,12 @@ function Account()
 
     this.getAccountFromId = function(id,callback) //where callback = function ( err, found_account )
     {
-        this.openConnection();
         account_model.findOne( { _id: id }, callback);
 
     };
 
     this.getAccountFromUsername = function(username,callback) //where callback = function ( err, found_account )
     {
-        this.openConnection();
         account_model.findOne( { username: username }, callback);
     };
 
@@ -104,18 +96,12 @@ function Account()
 
     this.deleteAccount = function(id, callback) //function (err, bool deleted)
     {
-        this.openConnection();
-        this.account.remove("ObjectId("+ id + ")", callback);
+        account_model.remove("ObjectId("+ id + ")", callback);
     };
 
     this.getAllAccounts = function(callback) //function ( err, found_account )
     {
-        this.openConnection();
-        this.account.find()
-            .where('category').lt(6)
-            .sort('category')
-            .sort('name')
-            .exec(callback);
+        account_model.find().exec(callback);
     };
 /*
     this.updateInDB = function()

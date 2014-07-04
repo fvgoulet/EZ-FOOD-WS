@@ -1,6 +1,5 @@
 //
    Created by Gabriel on 2014-06-12.
-
 header
     if account != null
         div#UserSalutation Hello, #{account.firstName} #{account.lastName}
@@ -17,11 +16,10 @@ header
         - var account_category = account.category
         case account_category
             when 0
-                script(src='./routes/accountManagement.js')
                 nav
                     ul
                         li
-                            a(href="/accountManagement") Account Management
+                            a(href='/accountManagement') Account Management
                         li
                             a(href="/disconnect") Disconnect
             when 1

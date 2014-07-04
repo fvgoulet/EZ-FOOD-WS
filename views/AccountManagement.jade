@@ -1,8 +1,10 @@
 //
    Created by Félix on 2014-06-25.
-extends updatedLayout
-script(src='/routes/accountManagement.js')
+extends layout
 block content
+    script(type='text/javascript' src='http://code.jquery.com/jquery-latest.min.js')
+    script(src='./javascripts/clientAccountManagement.js')
+
     //include Header
     h1= title
     p Welcome to our test
@@ -13,7 +15,6 @@ block content
         // USER LIST
         h2 User List
         #userList
-            input#refreshUserList(type='button', value='Refresh list' ,onClick='initAccountManagement();')
             table
                 thead
                     th User Name
@@ -52,8 +53,9 @@ block content
                 input#inputUserStreet(type='text', placeholder='Street')
                 input#inputUserCity(type='text', placeholder='City')
                 input#inputUserProvince(type='text', placeholder='Province')
-                input#inputUserZipConde(type='text', placeholder='ZipCode')
+                input#inputUserZipCode(type='text', placeholder='ZipCode')
+                input#inputUserId(type='text', placeholder='ZipCode')
                 br
-                button#refreshUserList(type='button', value='Modify User' ,onClick='applyModificationToUser();')
+                button#btnapplyModification(type='button', value='Modify User' ,onClick='applyModificationToUser();')
         // /Modify User
     // /WRAPPER

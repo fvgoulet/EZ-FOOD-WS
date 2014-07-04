@@ -5,8 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-//var mongoose = require("mongoose");
-//mongoose.connect('mongodb://localhost/EZ-Food');
+var mongoose = require("mongoose");
+mongoose.connect( 'mongodb://localhost/EZ-Food' );
 // Database
 
 var app = express();
@@ -22,7 +22,7 @@ var app = express();
 var routes = require('./routes/index');
 var createAccount = require('./routes/createAccount');
 var modifyAccount = require('./routes/modifyAccount');
-//var accountManagement = require('./routes/accountManagement');
+var accountManagement = require('./routes/accountManagement');
 var manageRestaurateur = require('./routes/manageRestaurateur');
 var signIn = require('./routes/signIn');
 // view engine setup
@@ -41,7 +41,7 @@ app.use('/', routes);
 app.use('/createAccount', createAccount);
 app.use('/signIn', signIn);
 app.use('/modifyAccount', modifyAccount);
-//app.use('/accountManagement', accountManagement);
+app.use('/accountManagement', accountManagement);
 app.use('/manageRestaurateur', manageRestaurateur);
 
 /// catch 404 and forwarding to error handler
@@ -49,6 +49,12 @@ app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
+});
+
+// Make our db accessible to our router
+app.use(function(req,res,next){
+    req.db = db;
+    next();
 });
 
 /// error handlers

@@ -18,37 +18,31 @@ schema = mongoose.Schema({
     province: String,
     zipCode: String
 });
-account_model = mongoose.model( 'accounts', schema );
+var account_model = mongoose.model( 'accounts', schema );
 
 function Account()
 {
 
     //Constructor
     //this.account = new this.model(JSONaccount);
-
-
     this.account = new account_model();
 
     /*this.accountExist = function(user)
-     {
-     return this.accounts.find({username : user }, function(err,returnValue)
-     {
-     if(err)
-     {
-     console.log(err);
-     return null;
-     }
-     return returnValue;
-     });
-     };*/
-    this.openConnection = function()
     {
-        mongoose.connect( 'mongodb://localhost/EZ-Food' );
-    }
+        return this.accounts.find({username : user }, function(err,returnValue)
+        {
+            if(err)
+            {
+                console.log(err);
+                return null;
+            }
+            return returnValue;
+        });
+    };*/
+
 
     this.save = function()
     {
-        this.openConnection();
         console.log('Save Account.');
         console.log(this.account);
         this.account.save(function(err)
@@ -61,53 +55,66 @@ function Account()
             mongoose.connection.close()
         });
         return true;
+    };
+
+    this.getAccount = function(username, password, callback)//function ( err, found_account )
+    {
+        account_model.findOne( { username: username , password: password}, callback); /*function ( err, found_account )
+        {
+            if ( err ) return console.error( err );
+            if(null != found_account)
+            {
+                this.account = found_account;
+                console.log('Found account : ');
+                console.log(found_account);
+
+
+            }
+            mongoose.connection.close();
+        });*/
+
+    this.getAccountFromId = function(id,callback) //where callback = function ( err, found_account )
+    {
+        account_model.findOne( { _id: id }, callback);
 
     };
 
-    this.getAccount = function(username, password, callback)
+    this.getAccountFromUsername = function(username,callback) //where callback = function ( err, found_account )
     {
-        this.openConnection();
-        account_model.findOne( { username: username , password: password}, callback); /*function ( err, found_account )
-     {
-     if ( err ) return console.error( err );
-     if(null != found_account)
-     {
-     this.account = found_account;
-     console.log('Found account : ');
-     console.log(found_account);
-
-
-     }
-     mongoose.connection.close();
-     });*/
-
+        account_model.findOne( { username: username }, callback);
     };
 
     this.setAccount = function(account)
     {
         this.account = account;
-    }
-    this.closeConnection = function()
+    };
+
+    this.deleteAccount = function(id, callback) //function (err, bool deleted)
     {
-        mongoose.connection.close();
-    }
-    /*
-     this.updateInDB = function()
-     {
-     if(this.accountExist(this.account.username))
-     {
-     this.account.save(function(err)
-     {
-     if(err)
-     {
-     console.log(err);
-     return false;
-     }
-     });
-     return true;
-     }
-     return false;
-     };*/
+        account_model.remove("ObjectId("+ id + ")", callback);
+    };
+
+    this.getAllAccounts = function(callback) //function ( err, found_account )
+    {
+        account_model.find().exec(callback);
+    };
+/*
+    this.updateInDB = function()
+    {
+        if(this.accountExist(this.account.username))
+        {
+            this.account.save(function(err)
+            {
+                if(err)
+                {
+                    console.log(err);
+                    return false;
+                }
+            });
+            return true;
+        }
+        return false;
+    };*/
 
     /* This function sets the username.*/
     this.setUsername = function(username)
@@ -197,8 +204,6 @@ function Account()
     {
         return this.account.phoneNumber;
     };
-
-
 
     /* This function sets the address.*/
     this.setCategory = function(category)

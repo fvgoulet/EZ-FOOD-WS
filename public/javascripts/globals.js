@@ -12,6 +12,7 @@ $(document).ready(function() {
     $('#confirmPassword').on('keyup', PasswordValidation);
 
 
+
 });
 
 
@@ -99,7 +100,7 @@ function validateAccountFields(event) {
     {
         document.account.submit();
     }
-};
+}
 
 function checkAccountExist()
 {
@@ -114,13 +115,76 @@ function checkAccountExist()
     {// code for IE6, IE5
         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     }
+    // Callback on response.e
     xmlhttp.onreadystatechange=function()
     {
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
-            document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+            if("true" == xmlhttp.responseText)
+            {
+                // TODO : Add simili pop-up.
+                document.getElementsByName("username")[0].setAttribute("style","background:red");
+                document.getElementsByName("submit_button")[0].disabled = true;
+            }
+            else
+            {
+                // TODO : Remove simili pop-up.
+                document.getElementsByName("username")[0].setAttribute("style","background:white");
+                document.getElementsByName("submit_button")[0].disabled = false;
+            }
+
+        }
+    };
+    xmlhttp.open("POST","/createAccount/isAccountExist",true);
+    xmlhttp.send('{"username":"' + username + '"}');
+}
+
+function manageRestaurateur()
+{
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    // Callback on response.e
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            document.getElementById("content").innerHTML = xmlhttp.responseText;
+
+        }
+    };
+
+    xmlhttp.open("GET","/manageRestaurateur",true);
+    xmlhttp.send();
+}
+
+function showAddNewRestaurateur()
+{
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    // Callback on response.e
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            document.getElementById("content").innerHTML = xmlhttp.responseText;
+
         }
     }
-    xmlhttp.open("GET","/createAccount/isAccountExist",true);
-    xmlhttp.send("username=" + username);
+
+    xmlhttp.open("GET","/manageRestaurateur/addNewRestaurateur",true);
+    xmlhttp.send();
 }

@@ -72,7 +72,6 @@ router.post('/confirmed', function(req, res) {
             console.log(found_account);
             actual_account.setAccount(found_account);
         }
-        actual_account.closeConnection();
 
         actual_account.setPassword(req.body.userPassword);
         actual_account.setFirstName(req.body.userFirstName);

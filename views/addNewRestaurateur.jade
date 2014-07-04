@@ -1,0 +1,52 @@
+
+block content
+
+    h2 Add Restaurateur
+    br
+    p Please fill the fields to add the restaurateur.
+
+    h3 Restaurant(Optional)
+    br
+    | Available restaurants :
+    select
+        option(value='None') None
+
+    hr(align="center", width="85%", size="10", noshade)
+    h3 Account
+    br
+    form(name="account", action="/manageRestaurateur/addNewRestaurateur/addUser", method="post")
+        br
+        | Username :
+        input(name='username',class='form-control' , type='text', placeholder='Username', required autofocus, autocomplete="off", onblur="checkAccountExist();")
+        | Password :
+        input(name='userPassword',class='form-control', type='password', placeholder='Password', required autofocus, autocomplete="off")
+        br
+        | First Name :
+        input(name='userFirstName',class='form-control', type='text', placeholder='First Name', required autofocus, autocomplete="off")
+        | Last Name :
+        input(name='userSecondName',class='form-control', type='text', placeholder='Last Name', required autofocus, autocomplete="off")
+        | Birth Date :
+        input(name='userBirthDate',class='form-control', type='text', placeholder='YYYY-MM-DD', required autofocus, autocomplete="off")
+        br
+        | Email :
+        input(name='userEmail',class='form-control', type='text', placeholder='Email', required autofocus, autocomplete="off")
+        | Phone Number :
+        input(name='userPhoneNumber',class='form-control', type='text', placeholder='###-###-####', required autofocus, autocomplete="off")
+        br
+        | Civic No. :
+        input(name='userCivicNumber',class='form-control', type='text', placeholder='Civic No.', required autofocus, autocomplete="off")
+        | Appartment :
+        input(name='userAppNumber',class='form-control', type='text', placeholder='App. No.(Optionnal)', required autofocus, autocomplete="off")
+        | Street :
+        input(name='userStreet',class='form-control', type='text', placeholder='Street', required autofocus, autocomplete="off")
+        | City :
+        input(name='userCity',class='form-control', type='text', placeholder='City', required autofocus, autocomplete="off")
+        | Province :
+        input(name='userProvince',class='form-control', type='text', placeholder='Province', required autofocus, autocomplete="off")
+        | ZIP Code :
+        input(name='userZipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
+        br
+        input#btnSubmitRestaurateur(name="submit_button",type="submit", value="Add Restaurateur", class="btn btn-lg btn-primary btn-block")
+
+
+    //script(src='/javascripts/validateAccountFields.js')

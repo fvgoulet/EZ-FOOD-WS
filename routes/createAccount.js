@@ -11,11 +11,43 @@ router.get('/', function(req, res) {
 /*
  * GET .
  */
-router.get('/isAccountExist', function(req, res) {
+router.post('/isAccountExist', function(req, res) {
     console.log("is account exist");
-    console.log(req);
-    console.log(res);
-    res.render('createAccount', { title: 'EZ-Food' });
+    if (req.method == 'POST') {
+        var post_data = '';
+        req.on('data', function (data) {
+            post_data += data;
+        });
+
+        req.on('end', function () {
+
+
+            console.log('RECEIVED THIS DATA:\n' + post_data);
+            var json_data = JSON.parse(post_data);
+            console.log(json_data);
+            console.log(json_data.username);
+
+            var virtual_account = new account.Account();
+            virtual_account.getAccountFromUsername(json_data.username,function(err, found_account)
+            {
+                if ( err ) return console.error( err );
+                console.log('Found account : ');
+                console.log(found_account);
+                if(null != found_account)
+                {
+
+                    res.send(true);
+                }
+                else
+                {
+                    res.send(false);
+                }
+            });
+
+
+        });
+    }
+
 });
 
 
@@ -39,7 +71,7 @@ router.post('/confirmAccount', function(req, res) {
         'userProvince': req.body.userProvince,
         'userZipCode': req.body.userZipCode,
         'userEmail':req.body.userEmail
-    }
+    };
 
     res.render('confirmAccount', newUser );
 
@@ -101,7 +133,7 @@ router.post('/', function(req, res) {
         'userProvince': req.body.userProvince,
         'userZipCode': req.body.userZipCode,
         'userEmail':req.body.userEmail
-    }
+    };
 
     res.render('createAccount', newUser );
 

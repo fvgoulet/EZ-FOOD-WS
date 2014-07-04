@@ -52,7 +52,6 @@ function Account()
            {
                console.log(err);
            }
-            mongoose.connection.close()
         });
         return true;
     };

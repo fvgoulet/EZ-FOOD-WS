@@ -5,7 +5,13 @@ var Restaurant = require('../public/Utilities/Restaurant');
  * GET .
  */
 router.get('/', function(req, res) {
-    res.render('addRestaurant', { title: 'EZ-Food' });
+    var account;
+
+    if((req.session.account)){
+        account = JSON.parse(req.session.account).account;
+    }
+
+    res.render('addRestaurant', {account: account });
 });
 
 

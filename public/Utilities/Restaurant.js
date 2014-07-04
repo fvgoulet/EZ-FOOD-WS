@@ -11,7 +11,7 @@ schema = mongoose.Schema({
     province: String,
     zipCode: String
 });
-restaurant_model = mongoose.model( 'restaurants', schema );
+var restaurant_model = mongoose.model( 'restaurants', schema );
 
 function Restaurant()
 {
@@ -20,16 +20,8 @@ function Restaurant()
 
     this.restaurant = new restaurant_model();
 
-    this.openConnection = function()
-    {
-        mongoose.connect( 'mongodb://localhost/EZ-Food' );
-    }
-
     this.save = function()
     {
-        this.openConnection();
-        console.log('Save Restaurant.');
-        console.log(this.restaurant);
         this.restaurant.save(function(err)
         {
             console.log('Restaurant saved.');
@@ -37,7 +29,6 @@ function Restaurant()
             {
                 console.log(err);
             }
-            mongoose.connection.close()
         });
         return true;
 
@@ -46,10 +37,6 @@ function Restaurant()
     this.setRestaurant = function(restaurant)
     {
         this.restaurant = restaurant;
-    }
-    this.closeConnection = function()
-    {
-        mongoose.connection.close();
     }
 
     /* This function sets the name.*/

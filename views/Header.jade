@@ -25,7 +25,8 @@ header
             when 1
                 nav
                     ul
-                        li Restaurant(s)
+                        li
+                            a(href="/addRestaurant") Add Restaurant
                         li
                             a#btnManageRestaurateur(onClick="manageRestaurateur();") Restaurateur(s)
                         li
@@ -41,8 +42,7 @@ header
             when 3
                 nav
                     ul
-                        li
-                            a(href="/addRestaurant") Add Restaurant
+
                         li
                             a(href="/modifyAccount") Modify Account
                         li

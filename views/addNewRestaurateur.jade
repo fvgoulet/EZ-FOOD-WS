@@ -9,7 +9,8 @@ block content
     br
     | Available restaurants :
     select
-        option(value='None') None
+        - for (var x = 0; x < restaurants.length ; x++)
+          option(name='#{restaurants[x]}') #{restaurants[x]}
 
     hr(align="center", width="85%", size="10", noshade)
     h3 Account

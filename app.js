@@ -54,10 +54,10 @@ app.use(function(req, res, next) {
 });
 
 // Make our db accessible to our router
-app.use(function(req,res,next){
+/*app.use(function(req,res,next){
     req.db = db;
     next();
-});
+});*/
 
 /// error handlers
 

@@ -9,7 +9,8 @@ schema = mongoose.Schema({
     street: String,
     city: String,
     province: String,
-    zipCode: String
+    zipCode: String,
+    entrepreneur_id: String
 });
 var restaurant_model = mongoose.model( 'restaurants', schema );
 
@@ -34,6 +35,10 @@ function Restaurant()
 
     };
 
+    this.getRestaurantsByEntrepreneurId = function(entrepreneur_id , callback) //where callback = function ( err, found_account )
+    {
+        restaurant_model.find( { entrepreneur_id: entrepreneur_id }, callback);
+    };
     this.setRestaurant = function(restaurant)
     {
         this.restaurant = restaurant;
@@ -44,10 +49,21 @@ function Restaurant()
     {
         this.restaurant.name = name;
     };
-    /* This function returns the username.*/
+    /* This function returns the name.*/
     this.getName = function()
     {
         return this.restaurant.name;
+    };
+
+    /* This function sets the name.*/
+    this.setEntrepreneurId = function(entrepreneur_id)
+    {
+        this.restaurant.entrepreneur_id = entrepreneur_id;
+    };
+    /* This function returns the name.*/
+    this.getEntrepreneurId = function()
+    {
+        return this.restaurant.entrepreneur_id;
     };
 
     /* This function sets the phoneNumber.*/

@@ -38,10 +38,16 @@ router.post('/confirmRestaurant', function(req, res) {
  * POST to .
  */
 router.post('/confirmed', function(req, res) {
+    var account;
+
+    if((req.session.account)){
+        account = JSON.parse(req.session.account).account;
+    }
 
     var new_Restaurant = new Restaurant.Restaurant();
 
-    new_Restaurant.setName(req.body.username);
+    new_Restaurant.setName(req.body.name);
+    new_Restaurant.setEntrepreneurId(account._id);
     new_Restaurant.setPhoneNumber(req.body.phoneNumber);
     new_Restaurant.setCivicNo(req.body.civicNumber);
     new_Restaurant.setStreet(req.body.street);

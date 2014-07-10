@@ -1,21 +1,21 @@
 
 block content
 
+
     h2 Add Restaurateur
     br
     p Please fill the fields to add the restaurateur.
-
-    h3 Restaurant(Optional)
-    br
-    | Available restaurants :
-    select
-        - for (var x = 0; x < restaurants.length ; x++)
-          option(name='#{restaurants[x]}') #{restaurants[x]}
-
-    hr(align="center", width="85%", size="10", noshade)
-    h3 Account
     br
     form(name="account", action="/manageRestaurateur/addNewRestaurateur/addUser", method="post")
+        h3 Restaurant(Optional)
+        br
+        | Available restaurants :
+        select(name="restaurant")
+            - for (var x = 0; x < restaurants.length ; x++)
+              option(name='#{restaurants[x]}') #{restaurants[x]}
+
+        hr(align="center", width="85%", size="10", noshade)
+        h3 Account
         br
         | Username :
         input(name='username',class='form-control' , type='text', placeholder='Username', required autofocus, autocomplete="off", onblur="checkAccountExist();")
@@ -37,7 +37,7 @@ block content
         | Civic No. :
         input(name='userCivicNumber',class='form-control', type='text', placeholder='Civic No.', required autofocus, autocomplete="off")
         | Appartment :
-        input(name='userAppNumber',class='form-control', type='text', placeholder='App. No.(Optionnal)', required autofocus, autocomplete="off")
+        input(name='userAppNumber',class='form-control', type='text', placeholder='App. No.(Optionnal)', autofocus, autocomplete="off")
         | Street :
         input(name='userStreet',class='form-control', type='text', placeholder='Street', required autofocus, autocomplete="off")
         | City :
@@ -47,7 +47,7 @@ block content
         | ZIP Code :
         input(name='userZipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
         br
-        input#btnSubmitRestaurateur(name="submit_button",type="submit", value="Add Restaurateur", class="btn btn-lg btn-primary btn-block")
+        input#btnSubmitRestaurateur(name="submit_button",type="submit", value="Add Restaurateur", class="btn btn-lg btn-primary btn-block", onclick="validateAccountFields();")
 
 
     //script(src='/javascripts/validateAccountFields.js')

@@ -26,17 +26,20 @@ header
                 nav
                     ul
                         li
-                            a(href="/addRestaurant") Add Restaurant
+                            a#btnAddRestaurant(onClick="addRestaurant();") Add Restaurant
                         li
                             a#btnManageRestaurateur(onClick="manageRestaurateur();") Restaurateur(s)
                         li
-                            a(href="/modifyAccount") Modify Account
+                            a#btnModifyAccount(onClick="modifyAccount();") Modify Account
                         li
                             a(href="/disconnect") Disconnect
 
             when 2
                 nav
                     ul
+                        li Manage Restaurants
+                        li
+                            a#btnModifyAccount(onClick="modifyAccount();") Modify Account
                         li
                             a(href="/disconnect") Disconnect
             when 3
@@ -44,7 +47,7 @@ header
                     ul
 
                         li
-                            a(href="/modifyAccount") Modify Account
+                            a#btnModifyAccount(onClick="modifyAccount();") Modify Account
                         li
                             a(href="/disconnect") Disconnect
             when 4
@@ -64,6 +67,6 @@ header
         nav
             ul
                 li
-                    a(href='/createAccount') Create Account
+                    a#btnCreateAccount(onClick="createAccount();") Create Account
                 li
-                    a(href='/signIn') Sign In
+                    a#btnSignIn(onClick="signIn();") Sign In

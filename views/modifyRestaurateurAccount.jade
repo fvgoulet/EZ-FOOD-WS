@@ -6,7 +6,16 @@ block content
     // Create Account
     h2 Modify Account
 
-    form(name="account", action="/modifyAccount/confirmAccount", method="post")
+    form(name="account", action="/manageRestaurateur/confirmedModifications", method="post")
+        h3 Restaurant(Optional)
+        br
+        | Available restaurants :
+        select(name="restaurant")
+            - for (var x = 0; x < restaurants.length ; x++)
+                option(name='#{restaurants[x]}') #{restaurants[x]}
+        hr(align="center", width="85%", size="10", noshade)
+        h3 Account
+
         input(name='username', type='hidden', value='#{account.username}',class='form-control')
         | Password :
         input(name='userPassword', type='password', placeholder='Password', value='#{account.password}',class='form-control', required autofocus, autocomplete="off")

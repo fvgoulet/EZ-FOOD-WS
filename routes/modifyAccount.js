@@ -81,7 +81,7 @@ router.post('/confirmed', function(req, res) {
         actual_account.setPhoneNumber(req.body.userPhoneNumber);
 
         actual_account.setCivicNo(req.body.userCivicNumber);
-        actual_account.setAppartment(req.body.userAppNumber);
+        actual_account.setApartment(req.body.userAppNumber);
         actual_account.setStreet(req.body.userStreet);
         actual_account.setCity(req.body.userCity);
         actual_account.setProvince(req.body.userProvince);

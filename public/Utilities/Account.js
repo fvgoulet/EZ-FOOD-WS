@@ -2,7 +2,7 @@
  * Created by Alex on 2014-06-11.
  */
 var mongoose = require( 'mongoose' );
-schema = mongoose.Schema({
+general_schema = mongoose.Schema({
     username : String,
     password: String,
     category: Number,
@@ -12,13 +12,32 @@ schema = mongoose.Schema({
     email: String,
     phoneNumber: String,
     civicNo: String,
-    appartment: String,
+    apartment: String,
     street: String,
     city: String,
     province: String,
     zipCode: String
 });
-var account_model = mongoose.model( 'accounts', schema );
+
+restaurateur_schema = mongoose.Schema({
+    username : String,
+    password: String,
+    category: Number,
+    firstName: String,
+    lastName: String,
+    birthDate: String,
+    email: String,
+    phoneNumber: String,
+    civicNo: String,
+    apartment: String,
+    street: String,
+    city: String,
+    province: String,
+    zipCode: String,
+    entrepreneur_id : String
+});
+
+var account_model = mongoose.model( 'accounts', general_schema , 'accounts');
 
 function Account()
 {
@@ -84,6 +103,13 @@ function Account()
         account_model.findOne( { username: username }, callback);
     };
 
+
+    this.getAccountsByEntrepreneurId = function(entrepreneur_id, callback) //where callback = function ( err, found_account )
+    {
+        account_model.find( { entrepreneur_id: entrepreneur_id }, callback);
+    };
+
+
     this.setAccount = function(account)
     {
         this.account = account;
@@ -93,6 +119,12 @@ function Account()
     {
         account_model.remove("ObjectId("+ id + ")", callback);
     };
+
+    /*this.deleteAccountByName = function(name, callback) //function (err, bool deleted)
+    {
+
+        account_model.findOne({ 'username': name },callback);
+    };*/
 
     this.getAllAccounts = function(callback) //function ( err, found_account )
     {
@@ -235,14 +267,14 @@ function Account()
     };
 
     /* This function sets the address.*/
-    this.setAppartment = function(appartment)
+    this.setApartment = function(apartment)
     {
-        this.account.appartment = appartment;
+        this.account.apartment = apartment;
     };
     /* This function returns the address.*/
-    this.getAppartment = function()
+    this.getApartment = function()
     {
-        return this.account.appartment;
+        return this.account.apartment;
     };
 
 
@@ -291,6 +323,29 @@ function Account()
     this.getZipCode = function()
     {
         return this.account.zipCode;
+    };
+
+
+    // This is only for a Restaurateur account
+    /* This function sets the restaurant_id.*/
+    this.setEntrepreneurId = function(entrepreneur_id)
+    {
+
+        var new_account_model = mongoose.model( 'reastaurateurs', restaurateur_schema , 'accounts');
+
+        this.account = new new_account_model(this.account );
+        this.account.entrepreneur_id = entrepreneur_id;
+
+    };
+    /* This function returns the entrepreneur_id.*/
+    this.getEntrepreneurId = function()
+    {
+        return this.account.entrepreneur_id;
+    };
+
+    this.getId = function()
+    {
+        return this.account._id;
     };
 }
 

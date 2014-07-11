@@ -4,10 +4,11 @@ block content
     br
     div#exitingRetaurateur
         | Available restaurateur :
-        select
-            option(value='None') None
-        button(type='button') Modify
-        button(type='button') Delete
+        select#avalaibleRestaurateur
+            - for (var x = 0; x < accounts.length ; x++)
+                option(name='#{accounts[x]}') #{accounts[x]}
+        button(type='button', onClick="modifyUser();") Modify
+        button(type='button', onClick="deleteUser();") Delete
 
     div#addNewRestaurateur
         button(type='button', onClick="showAddNewRestaurateur();") Add new

@@ -96,10 +96,7 @@ router.post('/confirmed', function(req, res) {
     new_account.setPhoneNumber(req.body.userPhoneNumber);
     new_account.setCategory(3);
     new_account.setCivicNo(req.body.userCivicNumber);
-    console.log("Appartement : ");
-    console.log(req.body.userAppNumber);
-    new_account.setAppartment(req.body.userAppNumber);
-    console.log(new_account.getAppartment());
+    new_account.setApartment(req.body.userAppNumber);
     new_account.setStreet(req.body.userStreet);
     new_account.setCity(req.body.userCity);
     new_account.setProvince(req.body.userProvince);

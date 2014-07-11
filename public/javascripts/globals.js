@@ -104,7 +104,7 @@ function validateAccountFields(event) {
 
 function checkAccountExist()
 {
-    var username = document.getElementsByName('username')[0].value ;
+    var username = document.getElementById('username').value ;
 
     var xmlhttp;
     if (window.XMLHttpRequest)
@@ -120,17 +120,21 @@ function checkAccountExist()
     {
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
-            if("true" == xmlhttp.responseText)
-            {
-                // TODO : Add simili pop-up.
-                document.getElementsByName("username")[0].setAttribute("style","background:red");
-                document.getElementsByName("submit_button")[0].disabled = true;
+            if(username != '') {
+                if ("true" == xmlhttp.responseText) {
+                    // TODO : Add simili pop-up.
+                    document.getElementById('username').setAttribute("style", "background:red");
+                    $('#btnSubmitAccount').prop('disabled', true);
+                }
+                else {
+                    // TODO : Remove simili pop-up.
+                    document.getElementById('username').setAttribute("style", "background:green");
+                    $('#btnSubmitAccount').prop('disabled', false);
+                }
             }
-            else
-            {
-                // TODO : Remove simili pop-up.
-                document.getElementsByName("username")[0].setAttribute("style","background:white");
-                document.getElementsByName("submit_button")[0].disabled = false;
+            else{
+                document.getElementById('username').setAttribute("style", "background:white");
+                $('#btnSubmitAccount').prop('disabled', true);
             }
 
         }

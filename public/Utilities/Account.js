@@ -23,23 +23,7 @@ var account_model = mongoose.model( 'accounts', schema );
 function Account()
 {
 
-    //Constructor
-    //this.account = new this.model(JSONaccount);
     this.account = new account_model();
-
-    /*this.accountExist = function(user)
-    {
-        return this.accounts.find({username : user }, function(err,returnValue)
-        {
-            if(err)
-            {
-                console.log(err);
-                return null;
-            }
-            return returnValue;
-        });
-    };*/
-
 
     this.save = function()
     {
@@ -57,29 +41,17 @@ function Account()
         return true;
     };
 
-    this.getAccount = function(username, password, callback)//function ( err, found_account )
-    {
-        account_model.findOne( { username: username , password: password}, callback); /*function ( err, found_account )
-        {
-            if ( err ) return console.error( err );
-            if(null != found_account)
-            {
-                this.account = found_account;
-                console.log('Found account : ');
-                console.log(found_account);
+    this.getAccount = function(username, password, callback) {
+        account_model.findOne({ username: username, password: password}, callback);
+    };
 
-
-            }
-            mongoose.connection.close();
-        });*/
-
-    this.getAccountFromId = function(id,callback) //where callback = function ( err, found_account )
+    this.getAccountFromId = function(id,callback)
     {
         account_model.findOne( { _id: id }, callback);
 
     };
 
-    this.getAccountFromUsername = function(username,callback) //where callback = function ( err, found_account )
+    this.getAccountFromUsername = function(username,callback)
     {
         account_model.findOne( { username: username }, callback);
     };
@@ -89,32 +61,15 @@ function Account()
         this.account = account;
     };
 
-    this.deleteAccount = function(id, callback) //function (err, bool deleted)
+    this.deleteAccount = function(id, callback)
     {
         account_model.remove("ObjectId("+ id + ")", callback);
     };
 
-    this.getAllAccounts = function(callback) //function ( err, found_account )
+    this.getAllAccounts = function(callback)
     {
         account_model.find().exec(callback);
     };
-/*
-    this.updateInDB = function()
-    {
-        if(this.accountExist(this.account.username))
-        {
-            this.account.save(function(err)
-            {
-                if(err)
-                {
-                    console.log(err);
-                    return false;
-                }
-            });
-            return true;
-        }
-        return false;
-    };*/
 
     /* This function sets the username.*/
     this.setUsername = function(username)

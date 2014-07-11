@@ -2,60 +2,66 @@
    Created by Félix on 2014-06-25.
 extends layout
 block content
+
+    include Header
+
+    div#content
+        //include Header
+        h1= title
+        p Welcome to our test
+
+        // Wrapper
+        #wrapper
+
+            // USER LIST
+            h2 User List
+            #userList
+                table
+                    thead
+                        th User Name
+                        th Password
+                        th Category
+                        th First Name
+                        th Last Name
+                        th Birth Date
+                        th Email
+                        th Phone Number
+                        th Civic No
+                        th Appartment
+                        th Street
+                        th City
+                        th Province
+                        th Zip Code
+                        th Modify
+                        th Delete
+                    tbody
+            // /USER LIST
+
+            // Modify User
+            h2 Modify User
+            #modifyUser
+                fieldset
+                    input#inputUserName(type='text', placeholder='Username')
+                    input#inputUserPassword(type='text', placeholder='Password')
+                    input#inputUserCategory(type='numeric', placeholder='Category')
+                    input#inputUserFirstName(type='text', placeholder='FirstName')
+                    input#inputUserLastName(type='text', placeholder='LastName')
+                    input#inputUserBirthDate(type='text', placeholder='BirthDate')
+                    input#inputUserEmail(type='text', placeholder='Email')
+                    input#inputUserPhone(type='text', placeholder='PhoneNumber')
+                    input#inputUserCivicNo(type='text', placeholder='CivicNo')
+                    input#inputUserAppartment(type='text', placeholder='Appartment')
+                    input#inputUserStreet(type='text', placeholder='Street')
+                    input#inputUserCity(type='text', placeholder='City')
+                    input#inputUserProvince(type='text', placeholder='Province')
+                    input#inputUserZipCode(type='text', placeholder='ZipCode')
+                    input#inputUserId(type='text', placeholder='ZipCode')
+                    br
+                    button#btnapplyModification(type='button', value='Modify User' ,onClick='applyModificationToUser();')
+            // /Modify User
+        // /WRAPPER
+
     script(type='text/javascript' src='http://code.jquery.com/jquery-latest.min.js')
     script(src='./javascripts/clientAccountManagement.js')
 
-    //include Header
-    h1= title
-    p Welcome to our test
-
-    // Wrapper
-    #wrapper
-
-        // USER LIST
-        h2 User List
-        #userList
-            table
-                thead
-                    th User Name
-                    th Password
-                    th Category
-                    th First Name
-                    th Last Name
-                    th Birth Date
-                    th Email
-                    th Phone Number
-                    th Civic No
-                    th Appartment
-                    th Street
-                    th City
-                    th Province
-                    th Zip Code
-                    th Modify
-                    th Delete
-                tbody
-        // /USER LIST
-
-        // Modify User
-        h2 Modify User
-        #modifyUser
-            fieldset
-                input#inputUserName(type='text', placeholder='Username')
-                input#inputUserPassword(type='text', placeholder='Password')
-                input#inputUserCategory(type='numeric', placeholder='Category')
-                input#inputUserFirstName(type='text', placeholder='FirstName')
-                input#inputUserLastName(type='text', placeholder='LastName')
-                input#inputUserBirthDate(type='text', placeholder='BirthDate')
-                input#inputUserEmail(type='text', placeholder='Email')
-                input#inputUserPhone(type='text', placeholder='PhoneNumber')
-                input#inputUserCivicNo(type='text', placeholder='CivicNo')
-                input#inputUserAppartment(type='text', placeholder='Appartment')
-                input#inputUserStreet(type='text', placeholder='Street')
-                input#inputUserCity(type='text', placeholder='City')
-                input#inputUserProvince(type='text', placeholder='Province')
-                input#inputUserZipCode(type='text', placeholder='ZipCode')
-                input#inputUserId(type='text', placeholder='ZipCode')
-                br
-                button#btnapplyModification(type='button', value='Modify User' ,onClick='applyModificationToUser();')
-        // /Modify User
-    // /WRAPPER
+    include Footer

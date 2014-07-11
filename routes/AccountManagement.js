@@ -9,10 +9,15 @@ var Account = require('../public/Utilities/Account');
  */
 router.get('/', function(req, res)
 {
+    var actual_account;
     var accountCategory = req.session.account.category;
+
+    if((req.session.account)){
+        actual_account = JSON.parse(req.session.account).account;
+    }
     //if(accountCategory == 0)
     //{
-        res.render('accountManagement', { title: 'Account Management' });
+        res.render('accountManagement', {account: actual_account, title: 'Account Management' });
     //}
     //else
     //{

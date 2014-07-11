@@ -14,7 +14,7 @@ block content
                         tr
                             td Username *:
                             td
-                                input(id='username', type='text', placeholder='Username', value='#{username}',class='form-control', required autofocus, autocomplete="off")
+                                input(id='username', type='text', placeholder='Username', value='#{username}',class='form-control', required autofocus, autocomplete="off", onblur="checkAccountExist();")
                         tr
                             td Password *:
                             td
@@ -76,7 +76,7 @@ block content
                         tr
                             td Username *:
                             td
-                                input(id='username',class='form-control' , type='text', placeholder='Username', required autofocus, autocomplete="off")
+                                input(id='username',class='form-control' , type='text', placeholder='Username', required autofocus, autocomplete="off", onblur="checkAccountExist();")
                         tr
                             td Password *:
                             td

@@ -43,6 +43,10 @@ function Restaurant()
     {
         restaurant_model.find( { entrepreneur_id: entrepreneur_id }, callback);
     };
+    this.getRestaurantsByRestaurateurId = function(restaurateur_id , callback) //where callback = function ( err, found_account )
+    {
+        restaurant_model.find( { restaurateur_id: restaurateur_id }, callback);
+    };
     this.setRestaurant = function(restaurant)
     {
         this.restaurant = restaurant;

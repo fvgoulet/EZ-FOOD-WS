@@ -114,8 +114,6 @@ router.post('/confirmed', function(req, res) {
  */
 router.post('/', function(req, res) {
 
-
-
     var newUser = {
         'username' : req.body.username ,
         'userPassword': req.body.userPassword,
@@ -131,6 +129,8 @@ router.post('/', function(req, res) {
         'userZipCode': req.body.userZipCode,
         'userEmail':req.body.userEmail
     };
+
+    console.log(newUser);
 
     res.render('createAccount', newUser );
 

@@ -205,34 +205,66 @@ router.post('/modifyUser', function(req, res) {
 
             var json_data = JSON.parse(post_data);
 
-            virtual_account.getAccountFromUsername(json_data.username,function(err, found_account)
-            {
-
+            virtual_account.getAccountFromUsername(json_data.username, function (err, found_account) {
+                //////////////////////////////////////////////////////
                 var available_restaurants = new restaurant.Restaurant();
-                available_restaurants.getRestaurantsByEntrepreneurId(admin_account._id , function(err, found_restaurants)
-                {
+                available_restaurants.getRestaurantsByEntrepreneurId(admin_account._id, function (err, found_restaurants) {
 
-                    // TODO : Put the restaurant of this user.
-
-                    var restaurants = ["None"];
-                    if ( err ) return console.error( err );
-                    if(null != found_restaurants)
-                    {
-                        found_restaurants.forEach(function(restaurant) {
+                    var restaurants = [];
+                    if (err) return console.error(err);
+                    if (null != found_restaurants) {
+                        found_restaurants.forEach(function (restaurant) {
                             console.log(restaurant);
                             restaurants.push(restaurant.name);
                         });
 
                     }
-                    console.log(restaurants);
-                    res.render('modifyRestaurateurAccount', {account: found_account, restaurants: restaurants});
 
+                    available_restaurants.getRestaurantsByRestaurateurId(found_account._id, function (err, found_restaurants) {
+
+                        var selected_restaurants = [];
+                        if (err) return console.error(err);
+                        if (null != found_restaurants) {
+                            found_restaurants.forEach(function (restaurant) {
+                                console.log(restaurant);
+                                selected_restaurants.push(restaurant.name);
+                            });
+
+                        }
+                        restaurants[0] = selected_restaurants[0];
+                        res.render('modifyRestaurateurAccount', {account: found_account, restaurants: restaurants});
+
+                    });
                 });
-            });
+////////////////////////////////////////////////
+                /*var available_restaurants = new restaurant.Restaurant();
+                 available_restaurants.getRestaurantsByEntrepreneurId(admin_account._id , function(err, found_restaurants)
+                 {
 
+                 // TODO : Put the restaurant of this user.
+
+                 var restaurants = ["None"];
+                 if ( err ) return console.error( err );
+                 if(null != found_restaurants)
+                 {
+                 found_restaurants.forEach(function(restaurant) {
+                 console.log(restaurant);
+                 restaurants.push(restaurant.name);
+                 });
+
+                 }
+                 console.log(restaurants);
+                 res.render('modifyRestaurateurAccount', {account: found_account, restaurants: restaurants});
+
+                 });
+                 });
+
+                 });*/
+
+
+            });
         });
     }
-
 });
 
 

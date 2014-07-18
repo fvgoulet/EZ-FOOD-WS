@@ -1,134 +1,131 @@
 block content
 
-    div#content
-        fieldset
-            legend Account Creation
-            div#mandatoy.warningCreateAccount Fields with an "*" are mandatory
-            div#error.warningCreateAccount
-            form(name="account", action="/createAccount/confirmAccount", method="post")
-                if account
-                    table
-                        tr
-                            td Username *:
-                            td
-                                input(id='username', type='text', placeholder='Username', value='#{username}',class='form-control', required autofocus, autocomplete="off", onblur="checkAccountExist();")
-                        tr
-                            td Password *:
-                            td
-                                input(id='userPassword', type='password', placeholder='Password', value='#{userPassword}',class='form-control', required autofocus, autocomplete="off")
-                        tr
-                            td Confirm Password *:
-                            td
-                                input(id='confirmPassword', type='password', placeholder='Password',class='form-control', required autofocus, autocomplete="off")
-                        tr
-                            td First Name *:
-                            td
-                                input(id='userFirstName', type='text', placeholder='First Name', value='#{userFirstName}',class='form-control', required autofocus, autocomplete="off")
-                        tr
-                            td Last Name *:
-                            td
-                                input(id='userSecondName', type='text', placeholder='Last Name', value='#{userSecondName}',class='form-control', required autofocus, autocomplete="off")
-                        tr
-                            td Birth Date *:
-                            td
-                                input(id='userBirthDate', type='text', placeholder='YYYY-MM-DD', value='#{userBirthDate}',class='form-control', required autofocus, autocomplete="off")
-                        tr
-                            td Email *:
-                            td
-                                input(id='userEmail', type='text', placeholder='Email', value='#{userEmail}',class='form-control', required autofocus, autocomplete="off")
-                        tr
-                            td Phone Number *:
-                            td
-                                input(id='userPhoneNumber', type='text', placeholder='###-###-####', value='#{userPhoneNumber}',class='form-control', required autofocus, autocomplete="off")
-                        tr
-                            td Civic No. *:
-                            td
-                                input(id='userCivicNumber', type='text', placeholder='Civic No.', value='#{userCivicNumber}',class='form-control', required autofocus, autocomplete="off")
-                        tr
-                            td Appartment :
-                            td
-                                input(id='userAppNumber', type='text', placeholder='App. No. (Optional)', value='#{userAppNumber}',class='form-control', required autofocus, autocomplete="off")
-                        tr
-                            td Street *:
-                            td
-                                input(id='userStreet', type='text', placeholder='Street', value='#{userStreet}',class='form-control', required autofocus, autocomplete="off")
-                        tr
-                            td City *:
-                            td
-                                input(id='userCity', type='text', placeholder='City', value='#{userCity}',class='form-control', required autofocus, autocomplete="off")
-                        tr
-                            td Province *:
-                            td
-                                input(id='userProvince', type='text', placeholder='Province', value='#{userProvince}',class='form-control', required autofocus, autocomplete="off")
-                        tr
-                            td ZIP Code *:
-                            td
-                                input(id='userZipCode', type='text', placeholder='ZIP Code', value='#{userZipCode}',class='form-control', required autofocus, autocomplete="off")
-                        tr
-                            td
-                                input#btnSubmitAccount(type="submit", value="Create Account",class="btn btn-lg btn-primary btn-block", disabled)
-                            td
-                else
-                    table
-                        tr
-                            td Username *:
-                            td
-                                input(id='username',class='form-control' , type='text', placeholder='Username', required autofocus, autocomplete="off", onblur="checkAccountExist();")
-                        tr
-                            td Password *:
-                            td
-                                input(id='userPassword',class='form-control', type='password', placeholder='Password', required autofocus, autocomplete="off")
-                        tr
-                            td Confirm Password *:
-                            td
-                                input(id='confirmPassword', type='password', placeholder='Confirm Password', class='form-control', required autofocus, autocomplete="off")
-                        tr
-                            td First Name *:
-                            td
-                                input(id='userFirstName',class='form-control', type='text', placeholder='First Name', required autofocus, autocomplete="off")
-                        tr
-                            td Last Name *:
-                            td
-                                input(id='userSecondName',class='form-control', type='text', placeholder='Last Name', required autofocus, autocomplete="off")
-                        tr
-                            td Birth Date *:
-                            td
-                                input(id='userBirthDate',class='form-control', type='text', placeholder='YYYY-MM-DD', required autofocus, autocomplete="off")
-                        tr
-                            td Email *:
-                            td
-                                input(id='userEmail',class='form-control', type='text', placeholder='Email', required autofocus, autocomplete="off")
-                        tr
-                            td Phone Number *:
-                            td
-                                input(id='userPhoneNumber',class='form-control', type='text', placeholder='###-###-####', required autofocus, autocomplete="off")
-                        tr
-                            td Civic No. *:
-                            td
-                                input(id='userCivicNumber',class='form-control', type='text', placeholder='Civic No.', required autofocus, autocomplete="off")
-                        tr
-                            td Appartment :
-                            td
-                                input(id='userAppNumber',class='form-control', type='text', placeholder='App. No.(Optionnal)', required autofocus, autocomplete="off")
-                        tr
-                            td Street *:
-                            td
-                                input(id='userStreet',class='form-control', type='text', placeholder='Street', required autofocus, autocomplete="off")
-                        tr
-                            td City *:
-                            td
-                                input(id='userCity',class='form-control', type='text', placeholder='City', required autofocus, autocomplete="off")
-                        tr
-                            td Province *:
-                            td
-                                input(id='userProvince',class='form-control', type='text', placeholder='Province', required autofocus, autocomplete="off")
-                        tr
-                            td ZIP Code *:
-                            td
-                                input(id='userZipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
-                        tr
-                            td
-                                input#btnSubmitAccount(type="submit", value="Create Account", class="btn btn-lg btn-primary btn-block", disabled)
-                            td
-
-    script(src='/javascripts/validateAccountFields.js')
+    fieldset
+        legend Account Creation
+        div#mandatoy.warningCreateAccount Fields with an "*" are mandatory
+        div#error.warningCreateAccount
+        form(name="account", action="/createAccount/confirmAccount", method="post")
+            if username
+                table
+                    tr
+                        td Username *:
+                        td
+                            input(id='username', name='username', type='text', placeholder='Username', value='#{username}',class='form-control', required autofocus, autocomplete="off", onblur="checkAccountExist();")
+                    tr
+                        td Password *:
+                        td
+                            input(id='userPassword', name='userPassword', type='password', placeholder='Password', value='#{userPassword}',class='form-control', required autofocus, autocomplete="off", onkeyup=("PasswordValidation();"))
+                    tr
+                        td Confirm Password *:
+                        td
+                            input(id='confirmPassword', name='confirmPassword',type='password', placeholder='Password',class='form-control', required autofocus, autocomplete="off", onkeyup=("PasswordValidation();"))
+                    tr
+                        td First Name *:
+                        td
+                            input(id='userFirstName', name='userFirstName',type='text', placeholder='First Name', value='#{userFirstName}',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td Last Name *:
+                        td
+                            input(id='userSecondName', name='userSecondName', type='text', placeholder='Last Name', value='#{userSecondName}',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td Birth Date *:
+                        td
+                            input(id='userBirthDate', name='userBirthDate',type='text', placeholder='YYYY-MM-DD', value='#{userBirthDate}',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td Email *:
+                        td
+                            input(id='userEmail', name='userEmail',type='text', placeholder='Email', value='#{userEmail}',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td Phone Number *:
+                        td
+                            input(id='userPhoneNumber', name='userPhoneNumber',type='text', placeholder='###-###-####', value='#{userPhoneNumber}',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td Civic No. *:
+                        td
+                            input(id='userCivicNumber', name='userCivicNumber',type='text', placeholder='Civic No.', value='#{userCivicNumber}',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td Appartment :
+                        td
+                            input(id='userAppNumber', name='userAppNumber',type='text', placeholder='App. No. (Optional)', value='#{userAppNumber}',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td Street *:
+                        td
+                            input(id='userStreet', name='userStreet', type='text', placeholder='Street', value='#{userStreet}',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td City *:
+                        td
+                            input(id='userCity', name='userCity', type='text', placeholder='City', value='#{userCity}',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td Province *:
+                        td
+                            input(id='userProvince', name='userProvince', type='text', placeholder='Province', value='#{userProvince}',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td ZIP Code *:
+                        td
+                            input(id='userZipCode', name='userZipCode', type='text', placeholder='ZIP Code', value='#{userZipCode}',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td
+                            input#btnSubmitAccount(type="submit", value="Create Account",class="btn btn-lg btn-primary btn-block", onclick="validateAccountFields();", disabled)
+                        td
+            else
+                table
+                    tr
+                        td Username *:
+                        td
+                            input(id='username', name='username', class='form-control' , type='text', placeholder='Username', required autofocus, autocomplete="off", onblur="checkAccountExist();")
+                    tr
+                        td Password *:
+                        td
+                            input(id='userPassword', name='userPassword',class='form-control', type='password', placeholder='Password', required autofocus, autocomplete="off", onkeyup=("PasswordValidation();"))
+                    tr
+                        td Confirm Password *:
+                        td
+                            input(id='confirmPassword', name='confirmPassword',type='password', placeholder='Confirm Password', class='form-control', required autofocus, autocomplete="off", onkeyup=("PasswordValidation();"))
+                    tr
+                        td First Name *:
+                        td
+                            input(id='userFirstName', name='userFirstName',class='form-control', type='text', placeholder='First Name', required autofocus, autocomplete="off")
+                    tr
+                        td Last Name *:
+                        td
+                            input(id='userSecondName', name='userSecondName',class='form-control', type='text', placeholder='Last Name', required autofocus, autocomplete="off")
+                    tr
+                        td Birth Date *:
+                        td
+                            input(id='userBirthDate', name='userBirthDate',class='form-control', type='text', placeholder='YYYY-MM-DD', required autofocus, autocomplete="off")
+                    tr
+                        td Email *:
+                        td
+                            input(id='userEmail', name='userEmail',class='form-control', type='text', placeholder='Email', required autofocus, autocomplete="off")
+                    tr
+                        td Phone Number *:
+                        td
+                            input(id='userPhoneNumber', name='userPhoneNumber',class='form-control', type='text', placeholder='###-###-####', required autofocus, autocomplete="off")
+                    tr
+                        td Civic No. *:
+                        td
+                            input(id='userCivicNumber', name='userCivicNumber',class='form-control', type='text', placeholder='Civic No.', required autofocus, autocomplete="off")
+                    tr
+                        td Appartment :
+                        td
+                            input(id='userAppNumber',name='userAppNumber',class='form-control', type='text', placeholder='App. No.(Optionnal)', required autofocus, autocomplete="off")
+                    tr
+                        td Street *:
+                        td
+                            input(id='userStreet', name='userStreet',class='form-control', type='text', placeholder='Street', required autofocus, autocomplete="off")
+                    tr
+                        td City *:
+                        td
+                            input(id='userCity', name='userCity',class='form-control', type='text', placeholder='City', required autofocus, autocomplete="off")
+                    tr
+                        td Province *:
+                        td
+                            input(id='userProvince', name='userProvince',class='form-control', type='text', placeholder='Province', required autofocus, autocomplete="off")
+                    tr
+                        td ZIP Code *:
+                        td
+                            input(id='userZipCode', name='userZipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
+                    tr
+                        td
+                            input#btnSubmitAccount(type="submit", value="Create Account", class="btn btn-lg btn-primary btn-block", onclick="validateAccountFields();", disabled)
+                        td

@@ -2,7 +2,7 @@
  * Created by Alex on 2014-06-11.
  */
 var mongoose = require( 'mongoose' );
-schema = mongoose.Schema({
+general_schema = mongoose.Schema({
     username : String,
     password: String,
     category: Number,
@@ -12,7 +12,7 @@ schema = mongoose.Schema({
     email: String,
     phoneNumber: String,
     civicNo: String,
-    appartment: String,
+    apartment: String,
     street: String,
     city: String,
     province: String,

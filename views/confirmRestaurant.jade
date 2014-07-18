@@ -26,7 +26,7 @@ block content
         input(name='zipCode', type='hidden', value='#{zipCode}')
         input(type="submit", value="Edit Restaurant", class="btn btn-lg btn-primary btn-block")
     br
-    form(name="confirmRestaurant", action="/addRestaurant/confirmed", method="post")
+    form(name="confirmRestaurant", action="/addRestaurant/confirmed", method="post", enctype="multipart/form-data")
         input(name='name', type='hidden', value='#{name}')
         input(name='phoneNumber', type='hidden', value='#{phoneNumber}')
         input(name='civicNumber', type='hidden', value='#{civicNumber}')
@@ -34,4 +34,5 @@ block content
         input(name='city', type='hidden', value='#{city}')
         input(name='province', type='hidden', value='#{province}')
         input(name='zipCode', type='hidden', value='#{zipCode}')
+        input(name='displayImage', type='file')
         input(type="submit", value="Confirm Restaurant", class="btn btn-lg btn-primary btn-block")

@@ -1,6 +1,10 @@
 var express = require('express');
+var fs = require('fs');
 var router = express.Router();
 var Restaurant = require('../public/Utilities/Restaurant');
+var mkdirp = require("mkdirp");
+var getDirName = require("path").dirname;
+
 /*
  * GET .
  */
@@ -19,7 +23,15 @@ router.get('/', function(req, res) {
  * POST to confirmRestaurant.
  */
 router.post('/confirmRestaurant', function(req, res) {
-    //var db = req.db;
+    /*fs.readFile(req.files.displayImage.path, function (err, data) {
+        // ...
+        var newPath = __dirname + "/../public/RestaurantsRessources/restaurant.jpg";
+        console.log(newPath);
+        fs.writeFile(newPath, data, function (err) {
+
+        });
+    });*/
+
     var newRestaurant = {
         'name' : req.body.name ,
         'phoneNumber': req.body.phoneNumber,
@@ -31,7 +43,6 @@ router.post('/confirmRestaurant', function(req, res) {
     }
 
     res.render('confirmRestaurant', newRestaurant );
-
 });
 
 /*
@@ -55,16 +66,28 @@ router.post('/confirmed', function(req, res) {
     new_Restaurant.setProvince(req.body.province);
     new_Restaurant.setZipCode(req.body.zipCode);
 
-    if(new_Restaurant.save())
+    new_Restaurant.save(function(err)
     {
-        req.session.new_Restaurant = JSON.stringify(new_Restaurant);
-        // Show a confirmation of the creation.
-        res.redirect('/');
-    }
-    else
-    {
-        res.redirect('/');
-    }
+
+        new_Restaurant.getRestaurantByName(new_Restaurant.getName(), function(err, found_restaurant)
+        {
+            new_Restaurant.setRestaurant(found_restaurant);
+            fs.readFile(req.files.displayImage.path, function (err, data) {
+                // ...
+                var newPath = "./public/RestaurantsRessources/" + new_Restaurant.getId() + "/restaurant.jpg";//new_Restaurant.getId()
+                mkdirp(getDirName(newPath));
+                console.log(newPath);
+                fs.writeFile(newPath, data, function (err) {
+                    console.log("erreur:");
+                    console.log(err);
+
+                });
+            });
+            res.redirect('/');
+        });
+
+    });
+
 
 });
 
@@ -72,9 +95,6 @@ router.post('/confirmed', function(req, res) {
  * POST to /.
  */
 router.post('/', function(req, res) {
-
-
-
     var newRestaurant = {
         'name' : req.body.name ,
         'phoneNumber': req.body.phoneNumber,

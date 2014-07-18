@@ -22,17 +22,9 @@ function Restaurant()
 
     this.restaurant = new restaurant_model();
 
-    this.save = function()
+    this.save = function(callback)
     {
-        this.restaurant.save(function(err)
-        {
-            console.log('Restaurant saved.');
-            if(err)
-            {
-                console.log(err);
-            }
-        });
-        return true;
+        this.restaurant.save(callback);
 
     };
     this.getRestaurantByName = function(name , callback) //where callback = function ( err, found_account )
@@ -46,6 +38,10 @@ function Restaurant()
     this.getRestaurantsByRestaurateurId = function(restaurateur_id , callback) //where callback = function ( err, found_account )
     {
         restaurant_model.find( { restaurateur_id: restaurateur_id }, callback);
+    };
+    this.getAllRestaurants = function(callback) //where callback = function ( err, found_account )
+    {
+        restaurant_model.find( {}, callback);
     };
     this.setRestaurant = function(restaurant)
     {
@@ -62,7 +58,10 @@ function Restaurant()
     {
         return this.restaurant.name;
     };
-
+    this.getId = function()
+    {
+        return this.restaurant._id;
+    };
     /* This function sets the name.*/
     this.setEntrepreneurId = function(entrepreneur_id)
     {

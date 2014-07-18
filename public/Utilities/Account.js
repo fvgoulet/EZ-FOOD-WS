@@ -43,6 +43,8 @@ function Account()
 {
     this.account = new account_model();
 
+
+
     this.save = function()
     {
         console.log('Save Account.');
@@ -58,8 +60,9 @@ function Account()
         return true;
     };
 
-    this.getAccount = function(username, password, callback) {
-        account_model.findOne({ username: username, password: password}, callback);
+    this.getAccount = function(username, password, callback)//function ( err, found_account )
+    {
+        account_model.findOne( { username: username , password: password}, callback);
     };
 
     this.getAccountFromId = function(id,callback)

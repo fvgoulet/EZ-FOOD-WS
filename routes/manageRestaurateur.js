@@ -97,9 +97,21 @@ router.post('/addNewRestaurateur/addUser', function(req, res)
 
     if([] != req.body.selected_restaurants)
     {
+
+        var array_selected_restaurants = [];
+
+        if( typeof req.body.selected_restaurants == 'string' )
+        {
+            array_selected_restaurants.push(req.body.selected_restaurants);
+        }
+        else if(undefined != req.body.selected_restaurants)
+        {
+            array_selected_restaurants = req.body.selected_restaurants;
+        }
+
         var associated_restaurant = new restaurant.Restaurant();
 
-        req.body.selected_restaurants.forEach(function(entry)
+        array_selected_restaurants.forEach(function(entry)
         {
             associated_restaurant.getRestaurantByName(entry, function (err, restaurant_found)
             {

@@ -229,3 +229,42 @@ function createAccount()
     xmlhttp.open("GET","/createAccount",true);
     xmlhttp.send();
 }
+
+function addToSelectedRestaurants()
+{
+    var available_restaurants = document.getElementById("available_restaurants");
+    var selected_restaurants = document.getElementById("selected_restaurants");
+    var new_option = document.createElement("option");
+
+    new_option.text = available_restaurants.options[available_restaurants.selectedIndex].text;
+    selected_restaurants.add(new_option);
+
+    available_restaurants.remove(available_restaurants.selectedIndex);
+
+}
+
+function deleteFromSelectedRestaurants()
+{
+    var available_restaurants = document.getElementById("available_restaurants");
+    var selected_restaurants = document.getElementById("selected_restaurants");
+    var new_option = document.createElement("option");
+
+    new_option.text = selected_restaurants.options[selected_restaurants.selectedIndex].text;
+    available_restaurants.add(new_option);
+
+    selected_restaurants.remove(selected_restaurants.selectedIndex);
+
+}
+
+function selectAll(selectBox,selectAll) {
+    // have we been passed an ID
+    if (typeof selectBox == "string") {
+        selectBox = document.getElementById(selectBox);
+    }
+    // is the select box a multiple select box?
+    if (selectBox.type == "select-multiple") {
+        for (var i = 0; i < selectBox.options.length; i++) {
+            selectBox.options[i].selected = selectAll;
+        }
+    }
+}

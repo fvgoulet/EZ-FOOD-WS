@@ -6,6 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var mongoose = require("mongoose");
+var multer  = require('multer')
+
+
 mongoose.connect( 'mongodb://localhost/EZ-Food' );
 // Database
 
@@ -30,13 +33,16 @@ var signIn = require('./routes/signIn');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+
 app.use(favicon());
 app.use(logger('dev'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: '1234567890QWERTY'}));
+app.use(multer({ dest: './uploads/'}))
 
 app.use('/', routes);
 app.use('/createAccount', createAccount);

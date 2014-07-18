@@ -46,18 +46,6 @@ function Account()
     //this.account = new this.model(JSONaccount);
     this.account = new account_model();
 
-    /*this.accountExist = function(user)
-    {
-        return this.accounts.find({username : user }, function(err,returnValue)
-        {
-            if(err)
-            {
-                console.log(err);
-                return null;
-            }
-            return returnValue;
-        });
-    };*/
 
 
     this.save = function()
@@ -77,19 +65,7 @@ function Account()
 
     this.getAccount = function(username, password, callback)//function ( err, found_account )
     {
-        account_model.findOne( { username: username , password: password}, callback); /*function ( err, found_account )
-        {
-            if ( err ) return console.error( err );
-            if(null != found_account)
-            {
-                this.account = found_account;
-                console.log('Found account : ');
-                console.log(found_account);
-
-
-            }
-            mongoose.connection.close();
-        });*/
+        account_model.findOne( { username: username , password: password}, callback);
     };
 
     this.getAccountFromId = function(id,callback) //where callback = function ( err, found_account )

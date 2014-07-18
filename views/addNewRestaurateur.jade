@@ -10,9 +10,15 @@ block content
         h3 Restaurant(Optional)
         br
         | Available restaurants :
-        select(name="restaurant")
-            - for (var x = 0; x < restaurants.length ; x++)
-              option(name='#{restaurants[x]}') #{restaurants[x]}
+        select(id="available_restaurants", multiple="multiple")
+            - for (var x = 0; x < available_restaurants.length ; x++)
+              option(name='#{available_restaurants[x]}') #{available_restaurants[x]}
+        button(type="button", onClick="deleteFromSelectedRestaurants();") <--
+        button(type="button", onClick="addToSelectedRestaurants();") -->
+        | Selected restaurants :
+        select(name="selected_restaurants" ,id="selected_restaurants", multiple="multiple")
+        //    - for (var x = 0; x < selected_restaurants.length ; x++)
+        //        option(name='#{selected_restaurants[x]}') #{selected_restaurants[x]}
 
         hr(align="center", width="85%", size="10", noshade)
         h3 Account
@@ -47,7 +53,7 @@ block content
         | ZIP Code :
         input(name='userZipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
         br
-        input#btnSubmitRestaurateur(name="submit_button",type="submit", value="Add Restaurateur", class="btn btn-lg btn-primary btn-block", onclick="validateAccountFields();")
+        input#btnSubmitRestaurateur(name="submit_button",type="submit", value="Add Restaurateur", class="btn btn-lg btn-primary btn-block", onclick="selectAll(document.getElementById('selected_restaurants'),true); validateAccountFields();")
 
 
     //script(src='/javascripts/validateAccountFields.js')

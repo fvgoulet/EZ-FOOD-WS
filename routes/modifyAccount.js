@@ -79,7 +79,6 @@ router.post('/confirmed', function(req, res) {
         actual_account.setBirthDate(req.body.userBirthDate);
         actual_account.setEmail(req.body.userEmail);
         actual_account.setPhoneNumber(req.body.userPhoneNumber);
-
         actual_account.setCivicNo(req.body.userCivicNumber);
         actual_account.setApartment(req.body.userAppNumber);
         actual_account.setStreet(req.body.userStreet);

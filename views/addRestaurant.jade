@@ -28,11 +28,12 @@ block content
             input(name='province', type='text', placeholder='Province', value='#{province}',class='form-control', required autofocus, autocomplete="off")
             | ZIP Code :
             input(name='zipCode', type='text', placeholder='ZIP Code', value='#{zipCode}',class='form-control', required autofocus, autocomplete="off")
+            br
 
             br
             input#btnSubmitAccount(name="submit_button", type="submit", value="Add Rerstaurant",class="btn btn-lg btn-primary btn-block")
     else
-        form(name="Restaurant", action="/addRestaurant/confirmRestaurant", method="post")
+        form(name="Restaurant", action="/addRestaurant/confirmRestaurant", method="post", enctype="multipart/form-data")
             br
             | Name :
             input(name='name',class='form-control' , type='text', placeholder='Name', required autofocus, autocomplete="off")
@@ -50,4 +51,8 @@ block content
             | ZIP Code :
             input(name='zipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
             br
+            //| Restaurant picture :
+            //input(type="file",  name="displayImage")
+            //br
             input#btnSubmitRestaurant(name="submit_button",type="submit", value="Add Restaurant", class="btn btn-lg btn-primary btn-block")
+

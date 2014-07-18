@@ -27,7 +27,7 @@ header
                 nav
                     ul
                         li
-                            a#btnAddRestaurant(onClick="addRestaurant();") Add Restaurant
+                            a#btnRestaurant(onClick="listRestaurant();") Restaurant
                         li
                             a#btnManageRestaurateur(onClick="manageRestaurateur();") Restaurateur(s)
                         li
@@ -45,7 +45,8 @@ header
             when 3
                 nav
                     ul
-
+                        li
+                            a#btnRestaurant(onClick="listRestaurant();") Restaurant
                         li
                             a#btnModifyAccount(onClick="modifyAccount();") Modify Account
                         li

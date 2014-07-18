@@ -42,6 +42,55 @@ function manageRestaurateur()
     xmlhttp.send();
 }
 
+function listRestaurant()
+{
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    // Callback on response.e
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            document.getElementById("content").innerHTML = xmlhttp.responseText;
+        }
+    };
+
+    xmlhttp.open("GET","/listRestaurant",true);
+    xmlhttp.send();
+}
+
+function modifyRestaurant()
+{
+    var e = document.getElementById("avalaibleRestaurant");
+    var strRes = e.options[e.selectedIndex].text;
+    if("None" != strRes) {
+
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        // Callback on response.e
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("content").innerHTML = xmlhttp.responseText;
+            }
+        };
+
+        xmlhttp.open("POST", "/listRestaurant/modifyRestaurant", true);
+        xmlhttp.send('{"restaurant":"' + strRes + '"}');
+    }
+}
+
 function showAddNewRestaurateur()
 {
     var xmlhttp;
@@ -67,6 +116,35 @@ function showAddNewRestaurateur()
     xmlhttp.send();
 }
 
+
+function deleteRestaurant() {
+    var e = document.getElementById("avalaibleRestaurant");
+    var strRes = e.options[e.selectedIndex].text;
+    if("None" != strRes) {
+        // Pop up a confirmation dialog
+        var confirmation = confirm('Are you sure you want to delete the restaurant ' + strRes + '?');
+
+        // Check and make sure the user confirmed
+        if (confirmation === true) {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            // Callback on response.e
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("content").innerHTML = xmlhttp.responseText;
+                }
+            };
+
+            xmlhttp.open("POST", "/listRestaurant/deleteRestaurant", true);
+            xmlhttp.send('{"restaurant":"' + strRes + '"}');
+        }
+    }
+}
 // Delete User
 function deleteUser()
 {

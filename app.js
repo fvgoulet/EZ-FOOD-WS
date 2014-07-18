@@ -27,8 +27,9 @@ var createAccount = require('./routes/createAccount');
 var modifyAccount = require('./routes/modifyAccount');
 var accountManagement = require('./routes/accountManagement');
 var manageRestaurateur = require('./routes/manageRestaurateur');
-var addRestaurant = require('./routes/addRestaurant')
+var addRestaurant = require('./routes/addRestaurant');
 var signIn = require('./routes/signIn');
+var listRestaurant = require('./routes/listRestaurant');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -51,6 +52,7 @@ app.use('/addRestaurant', addRestaurant);
 app.use('/modifyAccount', modifyAccount);
 app.use('/accountManagement', accountManagement);
 app.use('/manageRestaurateur', manageRestaurateur);
+app.use('/listRestaurant', listRestaurant);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

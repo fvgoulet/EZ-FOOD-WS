@@ -16,6 +16,8 @@
         "jade": "*",
         "mongodb": "*",
         "mongoskin": "*",
-        "mongoose": "*"
+        "mongoose": "*",
+        "multer": "*",
+        "mkdirp": "*"
     }
 }

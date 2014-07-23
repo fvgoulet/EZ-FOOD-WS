@@ -1,0 +1,16 @@
+//
+   Created by Gabriel on 2014-07-11.
+block content
+
+    h2 Manage Restaurant
+    br
+    div#existingRetaurant
+        | Available restaurant :
+        select#avalaibleRestaurant
+            - for (var x = 0; x < restaurants.length ; x++)
+                option(name='#{restaurants[x]}') #{restaurants[x]}
+        button(type='button', onClick="modifyRestaurant();") Modify
+        button(type='button', onClick="deleteRestaurant();") Delete
+
+    div#addNewRestaurant
+        button(type='button', onClick="addRestaurant();") Add new

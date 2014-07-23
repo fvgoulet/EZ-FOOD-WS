@@ -3,16 +3,32 @@ block content
     include Header
 
     div#content
-        - for (var x = 0; x < restaurants.length ; x++)
-            li
-                //img(src="Ressources/Icones/supprimer.png", align="Right")
-                h4 #{restaurants[x].name}
+
+        // Differents categories
+        // admin - 0
+        // entrepreneur -1
+        // restaurateur -2
+        // client - 3
+        // livreur - 4
+        - var account_category = account.category
+        if account_category == 0 || account_category == 1 || account_category == 2
+            - for (var x = 0; x < restaurants.length ; x++)
+                li
+                    h4 #{restaurants[x].name}
+                    img(id="#{restaurants[x]._id}", src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200", onclick="createMenu();")
+        else if
+            - for (var x = 0; x < restaurants.length ; x++)
+                li
+                    h4 #{restaurants[x].name}
+                    img(id="#{restaurants[x]._id}", src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200", onclick="clientMenu();")
+        else
+            - for (var x = 0; x < restaurants.length ; x++)
+                li
+                    h4 #{restaurants[x].name}
+                    img(id="#{restaurants[x]._id}", src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200", onclick="defaultMenu();")
 
 
 
-                img(src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200")
-                //div
-                    img(src="Ressources/Icones/modifier.png", align="Right")
-                    img(src="Ressources/Icones/localiser.png", align="Right")
+
 
     include Footer

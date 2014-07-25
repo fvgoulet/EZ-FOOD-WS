@@ -3,14 +3,14 @@
  */
 
 var mongoose = require( 'mongoose' );
-MenuItem = mongoose.Schema({
+schema = mongoose.Schema({
     name : String,
     description: String,
     price: String,
     menuId: String
 });
 
-var menuItemModel = mongoose.model( 'MenuItem', MenuItem , 'MenuItem');
+var menuItemModel = mongoose.model( 'MenuItem', schema , 'MenuItem');
 
 function MenuItem()
 {
@@ -20,6 +20,11 @@ function MenuItem()
     {
         this.menuItem.save(callback);
 
+    };
+
+    this.deleteMenuItem = function(id, callback)
+    {
+        this.menuItem.remove({_id: id}, callback);
     };
 
     this.getMenuItemByName = function(name , callback)
@@ -45,6 +50,26 @@ function MenuItem()
     this.getName = function()
     {
         return this.menuItem.name;
+    };
+
+    this.setDescription = function(description)
+    {
+        this.menuItem.description = description;
+    };
+
+    this.getDescription = function()
+    {
+        return this.menuItem.description;
+    };
+
+    this.setPrice = function(price)
+    {
+        this.menuItem.description = price;
+    };
+
+    this.getPrice = function()
+    {
+        return this.menuItem.price;
     };
 
     this.getId = function()

@@ -2,16 +2,77 @@
    Created by Gabriel on 2014-07-22.
 
 block content
-    fieldset
-        legend Menu Creation
-        form(name="menu", action="/createMenu/createMenu", method="post")
-            label(for='menuName') Menu name:
-            input(name='menuName', type='text', placeholder='Menu name', class='form-control', required autofocus, autocomplete="off")
+    form(name="menu", action="/manageMenu/confirmedMenuCreation", method="post", onsubmit="addMenuItems();")
+        fieldset
+            legend Menu Creation
+            input(name='restaurantId', type='hidden', value='#{restaurant._id}')
+            table
+                tr
+                    td
+                        label(for='menuName') Name:
+                    td
+                        input(id='menuName', name='menuName', type='text', placeholder='Menu name', class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td
+                        label(for='menuDescription') Description:
+                    td
+                        textarea(id='menuDescription', name='menuDescription', placeholder='A nice little description for the menu you want to create!', class='form-control', autocomplete="off", cols="50", rows="4")
+            fieldset#itemCreationFieldset
+                legend Menu item
+                div(style='float:left')
+                    table#itemCreationTable
+                        tr
+                            td
+                                label(for='itemName') Name:
+                            td
+                                input(id='itemName', name='itemName', type='text', placeholder='Item name', class='form-control', autocomplete="off")
+                        tr
+                            td
+                                label(for='itemDescription') Description:
+                            td
+                                textarea(id='itemDescription', name='itemDescription', placeholder='A nice little description for the menu you want to create!', class='form-control', autocomplete="off", cols="15", rows="4")
+                        tr
+                            td
+                                label(for='itemPrice') Price:
+                            td
+                                input(id='itemPrice', name='itemPrice', type='text', placeholder='##.##$', class='form-control', autocomplete="off")
+                        tr
+                            td
+                                button(type='button', onClick="validateMenuItem();") Add item
+                            td
+                                button(type='button', onClick="removeModal();") Remove item
+                div(style='float:right')
+                    select#itemSelectMultiple(name='itemSelectMultiple', multiple)
+            button(type='button', onClick="validateMenu();") Create Menu
 
-            label(for='menuDescription') Description
-            input(name='menuDescription', type='textarea', placeholder='A nice little description for the menu you want to create!', class='form-control', autocomplete="off")
+    div#errorModal.modal
+        div.modalHolder
+            div#errorSelect.warningCreateAccount
+            button(type='button', onClick="errorModal();") Close
 
+    div#confirmationItemModal.modal
+        div.modalHolder
+            h2 Confirmation
+            p Are you sure you want to create this item like this?
+            button(type='button', onClick="addMenuItem();") I guess?!
+            button(type='button', onClick="confirmationItemModal();") You shall not pass!
 
+    div#noDescriptionModal.modal
+        div.modalHolder
+            h2 No Description?
+            p Shame on you for not given your beautifull item a nice little description!
+            button(type='button', onClick="noDescriptionModal();") I'm sorry and i won't do it again...
 
+    div#removeModal.modal
+        div.modalHolder
+            h2 WHY WOULD YOU DO THAT?!!111
+            p That item seriously doesn't deserve this...
+            button(type='button', onClick="removeMenuItem();") Yes it does!
+            button(type='button', onClick="removeModal();") Cancel
 
-
+    div#confirmationMenuModal.modal
+        div.modalHolder
+            h2 Confirmation
+            p Are you sure you want to create this menu like this?
+            button(type='button', onClick="submitMenu();") Yes, i'm a man!
+            button(type='button', onClick="confirmationMenuModal();") I'm not quit sure...

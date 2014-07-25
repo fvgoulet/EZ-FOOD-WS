@@ -22,9 +22,19 @@ function Menu()
 
     };
 
+    this.deleteMenu = function(id, callback)
+    {
+        this.menu.remove({_id: id}, callback);
+    };
+
     this.getMenuByName = function(name , callback)
     {
         menuModel.findOne( { name: name }, callback);
+    };
+
+    this.getMenuById = function(id , callback)
+    {
+        menuModel.findOne( { _id: id }, callback);
     };
 
     this.getMenuByRestaurantId = function(restaurantId , callback)
@@ -46,6 +56,16 @@ function Menu()
     this.getName = function()
     {
         return this.menu.name;
+    };
+
+    this.setDescription = function(description)
+    {
+        this.menu.description = description;
+    };
+
+    this.getDescription = function()
+    {
+        return this.menu.description;
     };
 
     this.getId = function()

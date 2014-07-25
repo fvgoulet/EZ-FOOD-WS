@@ -367,6 +367,54 @@ function manageMenu(restaurantId){
         };
 
         xmlhttp.open("POST", "/manageMenu", true);
-        xmlhttp.send('{"restaurantID":"' + restaurantId + '"}');
+        xmlhttp.send('{"restaurantId":"' + restaurantId + '"}');
+    }
+}
+
+function createMenu(restaurantId){
+
+    if(restaurantId != "")
+    {
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        // Callback on response.e
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                document.getElementById("content").innerHTML = xmlhttp.responseText;
+            }
+        };
+
+        xmlhttp.open("POST", "/manageMenu/createMenu", true);
+        xmlhttp.send('{"restaurantId":"' + restaurantId + '"}');
+    }
+}
+
+function deleteMenu(){
+    var menuID = document.getElementById('menuToDelete').value;
+    if(menuID != "")
+    {
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        // Callback on response.e
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                document.getElementById("content").innerHTML = xmlhttp.responseText;
+            }
+        };
+
+        xmlhttp.open("POST", "/manageMenu/deleteMenu", true);
+        xmlhttp.send('{"menuId":"' + menuID + '"}');
     }
 }

@@ -2,7 +2,11 @@ doctype html
 html
     head
         title= title
-        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href='/stylesheets/globalStyle.css')
+        link(rel='stylesheet', href='/stylesheets/headerStyle.css')
+        link(rel='stylesheet', href='/stylesheets/accountStyle.css')
+        link(rel='stylesheet', href='/stylesheets/menuStyle.css')
+        link(rel='stylesheet', href='/stylesheets/modalStyle.css')
         //link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     body
         block content
@@ -10,3 +14,4 @@ html
         script(src="http://code.jquery.com/jquery-1.10.2.js")
         script(src='/javascripts/globals.js')
         script(src='/javascripts/accountValidation.js')
+        script(src='/javascripts/MenuUtils.js')

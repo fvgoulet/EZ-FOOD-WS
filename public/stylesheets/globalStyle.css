@@ -1,0 +1,96 @@
+body {
+    padding: 0px;
+    margin: 0px;
+
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: white;
+}
+
+h2 {
+    margin:0 0 .5em 0;
+}
+
+a {
+    color: #00B7FF;
+}
+
+a:hover{
+    cursor: pointer;
+}
+
+#wrapper {
+    padding-left:312px;
+    position:relative;
+}
+
+fieldset {
+    border-radius: 5px;
+    border:2px solid;
+    padding: 5px;
+    margin:0;
+    width:75%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+legend{
+    font-size: 1.25em;
+    font-weight: bold;
+    text-align: left;
+}
+
+input{
+    border-radius: 5px;
+    margin:5px;
+}
+
+input[type=submit]{
+    border:0px;
+    color:black;
+    font-weight: bold;
+    min-width: 125px;
+    background-color: lightgrey;
+    margin:5px;
+    padding:5px;
+}
+
+button{
+    border-radius: 5px;
+    border:0px;
+    color:black;
+    font-weight: bold;
+    min-width: 125px;
+    background-color: lightgrey;
+    margin:5px;
+    padding:5px;
+}
+
+#SignIn{
+    width:25%;
+    text-align: center;
+    margin: auto;
+}
+
+textarea{
+    resize: none;
+    border-radius: 5px;
+    color:black;
+    font-weight: bold;
+    margin:5px;
+    padding:5px;
+}
+
+button:hover{
+    cursor:pointer;
+}
+
+/*
+#menuMultiSelect{
+    border-radius: 5px;
+    color:black;
+    font-weight: bold;
+    margin:5px;
+    width:450px;
+    height: 250px;
+}
+*/

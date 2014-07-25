@@ -15,23 +15,23 @@ block content
 
             if account_category == 0 || account_category == 1 || account_category == 2
                 - for (var x = 0; x < restaurants.length ; x++)
-                    li
+                    li.restaurantLink
                         h4 #{restaurants[x].name}
                         a(onclick="manageMenu('#{restaurants[x]._id}');")
                             img(src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200")
             else if account_category == 3
                 - for (var x = 0; x < restaurants.length ; x++)
-                    li
+                    li.restaurantLink
                         h4 #{restaurants[x].name}
                         img(id="#{restaurants[x]._id}", src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200")
             else if account_category == 4
                 - for (var x = 0; x < restaurants.length ; x++)
-                    li
+                    li.restaurantLink
                         h4 #{restaurants[x].name}
                         img(id="#{restaurants[x]._id}", src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200")
         else
             - for (var x = 0; x < restaurants.length ; x++)
-                li
+                li.restaurantLink
                     h4 #{restaurants[x].name}
                     img(id="#{restaurants[x]._id}", src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200")
 

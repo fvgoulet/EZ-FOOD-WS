@@ -27,6 +27,12 @@ function Restaurant()
         this.restaurant.save(callback);
 
     };
+
+    this.getRestaurantById = function(id, callback)
+    {
+        restaurant_model.findOne( { _id: id}, callback);
+    }
+
     this.getRestaurantByName = function(name , callback) //where callback = function ( err, found_account )
     {
         restaurant_model.findOne( { name: name }, callback);

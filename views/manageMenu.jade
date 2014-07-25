@@ -1,0 +1,38 @@
+//
+   Created by Gabriel on 2014-07-22.
+
+block content
+    h2 Manage Menu - #{restaurant.name}
+    div#buttonholder
+        button(type='button', onClick="createMenu('#{restaurant._id}');") Create
+
+    table#menuTable
+        if(menus != null && menus.length > 0)
+            tr
+                td  #{menus[0].name}
+                td
+                    button(type='button', onClick="") Modify
+                td
+                    button(type='button', onClick="setConfirmationDeleteModal('#{menus[0]._id}');") Delete
+            - for (var i=1; i<menus.length ; i++)
+                tr
+                    td.tdTopBorder  #{menus[i].name}
+                    td.tdTopBorder
+                        button(type='button', onClick="") Modify
+                    td.tdTopBorder
+                        button(type='button', onClick="setConfirmationDeleteModal('#{menus[i]._id}');") Delete
+        else
+            tr
+                td This is not the menu you are looking for!
+                td
+                    button(type='button', disabled) Modify
+                td
+                    button(type='button', disabled) Delete
+
+    div#deletMenuModal.modal
+        div.modalHolder
+            h2 Delete menu
+            p DON'T DO IT JIMMY
+            input(id='menuToDelete' ,name='menuToDelete', type='hidden', value='')
+            button(type='button', onClick="deleteMenu()") I'm firing ma fireball!
+            button(type='button', onClick="confirmationDeleteMenuModal();") Boom, counterspell!

@@ -1,0 +1,32 @@
+#menuTable{
+    border: solid;
+    border-radius: 5px;
+    border-color: black;
+    margin:5px;
+}
+
+.tdTopBorder{
+    border-top: solid;
+    border-color: black;
+}
+
+#itemCreationTable{
+    width:50%;
+    min-width: 500px;
+}
+
+#itemCreationFieldset{
+    min-width: 95%;
+    border-radius: 5px;
+    border:1px solid;
+    margin:5px;
+    padding: 5px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+#itemSelectMultiple{
+    min-width: 450px;
+    height:145px;
+    border-radius: 5px;
+}

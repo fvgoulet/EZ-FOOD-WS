@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var mongoose = require("mongoose");
-var multer  = require('multer')
+var multer  = require('multer');
 
 
 mongoose.connect( 'mongodb://localhost/EZ-Food' );
@@ -30,6 +30,7 @@ var manageRestaurateur = require('./routes/manageRestaurateur');
 var addRestaurant = require('./routes/addRestaurant');
 var signIn = require('./routes/signIn');
 var listRestaurant = require('./routes/listRestaurant');
+var manageMenu = require('./routes/manageMenu');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -53,6 +54,7 @@ app.use('/modifyAccount', modifyAccount);
 app.use('/accountManagement', accountManagement);
 app.use('/manageRestaurateur', manageRestaurateur);
 app.use('/listRestaurant', listRestaurant);
+app.use('/manageMenu', manageMenu);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

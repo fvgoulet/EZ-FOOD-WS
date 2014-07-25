@@ -48,12 +48,6 @@ router.get('/', function(req, res) {
             res.render('index', {account: account, restaurants: found_restaurants});
         });
     }
-
-
-
-
-
-
 });
 
 /* GET home page. */

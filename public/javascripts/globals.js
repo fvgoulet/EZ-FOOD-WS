@@ -1,22 +1,124 @@
 // DOM Ready =============================================================
-$(document).ready(function() {
-
-
+$(document).ready(function()
+{
     // Submit account button click
     //$('#btnSubmitAccount').on('click', validateAccountFields);
 
     //$('#btnSubmitModifications').on('click', validateAccountFields);
-
-
-
-
 });
 
 
 // Functions =============================================================
+function confirmationCommandModal(){
+    var modal = document.getElementById('confirmationCommandModal');
+    modalVisbility(modal);
+}
+
+function modalVisbility(modal){
+    modal.style.visibility = (modal.style.visibility == "visible")?"hidden":"visible";
+}
+
+function checkout()
+{
+
+    var node_list = document.getElementsByName("cart_item");
+
+    var i;
+
+    var item_array = [];
+    for (i = 0; i < node_list.length; i++) {
+        var item = {};
+        item["item_id"] = node_list[i].getAttribute("item_id");
+        item["item_quantity"] = node_list[i].getAttribute("item_quantity");
+        //item["item_name"] = node_list[i].getAttribute("item_name");
+        //item["item_price"] = node_list[i].getAttribute("item_price");
+
+        item_array.push(item);
+    }
+
+    var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    // Callback on response.e
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("content").innerHTML = xmlhttp.responseText;
+        }
+    };
+
+    xmlhttp.open("POST", "/checkout", true);
+    var query = {};
+    query["cart_items"] = item_array;
+    xmlhttp.send(JSON.stringify(query));
+
+}
+
+function addItemToCart(item_id)
+{
+    var node_list = document.getElementsByName("cart_item");
+
+    var i;
+
+    var item_array = [];
+    for (i = 0; i < node_list.length; i++)
+    {
+        var item = {};
+        item["item_id"] = node_list[i].getAttribute("item_id");
+        item["item_quantity"] = node_list[i].getAttribute("item_quantity");
+        item["item_name"] = node_list[i].getAttribute("item_name");
+        item["item_price"] = node_list[i].getAttribute("item_price");
+
+        item_array.push(item);
+    }
 
 
+    var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    // Callback on response.e
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("cart").innerHTML = xmlhttp.responseText;
+        }
+    };
 
+    xmlhttp.open("POST", "/addItemToCart", true);
+    var query = {};
+    query["item_id"] = item_id;
+    query["cart_items"] = item_array;
+
+    xmlhttp.send(JSON.stringify(query));
+
+}
+
+function toggleVisibilityCartContent()
+{
+    if(true == $("#cart_items").is(":visible") )
+    {
+        hideCartContent();
+    }
+    else
+    {
+        showCartContent();
+    }
+}
+function showCartContent()
+{
+    $("#cart_items").show(1000);
+}
+
+function hideCartContent()
+{
+    $("#cart_items").hide(1000);
+}
 
 function manageRestaurateur()
 {
@@ -64,6 +166,50 @@ function listRestaurant()
 
     xmlhttp.open("GET","/listRestaurant",true);
     xmlhttp.send();
+}
+
+function showMenus(restaurant_id)
+{
+
+    var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    // Callback on response.e
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("content").innerHTML = xmlhttp.responseText;
+        }
+    };
+
+    xmlhttp.open("POST", "/showMenus", true);
+    xmlhttp.send('{"restaurant_id":"' + restaurant_id + '"}');
+
+}
+
+function showMenuItems(menu_id)
+{
+
+    var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    // Callback on response.e
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("content").innerHTML = xmlhttp.responseText;
+        }
+    };
+
+    xmlhttp.open("POST", "/showMenuItems", true);
+    xmlhttp.send('{"menu_id":"' + menu_id + '"}');
+
 }
 
 function modifyRestaurant()

@@ -17,7 +17,7 @@ function confirmationDeleteMenuModal(){
  */
 
 function validateMenu(){
-    var regexTextOnly = /^[a-zA-Z]+$/;
+    var regexTextOnly = /^[a-zA-Z\s]+$/;
     var menuName = document.getElementById("menuName").value;
 
     var errorMessage = '';
@@ -60,7 +60,7 @@ function addMenuItems(){
 }
 
 function validateMenuItem(){
-    var regexTextOnly = /^[a-zA-Z]+$/;
+    var regexTextOnly = /^[a-zA-Z\s]+$/;
     var regexPrice = /^(\d{1,3})?(,?\d{3})*(\.\d{2})?$/;
 
     var itemName = document.getElementById("itemName").value;

@@ -9,17 +9,24 @@ block content
     form(name="account", action="/manageRestaurateur/confirmedModifications", method="post")
         h3 Restaurant(Optional)
         br
+        div
 
-        | Available restaurants :
-        select(id="available_restaurants", multiple="multiple")
-            - for (var x = 0; x < available_restaurants.length ; x++)
-                option(name='#{available_restaurants[x]}') #{available_restaurants[x]}
-        button(type="button", onClick="deleteFromSelectedRestaurants();") <--
-        button(type="button", onClick="addToSelectedRestaurants();") -->
-        | Selected restaurants :
-        select(name="selected_restaurants" ,id="selected_restaurants", multiple="multiple")
-            - for (var x = 0; x < selected_restaurants.length ; x++)
-                option(name='#{selected_restaurants[x]}') #{selected_restaurants[x]}
+            div(style="float:left;")
+                | Available restaurants :
+                br
+                select(id="available_restaurants", multiple="multiple")
+                    - for (var x = 0; x < available_restaurants.length ; x++)
+                        option(name='#{available_restaurants[x]}') #{available_restaurants[x]}
+            div(style="float:left;")
+                button(type="button", onClick="deleteFromSelectedRestaurants();") <--
+                br
+                button(type="button", onClick="addToSelectedRestaurants();") -->
+            div(style="float:left;")
+                | Assigned restaurants :
+                br
+                select(name="selected_restaurants" ,id="selected_restaurants", multiple="multiple")
+                    - for (var x = 0; x < selected_restaurants.length ; x++)
+                        option(name='#{selected_restaurants[x]}') #{selected_restaurants[x]}
 
         hr(align="center", width="85%", size="10", noshade)
         h3 Account

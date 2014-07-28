@@ -36,6 +36,10 @@ function MenuItem()
     {
         menuItemModel.find( { menuId: menuId }, callback);
     };
+    this.getMenuItemById = function(id , callback)
+    {
+        menuItemModel.findOne( { _id: id }, callback);
+    };
 
     this.setMenuItem = function(menuItem)
     {
@@ -64,7 +68,7 @@ function MenuItem()
 
     this.setPrice = function(price)
     {
-        this.menuItem.description = price;
+        this.menuItem.price = price;
     };
 
     this.getPrice = function()

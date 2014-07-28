@@ -96,25 +96,35 @@ router.post('/confirmedMenuCreation', function(req, res)
 
     schemaMenu.save(function(err){
         if ( err ) return console.error( err );
-        schemaMenu.getMenuByName(req.body.menuName, function(err, foundMenu){
-            if ( err ) return console.error( err );
-            var menuId = foundMenu._id;
-            var menuItems = req.body.itemSelectMultiple;
-            var schemaMenuItem = new menuItem.MenuItem();
 
-            menuItems.forEach(function(item){
-                var splitItem = item.split('|');
-                var newMenuItem = new menuItem.MenuItem();
-                newMenuItem.setName(splitItem[0]);
-                newMenuItem.setDescription(splitItem[1]);
-                newMenuItem.setPrice(splitItem[2]);
-                newMenuItem.setMenuId(menuId);
+        if ( err ) return console.error( err );
+        var menuId = schemaMenu.getId();
 
-                newMenuItem.save();
+        var menuItems = [];
 
-            });
+        if( typeof req.body.itemSelectMultiple == 'string' )
+        {
+            menuItems.push(req.body.itemSelectMultiple);
+        }
+        else if(undefined != req.body.itemSelectMultiple)
+        {
+            menuItems = req.body.itemSelectMultiple;
+        }
+
+        menuItems.forEach(function(item)
+        {
+            var splitItem = item.split('|');
+            var newMenuItem = new menuItem.MenuItem();
+            newMenuItem.setName(splitItem[0]);
+            newMenuItem.setDescription(splitItem[2]);
+            newMenuItem.setPrice(splitItem[1]);
+            newMenuItem.setMenuId(menuId);
+
+            newMenuItem.save();
 
         });
+
+
         res.redirect('/');
     });
 

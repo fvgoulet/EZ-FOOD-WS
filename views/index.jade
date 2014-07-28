@@ -23,7 +23,8 @@ block content
                 - for (var x = 0; x < restaurants.length ; x++)
                     li.restaurantLink
                         h4 #{restaurants[x].name}
-                        img(id="#{restaurants[x]._id}", src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200")
+                        a(onclick="showMenus('#{restaurants[x]._id}');")
+                            img(id="#{restaurants[x]._id}", src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200")
             else if account_category == 4
                 - for (var x = 0; x < restaurants.length ; x++)
                     li.restaurantLink
@@ -38,5 +39,6 @@ block content
 
 
 
-
+    div#cart
+        include Cart
     include Footer

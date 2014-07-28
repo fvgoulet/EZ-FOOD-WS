@@ -1,0 +1,33 @@
+div.cart-header {
+    background-color:black;
+
+}
+
+h2.cart-header {
+    display: inline-block;
+    color:white;
+}
+ul.cart-items{
+    list-style-type: none;
+}
+div.cart-item li{
+    border-bottom: 1px solid black;
+    font-weight: bold;
+}
+
+div.cart-item li h4 {
+    display: inline-block;
+}
+
+li.restaurant {
+    border-radius: 10px 10px 10px 10px;
+    border: 2px solid black;
+    display: inline-block;
+    padding: 5px 10px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top:10px;
+    margin-right:10px;
+    margin-left:10px;
+    margin-bottom:10px;
+}

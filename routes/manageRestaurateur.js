@@ -110,7 +110,16 @@ router.post('/addNewRestaurateur/addUser', function(req, res)
         }
 
         var associated_restaurant = new restaurant.Restaurant();
+        var array_selected_restaurants = [];
 
+        if( typeof req.body.selected_restaurants == 'string' )
+        {
+            array_selected_restaurants.push(req.body.selected_restaurants);
+        }
+        else if(undefined != req.body.selected_restaurants)
+        {
+            array_selected_restaurants = req.body.selected_restaurants;
+        }
         array_selected_restaurants.forEach(function(entry)
         {
             associated_restaurant.getRestaurantByName(entry, function (err, restaurant_found)
@@ -311,8 +320,13 @@ router.post('/confirmedModifications', function(req, res)
                         associated_restaurant.setRestaurant(restaurant_found);
                     }
                     associated_restaurant.setRestaurateurId(restaurateur_account.getId());
-
-                    associated_restaurant.save();
+                    console.log(restaurateur_account.getId());
+                    console.log(associated_restaurant.getName());
+                    associated_restaurant.save(function(err)
+                    {
+                        console.log("SAVED");
+                        if (err) return console.error(err);
+                    });
                 });
             });
         }

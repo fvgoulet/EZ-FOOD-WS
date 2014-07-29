@@ -18,3 +18,8 @@
     padding: 15px;
     text-align: center;
 }
+
+.hidden
+{
+    visibility: hidden;
+}

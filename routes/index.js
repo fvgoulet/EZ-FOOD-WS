@@ -101,12 +101,14 @@ router.post('/checkout', function(req, res)
             new_order.save(function(err)
             {
                 if ( err ) return console.error( err );
-                var virtual_restaurant = new restaurant.Restaurant();
+                res.send(new_order._id);
+                /*var virtual_restaurant = new restaurant.Restaurant();
                 virtual_restaurant.getAllRestaurants(function (err, found_restaurants)
                 {
                     var cart = [];
                     res.render('index', {account: logged_account, restaurants: found_restaurants, cart: cart});
-                });
+                    //res.send();
+                });*/
             });
 
         });

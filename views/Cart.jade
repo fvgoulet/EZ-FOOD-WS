@@ -13,33 +13,67 @@ if cart != null
                     div(class="cart-item", name="cart_item", item_id="#{cart[x].item_id}", item_quantity="#{cart[x].item_quantity}",
                     item_name="#{cart[x].item_name}",item_price="#{cart[x].item_price}")
                         li
-                            h4 #{cart[x].item_name}
-                            h4 #{cart[x].item_quantity}
-                            h4 #{cart[x].item_price} $
-                            h4 Delete
+                            table(width="100%")
+                                col(width="60%")
+                                col(width="20%")
+                                col(width="10%")
+                                col(width="10%")
+                                tr
+                                    td
+                                        h4 #{cart[x].item_name}
+                                    td
+                                        h4 #{cart[x].item_quantity}
+                                    td
+                                        h4 #{cart[x].item_price} $
+                                    td
+                                        h4 Delete
+
+    div#orderConfirmedModal.modal
+        div.modalHolder
+            h2 Confirmed !
+            p Here is yout confirmation number : N/D
+            p An e-mail will be send to you with your order informations.
+
+            button(type='button', onClick="closeConfirmation();") Close
 
     div#confirmationCommandModal.modal
         div.modalHolder
             h2 Confirmation
-            p Here is the summary of your command, do you confirm ?
+            p Here is the summary of your order, do you confirm ?
             - var total = 0;
             - for (var x = 0; x < cart.length ; x++)
                 div(class="cart-item")
-                    li
-                        h4 #{cart[x].item_name}
-                        h4 #{cart[x].item_quantity}
-                        h4 #{cart[x].item_price} $
-                        - total = (cart[x].item_quantity * cart[x].item_price) + total
+                    ul(class="cart-items")
+                        li
+                            table(width="100%")
+                                col(width="60%")
+                                col(width="20%")
+                                col(width="20%")
+
+                                tr
+                                    td
+                                        h4 #{cart[x].item_name}
+                                    td
+                                        h4 #{cart[x].item_quantity}
+                                    td
+                                        h4 #{cart[x].item_price} $
+                            - total = (cart[x].item_quantity * cart[x].item_price) + total
 
             h4 Ho lucky you ! You don't have to pay taxes this time ! :D
             h2 Total : #{total} $
 
             h3 Choose the delivery time :
-            input(name="delivery_time", type="Radio", value="ASAP", checked)
+            input(name="delivery_time", type="Radio", value="ASAP", checked, onchange="toggleDeleveryTimePickerVisibility();")
             | ASAP !
-            input(name="delivery_time", type="Radio", value="user_defined")
+            input(name="delivery_time", type="Radio", value="user_defined", onchange="toggleDeleveryTimePickerVisibility();")
             | Someday...
             br
+            div#delevery_time_picker.hidden
+                | Select the date :
+                input(type="date")
+                | Select the time :
+                input(type="time")
+
             button(type='button', onClick="checkout();confirmationCommandModal();") Gimme that Food !
             button(type='button', onClick="confirmationCommandModal();") Nop
 

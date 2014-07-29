@@ -9,6 +9,16 @@ $(document).ready(function()
 
 
 // Functions =============================================================
+function toggleDeleveryTimePickerVisibility(){
+    var modal = document.getElementById('delevery_time_picker');
+    modalVisbility(modal);
+}
+
+function closeConfirmation(){
+    var modal = document.getElementById('orderConfirmedModal');
+    modalVisbility(modal);
+}
+
 function confirmationCommandModal(){
     var modal = document.getElementById('confirmationCommandModal');
     modalVisbility(modal);
@@ -46,7 +56,10 @@ function checkout()
     // Callback on response.e
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            document.getElementById("content").innerHTML = xmlhttp.responseText;
+            var response = xmlhttp.responseText;
+            document.getElementById("confirmationNumber").innerHTML = response;
+            var modal = document.getElementById('confirmationCommandModal');
+            modalVisbility(modal);
         }
     };
 

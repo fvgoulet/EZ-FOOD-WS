@@ -18,6 +18,8 @@
         "mongoskin": "*",
         "mongoose": "*",
         "multer": "*",
+        "moment": "*",
+        "nodemailer": "*",
         "mkdirp": "*"
     }
 }

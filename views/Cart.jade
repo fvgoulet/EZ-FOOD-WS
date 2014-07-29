@@ -8,6 +8,20 @@ if cart != null
 
         div#cart_items
             ul(class="cart-items")
+                table(width="100%")
+                    col(width="60%")
+                    col(width="20%")
+                    col(width="10%")
+                    col(width="10%")
+                    tr
+                        td
+                            h3 Item Name
+                        td
+                            h3 Item Quatity
+                        td
+                            h3 Item Price(Unit)
+                        td
+                            h3 Delete Item
                 - for (var x = 0; x < cart.length ; x++)
 
                     div(class="cart-item", name="cart_item", item_id="#{cart[x].item_id}", item_quantity="#{cart[x].item_quantity}",
@@ -22,16 +36,17 @@ if cart != null
                                     td
                                         h4 #{cart[x].item_name}
                                     td
-                                        h4 #{cart[x].item_quantity}
+                                        input(type="Number", value="#{cart[x].item_quantity}", min="1", onChange="updateQuantity('#{cart[x].item_id}', this.value);")
                                     td
                                         h4 #{cart[x].item_price} $
                                     td
-                                        h4 Delete
+                                        a(onclick="deleteItem('#{cart[x].item_id}');") Delete
 
     div#orderConfirmedModal.modal
         div.modalHolder
             h2 Confirmed !
-            p Here is yout confirmation number : N/D
+            p Here is yout confirmation number :
+            p#confirmationNumber
             p An e-mail will be send to you with your order informations.
 
             button(type='button', onClick="closeConfirmation();") Close
@@ -69,10 +84,8 @@ if cart != null
             | Someday...
             br
             div#delevery_time_picker.hidden
-                | Select the date :
-                input(type="date")
-                | Select the time :
-                input(type="time")
+                | Select the date and time :
+                input(type="datetime-local", name="date_time_picker", value="#{moment(Date.now()).format('YYYY-MM-DDThh:mm:ss')}", min="#{moment(Date.now()).format('YYYY-MM-DDThh:mm:ss')}")
 
             button(type='button', onClick="checkout();confirmationCommandModal();") Gimme that Food !
             button(type='button', onClick="confirmationCommandModal();") Nop

@@ -35,6 +35,7 @@ var manageMenu = require('./routes/manageMenu');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.locals.moment = require('moment');
 
 app.use(favicon());
 app.use(logger('dev'));

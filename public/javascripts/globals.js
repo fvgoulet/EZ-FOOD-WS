@@ -30,6 +30,19 @@ function modalVisbility(modal){
 
 function checkout()
 {
+    var delivery_time_radio_button = document.getElementsByName("delivery_time");
+
+    var delivery_type = "unknown";
+
+    for(var i = 0; i < delivery_time_radio_button.length; i++)
+    {
+        if(delivery_time_radio_button[i].checked)
+        {
+            delivery_type = delivery_time_radio_button[i].value;
+        }
+    }
+
+
 
     var node_list = document.getElementsByName("cart_item");
 
@@ -58,7 +71,7 @@ function checkout()
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var response = xmlhttp.responseText;
             document.getElementById("confirmationNumber").innerHTML = response;
-            var modal = document.getElementById('confirmationCommandModal');
+            var modal = document.getElementById('orderConfirmedModal');
             modalVisbility(modal);
         }
     };
@@ -66,6 +79,16 @@ function checkout()
     xmlhttp.open("POST", "/checkout", true);
     var query = {};
     query["cart_items"] = item_array;
+    if("user_defined" == delivery_type)
+    {
+        query["delivery_type"] = "user_defined";
+        query["delivery_date_time"] = document.getElementsByName("date_time_picker")[0].value;
+    }
+    else
+    {
+        query["delivery_type"] = "ASAP";
+    }
+
     xmlhttp.send(JSON.stringify(query));
 
 }
@@ -110,6 +133,91 @@ function addItemToCart(item_id)
 
     xmlhttp.send(JSON.stringify(query));
 
+}
+
+function deleteItem(item_id)
+{
+    var node_list = document.getElementsByName("cart_item");
+    var i;
+    var item_array = [];
+    for (i = 0; i < node_list.length; i++)
+    {
+        var item = {};
+        if(item_id != node_list[i].getAttribute("item_id"))
+        {
+            item["item_id"] = node_list[i].getAttribute("item_id");
+            item["item_quantity"] = node_list[i].getAttribute("item_quantity");
+            item["item_name"] = node_list[i].getAttribute("item_name");
+            item["item_price"] = node_list[i].getAttribute("item_price");
+
+            item_array.push(item);
+        }
+    }
+
+    var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    // Callback on response.e
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("cart").innerHTML = xmlhttp.responseText;
+        }
+    };
+
+    xmlhttp.open("POST", "/updateCart", true);
+    var query = {};
+    query["cart_items"] = item_array;
+    xmlhttp.send(JSON.stringify(query));
+}
+
+function updateQuantity(item_id, quantity)
+{
+    var node_list = document.getElementsByName("cart_item");
+    var i;
+    var item_array = [];
+    for (i = 0; i < node_list.length; i++)
+    {
+        var item = {};
+
+        item["item_id"] = node_list[i].getAttribute("item_id");
+        item["item_name"] = node_list[i].getAttribute("item_name");
+        item["item_price"] = node_list[i].getAttribute("item_price");
+
+        if(item_id == item["item_id"])
+        {
+            item["item_quantity"] = quantity
+        }
+        else
+        {
+            item["item_quantity"] = node_list[i].getAttribute("item_quantity");
+        }
+
+        item_array.push(item);
+
+    }
+
+    var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    // Callback on response.e
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("cart").innerHTML = xmlhttp.responseText;
+        }
+    };
+
+    xmlhttp.open("POST", "/updateCart", true);
+    var query = {};
+    query["cart_items"] = item_array;
+    xmlhttp.send(JSON.stringify(query));
 }
 
 function toggleVisibilityCartContent()

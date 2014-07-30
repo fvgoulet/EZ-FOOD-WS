@@ -4,7 +4,7 @@ var restaurant = require('../public/Utilities/Restaurant');
 var menu = require('../public/Utilities/Menu');
 var menu_item = require('../public/Utilities/MenuItem');
 var order = require('../public/Utilities/Order');
-//var mail_sender = require('../public/Utilities/MailSender');
+var mail_sender = require('../public/Utilities/MailSender');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -106,14 +106,22 @@ router.post('/checkout', function(req, res)
                 if ( err ) return console.error( err );
 
                 res.send(new_order.getId());
-                console.log("iciiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-                console.log(logged_account);
-                //mail_sender = new mail_sender.MailSender();
+
+                mail_sender = new mail_sender.MailSender();
                 var client_name = logged_account.firstName + " " + logged_account.lastName;
                 var client_email = logged_account.email;
-                var subject = "Ez-Food : Your order has been passed !";
-                var content = "Hi " + client_name + ",\n your order as been passed, here is your confirmation number : " + new_order.getId();
-               // mail_sender.sendMail2(client_name, client_email, subject, content);
+                var subject = "EZ-Food : Your order has been passed !";
+                var content = "Hi " + client_name + ",\n your order as been passed, here is your confirmation number : " + new_order.getId() + "\n";
+                content = content + "Here is your order : \n"
+                content = content + "Item Name     Quantity     Unit Price \n \n"
+                var total_price = 0;
+                json_data["cart_items"].forEach(function(cart_item)
+                {
+                    content = content + cart_item["item_name"] + "    "+ cart_item["item_quantity"] + "    "+ cart_item["item_price"] + "$\n";
+                    total_price = total_price + (parseInt(cart_item["item_quantity"]) * parseInt(cart_item["item_price"]));
+                });
+                content = content + "\nThat make a total of : " + total_price + "$.\n"
+                mail_sender.sendMail(client_name, client_email, subject, content);
             });
 
         });

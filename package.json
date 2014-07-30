@@ -1,25 +1,37 @@
 {
-    "name": "application-name",
-    "version": "0.0.1",
-    "private": true,
-    "scripts": {
-        "start": "node ./bin/www"
-    },
-    "dependencies": {
-        "express": "~4.2.0",
-        "express-session": "*",
-        "static-favicon": "~1.0.0",
-        "morgan": "~1.0.0",
-        "cookie-parser": "~1.0.1",
-        "body-parser": "~1.0.0",
-        "debug": "~0.7.4",
-        "jade": "*",
-        "mongodb": "*",
-        "mongoskin": "*",
-        "mongoose": "*",
-        "multer": "*",
-        "moment": "*",
-        "nodemailer": "*",
-        "mkdirp": "*"
-    }
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "express": "~4.2.0",
+    "express-session": "*",
+    "static-favicon": "~1.0.0",
+    "morgan": "~1.0.0",
+    "cookie-parser": "~1.0.1",
+    "body-parser": "~1.0.0",
+    "debug": "~0.7.4",
+    "jade": "*",
+    "mongodb": "*",
+    "mongoskin": "*",
+    "mongoose": "*",
+    "multer": "*",
+    "moment": "*",
+    "nodemailer":"0.3.29",
+    "mkdirp": "*"
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fvgoulet/EZ-FOOD-WS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fvgoulet/EZ-FOOD-WS/issues"
+  },
+  "homepage": "https://github.com/fvgoulet/EZ-FOOD-WS"
 }

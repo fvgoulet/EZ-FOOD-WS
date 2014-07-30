@@ -53,8 +53,8 @@ function checkout()
         var item = {};
         item["item_id"] = node_list[i].getAttribute("item_id");
         item["item_quantity"] = node_list[i].getAttribute("item_quantity");
-        //item["item_name"] = node_list[i].getAttribute("item_name");
-        //item["item_price"] = node_list[i].getAttribute("item_price");
+        item["item_name"] = node_list[i].getAttribute("item_name");
+        item["item_price"] = node_list[i].getAttribute("item_price");
 
         item_array.push(item);
     }

@@ -5,9 +5,13 @@ var menu = require('../public/Utilities/Menu');
 var menu_item = require('../public/Utilities/MenuItem');
 var order = require('../public/Utilities/Order');
 var mail_sender = require('../public/Utilities/MailSender');
+var fs = require('fs');
 
 /* GET home page. */
 router.get('/', function(req, res) {
+    /*console.log("iciiiiiiiiiiiiiiiiiiiiiiiiiii");
+    console.log(fs.existsSync(__dirname + '/../public/RestaurantsRessources/default.jpg'));
+    console.log("iciiiiiiiiiiiiiiiiiiiiiiiiiii");*/
     var account;
 
     if((req.session.account))
@@ -25,6 +29,7 @@ router.get('/', function(req, res) {
     ///////////////////////////////////////////
 
     var cart = [];
+
     if(req.session.cart)
     {
         cart = req.session.cart;
@@ -35,21 +40,22 @@ router.get('/', function(req, res) {
         {
             virtual_restaurant.getRestaurantsByEntrepreneurId(account._id, function (err, found_restaurants)
             {
-                res.render('index', {account: account, restaurants: found_restaurants});
+                res.render('index', {account: account, restaurants: found_restaurants, fs_module:fs});
             });
         }
         else if (2 == account.category)
         {
             virtual_restaurant.getRestaurantsByRestaurateurId(account._id, function (err, found_restaurants)
             {
-                res.render('index', {account: account, restaurants: found_restaurants});
+                res.render('index', {account: account, restaurants: found_restaurants, fs_module:fs});
             });
         }
         else
         {
             virtual_restaurant.getAllRestaurants(function (err, found_restaurants)
             {
-                res.render('index', {account: account, restaurants: found_restaurants, cart: cart});
+
+                res.render('index', {account: account, restaurants: found_restaurants, cart: cart, fs_module:fs});
             });
         }
     }
@@ -57,7 +63,7 @@ router.get('/', function(req, res) {
     {
         virtual_restaurant.getAllRestaurants(function (err, found_restaurants)
         {
-            res.render('index', {account: account, restaurants: found_restaurants});
+            res.render('index', {account: account, restaurants: found_restaurants, fs_module:fs});
         });
     }
 });

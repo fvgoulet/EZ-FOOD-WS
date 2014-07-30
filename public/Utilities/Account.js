@@ -272,6 +272,11 @@ function Account()
     {
         return this.account._id;
     };
+    this.getAddress = function()
+    {
+        var compiledAddress = this.account.civicNo + " " + this.account.street + "#" + this.account.apartment + ", " + this.account.city + ", " + this.account.province + ", " + this.account.zipCode;
+        return compiledAddress;
+    }
 }
 
 module.exports.Account = Account;

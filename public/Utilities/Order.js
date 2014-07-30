@@ -23,7 +23,6 @@ var order_model = mongoose.model( 'Orders', schema);
 
 function Order()
 {
-
     //Constructor
 
     this.order = new order_model();

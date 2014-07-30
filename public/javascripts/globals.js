@@ -8,7 +8,6 @@ $(document).ready(function()
 });
 
 
-
 // Functions =============================================================
 function toggleDeleveryTimePickerVisibility(){
     var modal = document.getElementById('delevery_time_picker');
@@ -290,30 +289,6 @@ function listRestaurant()
     xmlhttp.send();
 }
 
-function demandeLivraison()
-{
-    var xmlhttp;
-    if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp=new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    // Callback on response.e
-    xmlhttp.onreadystatechange=function()
-    {
-        if (xmlhttp.readyState==4 && xmlhttp.status==200)
-        {
-            document.getElementById("content").innerHTML = xmlhttp.responseText;
-        }
-    };
-
-    xmlhttp.open("GET","/demandeLivraison",true);
-    xmlhttp.send();
-}
-
 function showMenus(restaurant_id)
 {
 
@@ -408,6 +383,7 @@ function showAddNewRestaurateur()
     xmlhttp.send();
 }
 
+
 function deleteRestaurant() {
     var e = document.getElementById("avalaibleRestaurant");
     var strRes = e.options[e.selectedIndex].text;
@@ -436,7 +412,7 @@ function deleteRestaurant() {
         }
     }
 }
-
+// Delete User
 function deleteUser()
 {
     var e = document.getElementById("avalaibleRestaurateur");
@@ -468,6 +444,7 @@ function deleteUser()
     }
 }
 
+// Delete User
 function modifyUser()
 {
     var e = document.getElementById("avalaibleRestaurateur");
@@ -496,6 +473,7 @@ function modifyUser()
     }
 }
 
+// Delete User
 function modifyAccount()
 {
     var xmlhttp;
@@ -521,6 +499,7 @@ function modifyAccount()
     xmlhttp.send();
 }
 
+// Delete User
 function addRestaurant()
 {
     var xmlhttp;
@@ -596,7 +575,8 @@ function createAccount()
     xmlhttp.send();
 }
 
-function addToSelectedRestaurants(){
+function addToSelectedRestaurants()
+{
     var available_restaurants = document.getElementById("available_restaurants");
     var selected_restaurants = document.getElementById("selected_restaurants");
     var new_option = document.createElement("option");
@@ -608,7 +588,8 @@ function addToSelectedRestaurants(){
 
 }
 
-function deleteFromSelectedRestaurants(){
+function deleteFromSelectedRestaurants()
+{
     var available_restaurants = document.getElementById("available_restaurants");
     var selected_restaurants = document.getElementById("selected_restaurants");
     var new_option = document.createElement("option");

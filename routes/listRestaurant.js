@@ -27,6 +27,8 @@ router.get('/', function(req, res) {
                 console.log(restaurant_found);
                 restaurants.push(restaurant_found.name);
             });
+            /*actual_account.setAccount(found_account);
+             req.session.account = JSON.stringify(actual_account);*/
         }
         console.log(restaurants);
         res.render('listRestaurant', {restaurants: restaurants});
@@ -35,6 +37,10 @@ router.get('/', function(req, res) {
 
 });
 
+router.get('/modifyRestaurant', function(req, res) {
+
+
+});
 
 /*
  * POST .

@@ -94,6 +94,8 @@ router.post('/checkout', function(req, res)
             {
                 new_order.addItem(cart_item["item_id"], cart_item["item_quantity"]);
             });
+            new_order.setStatus(1);
+            //new_order.setRestaurantId()
             console.log(json_data["cart_items"]);
             console.log(json_data["cart_items"][0]);
             console.log(json_data["cart_items"][1]);

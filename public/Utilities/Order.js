@@ -2,15 +2,24 @@
  * Created by Gabriel on 2014-06-20.
  */
 var mongoose = require( 'mongoose' );
+
 schema = mongoose.Schema({
     client_id : String,
     restaurant_id : String,
     order_timestamp : { type : Date, default: Date.now },
-    delivery_time : { type : Date, default: Date.now },
-    items : [{item_id:String, quantity:Number}]
+    delivery_time: { type : Date, default: Date.now },
+    items : [{item_id:String, quantity:Number}],
+    status : Number
 });
-var order_model = mongoose.model( 'Orders', schema );
+var order_model = mongoose.model( 'Orders', schema);
 
+/*
+ Status:
+ 1- Submitted by client
+ 2- Getting ready
+ 3- Ready
+ 4- Delivered
+*/
 
 function Order()
 {
@@ -42,6 +51,20 @@ function Order()
     this.addItem = function(item_id, item_quantity)
     {
         this.order.items.push({item_id:item_id, quantity:item_quantity});
+    };
+
+    this.setStatus = function(Number)
+    {
+        this.order.status = Number;
+    };
+
+    this.getOrdersByStatus = function(status, callback) //where callback = function ( err, found_account )
+    {
+        order_model.find( { status : status }, callback);
+    };
+    this.getOrdersByLocation = function(address, callback) //where callback = function ( err, found_account )
+    {
+        order_model.find( { address : address }, callback);
     };
 
     this.getId = function()

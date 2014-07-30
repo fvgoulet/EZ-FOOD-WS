@@ -101,6 +101,7 @@ router.post('/checkout', function(req, res)
             });
 
 
+
             new_order.save(function(err)
             {
                 if ( err ) return console.error( err );

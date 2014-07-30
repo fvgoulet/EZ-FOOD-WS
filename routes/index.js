@@ -4,6 +4,7 @@ var restaurant = require('../public/Utilities/Restaurant');
 var menu = require('../public/Utilities/Menu');
 var menu_item = require('../public/Utilities/MenuItem');
 var order = require('../public/Utilities/Order');
+var mail_sender = require('../public/Utilities/MailSender');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -90,25 +91,37 @@ router.post('/checkout', function(req, res)
             var new_order = new order.Order();
 
             new_order.setClientId(logged_account._id);
+            if("user_defined" == json_data["delivery_type"])
+            {
+                new_order.setDeliveryTime(json_data["delivery_date_time"]);
+            }
             json_data["cart_items"].forEach(function(cart_item)
             {
                 new_order.addItem(cart_item["item_id"], cart_item["item_quantity"]);
             });
-            new_order.setStatus(1);
-            //new_order.setRestaurantId()
-            console.log(json_data["cart_items"]);
-            console.log(json_data["cart_items"][0]);
-            console.log(json_data["cart_items"][1]);
+
 
             new_order.save(function(err)
             {
                 if ( err ) return console.error( err );
-                var virtual_restaurant = new restaurant.Restaurant();
-                virtual_restaurant.getAllRestaurants(function (err, found_restaurants)
+
+                res.send(new_order.getId());
+
+                mail_sender = new mail_sender.MailSender();
+                var client_name = logged_account.firstName + " " + logged_account.lastName;
+                var client_email = logged_account.email;
+                var subject = "EZ-Food : Your order has been passed !";
+                var content = "Hi " + client_name + ",\n your order as been passed, here is your confirmation number : " + new_order.getId() + "\n";
+                content = content + "Here is your order : \n"
+                content = content + "Item Name     Quantity     Unit Price \n \n"
+                var total_price = 0;
+                json_data["cart_items"].forEach(function(cart_item)
                 {
-                    var cart = [];
-                    res.render('index', {account: logged_account, restaurants: found_restaurants, cart: cart});
+                    content = content + cart_item["item_name"] + "    "+ cart_item["item_quantity"] + "    "+ cart_item["item_price"] + "$\n";
+                    total_price = total_price + (parseInt(cart_item["item_quantity"]) * parseInt(cart_item["item_price"]));
                 });
+                content = content + "\nThat make a total of : " + total_price + "$.\n"
+                mail_sender.sendMail(client_name, client_email, subject, content);
             });
 
         });
@@ -133,14 +146,12 @@ router.post('/addItemToCart', function(req, res)
         req.on('end', function ()
         {
             var json_data = JSON.parse(post_data);
-            console.log(json_data["item_id"]);
+
 
             var virtual_menu_item = new menu_item.MenuItem();
             virtual_menu_item.getMenuItemById(json_data["item_id"], function (err, found_menu_item)
             {
-                console.log(found_menu_item);
-                console.log("iciiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-                console.log(json_data["cart_items"]);
+
                 var cart = json_data["cart_items"];
 
 
@@ -153,7 +164,30 @@ router.post('/addItemToCart', function(req, res)
         });
     }
 });
+router.post('/updateCart', function(req, res)
+{
+    var logged_account;
 
+    if ((req.session.account))
+    {
+        logged_account = JSON.parse(req.session.account).account;
+    }
+
+    if (req.method == 'POST') {
+        var post_data = '';
+        req.on('data', function (data)
+        {
+            post_data += data;
+        });
+        req.on('end', function ()
+        {
+            var json_data = JSON.parse(post_data);
+
+            var cart = json_data["cart_items"];
+            res.render('Cart', {account: logged_account, cart: cart});
+        });
+    }
+});
 router.post('/showMenus', function(req, res)
 {
 
@@ -173,7 +207,7 @@ router.post('/showMenus', function(req, res)
         req.on('end', function ()
         {
             var json_data = JSON.parse(post_data);
-            console.log(json_data["restaurant_id"]);
+
 
             var virtual_menu = new menu.Menu();
             virtual_menu.getMenuByRestaurantId(json_data["restaurant_id"], function (err, found_menus)
@@ -187,7 +221,7 @@ router.post('/showMenus', function(req, res)
 
 router.post('/showMenuItems', function(req, res)
 {
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+
     var logged_account;
 
     if ((req.session.account))
@@ -204,12 +238,12 @@ router.post('/showMenuItems', function(req, res)
         req.on('end', function ()
         {
             var json_data = JSON.parse(post_data);
-            console.log(json_data["menu_id"]);
+
 
             var virtual_menu_item = new menu_item.MenuItem();
             virtual_menu_item.getMenuItemByMenuId(json_data["menu_id"], function (err, found_menu_items)
             {
-                console.log(found_menu_items);
+
                 res.render('showMenuItems', {account: logged_account, menu_items: found_menu_items});
             });
         });

@@ -45,16 +45,14 @@ header
                 nav
                     ul
                         li
+                            a#btnRestaurant(onClick="listRestaurant();") Restaurant
+                        li
                             a#btnModifyAccount(onClick="modifyAccount();") Modify Account
                         li
                             a(href="/disconnect") Disconnect
             when 4
                 nav
                     ul
-                        li
-                            a#btnDemandeLivraison(onClick="demandeLivraison();") Demande de livraison
-                        li
-                            a#btnModifyAccount(onClick="modifyAccount();") Modify Account
                         li
                             a(href="/disconnect") Disconnect
             default

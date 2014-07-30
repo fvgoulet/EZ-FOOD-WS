@@ -4,7 +4,10 @@ var restaurant = require('../public/Utilities/Restaurant');
 var menu = require('../public/Utilities/Menu');
 var menu_item = require('../public/Utilities/MenuItem');
 var order = require('../public/Utilities/Order');
+<<<<<<< Updated upstream
+=======
 var mail_sender = require('../public/Utilities/MailSender');
+>>>>>>> Stashed changes
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -91,16 +94,30 @@ router.post('/checkout', function(req, res)
             var new_order = new order.Order();
 
             new_order.setClientId(logged_account._id);
+<<<<<<< Updated upstream
+=======
             if("user_defined" == json_data["delivery_type"])
             {
                 new_order.setDeliveryTime(json_data["delivery_date_time"]);
             }
+>>>>>>> Stashed changes
             json_data["cart_items"].forEach(function(cart_item)
             {
                 new_order.addItem(cart_item["item_id"], cart_item["item_quantity"]);
             });
 
 
+<<<<<<< Updated upstream
+            new_order.save(function(err)
+            {
+                if ( err ) return console.error( err );
+                var virtual_restaurant = new restaurant.Restaurant();
+                virtual_restaurant.getAllRestaurants(function (err, found_restaurants)
+                {
+                    var cart = [];
+                    res.render('index', {account: logged_account, restaurants: found_restaurants, cart: cart});
+                });
+=======
 
             new_order.save(function(err)
             {
@@ -123,6 +140,7 @@ router.post('/checkout', function(req, res)
                 });
                 content = content + "\nThat make a total of : " + total_price + "$.\n"
                 mail_sender.sendMail(client_name, client_email, subject, content);
+>>>>>>> Stashed changes
             });
 
         });
@@ -147,12 +165,22 @@ router.post('/addItemToCart', function(req, res)
         req.on('end', function ()
         {
             var json_data = JSON.parse(post_data);
+<<<<<<< Updated upstream
+            console.log(json_data["item_id"]);
+=======
 
+>>>>>>> Stashed changes
 
             var virtual_menu_item = new menu_item.MenuItem();
             virtual_menu_item.getMenuItemById(json_data["item_id"], function (err, found_menu_item)
             {
+<<<<<<< Updated upstream
+                console.log(found_menu_item);
+                console.log("iciiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+                console.log(json_data["cart_items"]);
+=======
 
+>>>>>>> Stashed changes
                 var cart = json_data["cart_items"];
 
 
@@ -165,6 +193,9 @@ router.post('/addItemToCart', function(req, res)
         });
     }
 });
+<<<<<<< Updated upstream
+
+=======
 router.post('/updateCart', function(req, res)
 {
     var logged_account;
@@ -189,6 +220,7 @@ router.post('/updateCart', function(req, res)
         });
     }
 });
+>>>>>>> Stashed changes
 router.post('/showMenus', function(req, res)
 {
 
@@ -208,7 +240,11 @@ router.post('/showMenus', function(req, res)
         req.on('end', function ()
         {
             var json_data = JSON.parse(post_data);
+<<<<<<< Updated upstream
+            console.log(json_data["restaurant_id"]);
+=======
 
+>>>>>>> Stashed changes
 
             var virtual_menu = new menu.Menu();
             virtual_menu.getMenuByRestaurantId(json_data["restaurant_id"], function (err, found_menus)
@@ -222,7 +258,11 @@ router.post('/showMenus', function(req, res)
 
 router.post('/showMenuItems', function(req, res)
 {
+<<<<<<< Updated upstream
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+=======
 
+>>>>>>> Stashed changes
     var logged_account;
 
     if ((req.session.account))
@@ -239,12 +279,20 @@ router.post('/showMenuItems', function(req, res)
         req.on('end', function ()
         {
             var json_data = JSON.parse(post_data);
+<<<<<<< Updated upstream
+            console.log(json_data["menu_id"]);
+=======
 
+>>>>>>> Stashed changes
 
             var virtual_menu_item = new menu_item.MenuItem();
             virtual_menu_item.getMenuItemByMenuId(json_data["menu_id"], function (err, found_menu_items)
             {
+<<<<<<< Updated upstream
+                console.log(found_menu_items);
+=======
 
+>>>>>>> Stashed changes
                 res.render('showMenuItems', {account: logged_account, menu_items: found_menu_items});
             });
         });

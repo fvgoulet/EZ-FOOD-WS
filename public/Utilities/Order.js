@@ -6,6 +6,7 @@ var mongoose = require( 'mongoose' );
 schema = mongoose.Schema({
     client_id : String,
     restaurant_id : String,
+    delivery_address_name : String,
     order_timestamp : { type : Date, default: Date.now },
     delivery_time: { type : Date, default: Date.now },
     items : [{item_id:String, quantity:Number}],
@@ -39,7 +40,10 @@ function Order()
     {
         this.order.client_id = id;
     };
-
+    this.setDeliveryAddressName = function(name)
+    {
+        this.order.delivery_address_name = name;
+    };
     this.setRestaurantId = function(id)
     {
         this.order.restaurant_id = id;

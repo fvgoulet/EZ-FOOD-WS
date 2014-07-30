@@ -45,10 +45,27 @@ function Account()
 {
     this.account = new account_model();
 
+
+    this.addDeliveryAddress = function(name, civicNo, apartment, street, city, province, zipCode)
+    {
+        var address = this.getAddressByName(name);
+        if(null == address)
+        {
+            address = {};
+            address['name'] = name;
+            address['civicNo'] = civicNo;
+            address['apartment'] = apartment;
+            address['street'] = street;
+            address['city'] = city;
+            address['province'] = province;
+            address['zipCode'] = zipCode;
+
+            this.account.deliveryAddresses.push(address);
+        }
+    };
+
     this.save = function()
     {
-        console.log('Save Account.');
-        console.log(this.account);
         this.account.save(function(err)
         {
            console.log('Account saved.');
@@ -58,6 +75,19 @@ function Account()
            }
         });
         return true;
+    };
+
+    this.getAddressByName = function(name)
+    {
+        for(var x=0; x < this.account.deliveryAddresses.length; x++)
+        {
+            if (this.account.deliveryAddresses[x].name == name)
+            {
+                console.log("foundddddddddddddddddddddddddddddddddd");
+                return this.account.deliveryAddresses[x];
+            }
+        }
+        return null;
     };
 
     this.getAccount = function(username, password, callback)//function ( err, found_account )

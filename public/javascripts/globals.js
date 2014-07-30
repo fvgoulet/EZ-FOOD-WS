@@ -9,6 +9,13 @@ $(document).ready(function()
 
 
 // Functions =============================================================
+
+
+function showAddNewAddress()
+{
+    modalVisbility(document.getElementById('confirmationCommandModal'));
+    modalVisbility(document.getElementById('addNewAddress'));
+}
 function toggleDeleveryTimePickerVisibility(){
     var modal = document.getElementById('delevery_time_picker');
     modalVisbility(modal);
@@ -84,6 +91,11 @@ function checkout()
         xmlhttp.open("POST", "/checkout", true);
         var query = {};
         query["cart_items"] = item_array;
+        var select = document.getElementById("address");
+        var selected_address = select.options[select.selectedIndex].text;
+
+        query["selected_address"] = selected_address;
+
         if ("user_defined" == delivery_type) {
             query["delivery_type"] = "user_defined";
             query["delivery_date_time"] = document.getElementsByName("date_time_picker")[0].value;
@@ -100,7 +112,40 @@ function checkout()
     }
 
 }
+function addNewAddress()
+{
+    var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    // Callback on response.e
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            //document.getElementById("cart").innerHTML = xmlhttp.responseText;
+            modalVisbility(document.getElementById('addNewAddress'));
+            document.getElementById("cart").innerHTML = xmlhttp.responseText;
+            modalVisbility(document.getElementById('confirmationCommandModal'));
+        }
+    };
 
+    xmlhttp.open("POST", "/addNewAddress", true);
+    var query = {};
+    query["address_name"] = document.getElementById('name').value;
+    query["address_civicNumber"] = document.getElementById('civicNumber').value;
+    query["address_appNumber"] = document.getElementById('appNumber').value;
+    query["address_street"] = document.getElementById('street').value;
+    query["address_city"] = document.getElementById('city').value;
+    query["address_province"] = document.getElementById('province').value;
+    query["address_zipCode"] = document.getElementById('zipCode').value;
+
+
+
+    xmlhttp.send(JSON.stringify(query));
+
+}
 function addItemToCart(item_id)
 {
     var node_list = document.getElementsByName("cart_item");

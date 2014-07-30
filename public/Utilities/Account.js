@@ -5,6 +5,7 @@ var mongoose = require( 'mongoose' );
 general_schema = mongoose.Schema({
     username : String,
     password: String,
+    deliveryAddresses : [mongoose.Schema.Types.Mixed],
     category: Number,
     firstName: String,
     lastName: String,
@@ -22,6 +23,7 @@ general_schema = mongoose.Schema({
 restaurateur_schema = mongoose.Schema({
     username : String,
     password: String,
+    deliveryAddresses : [mongoose.Schema.Types.Mixed],
     category: Number,
     firstName: String,
     lastName: String,
@@ -42,8 +44,6 @@ var account_model = mongoose.model( 'accounts', general_schema , 'accounts');
 function Account()
 {
     this.account = new account_model();
-
-
 
     this.save = function()
     {

@@ -86,7 +86,10 @@ if cart != null
             div#delevery_time_picker.hidden
                 | Select the date and time :
                 input(type="datetime-local", name="date_time_picker", value="#{moment(Date.now()).format('YYYY-MM-DDThh:mm:ss')}", min="#{moment(Date.now()).format('YYYY-MM-DDThh:mm:ss')}")
-
+            h3 Choose the delivery address :
+            select(name="address") Address :
+            button(type='button') Add new address
+            br
             button(type='button', onClick="checkout();confirmationCommandModal();") Gimme that Food !
             button(type='button', onClick="confirmationCommandModal();") Nop
 

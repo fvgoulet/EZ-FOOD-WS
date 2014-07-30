@@ -18,23 +18,43 @@ block content
                     li.restaurantLink
                         h4 #{restaurants[x].name}
                         a(onclick="manageMenu('#{restaurants[x]._id}');")
-                            img(src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200")
+                            - var file_exists = fs_module.existsSync(__dirname + '/../public/RestaurantsRessources/' + restaurants[x]._id +'/restaurant.jpg')
+                            if file_exists
+                                img(id="#{restaurants[x]._id}", src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200")
+                            else
+                                img(id="#{restaurants[x]._id}", src="RestaurantsRessources/default.jpg", height="200", width="200")
+
             else if account_category == 3
                 - for (var x = 0; x < restaurants.length ; x++)
                     li.restaurantLink
                         h4 #{restaurants[x].name}
                         a(onclick="showMenus('#{restaurants[x]._id}');")
-                            img(id="#{restaurants[x]._id}", src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200")
+
+                            - var file_exists = fs_module.existsSync(__dirname + '/../public/RestaurantsRessources/' + restaurants[x]._id +'/restaurant.jpg')
+                            if file_exists
+                                img(id="#{restaurants[x]._id}", src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200")
+                            else
+                                img(id="#{restaurants[x]._id}", src="RestaurantsRessources/default.jpg", height="200", width="200")
+
             else if account_category == 4
                 - for (var x = 0; x < restaurants.length ; x++)
                     li.restaurantLink
                         h4 #{restaurants[x].name}
-                        img(id="#{restaurants[x]._id}", src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200")
+                        - var file_exists = fs_module.existsSync(__dirname + '/../public/RestaurantsRessources/' + restaurants[x]._id +'/restaurant.jpg')
+                        if file_exists
+                            img(id="#{restaurants[x]._id}", src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200")
+                        else
+                            img(id="#{restaurants[x]._id}", src="RestaurantsRessources/default.jpg", height="200", width="200")
+
         else
             - for (var x = 0; x < restaurants.length ; x++)
                 li.restaurantLink
                     h4 #{restaurants[x].name}
-                    img(id="#{restaurants[x]._id}", src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200")
+                    - var file_exists = fs_module.existsSync(__dirname + '/../public/RestaurantsRessources/' + restaurants[x]._id +'/restaurant.jpg')
+                    if file_exists
+                        img(id="#{restaurants[x]._id}", src="RestaurantsRessources/#{restaurants[x]._id}/restaurant.jpg", height="200", width="200")
+                    else
+                        img(id="#{restaurants[x]._id}", src="RestaurantsRessources/default.jpg", height="200", width="200")
 
     div#cart
         include Cart

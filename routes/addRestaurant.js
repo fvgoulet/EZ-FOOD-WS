@@ -72,17 +72,19 @@ router.post('/confirmed', function(req, res) {
         new_Restaurant.getRestaurantByName(new_Restaurant.getName(), function(err, found_restaurant)
         {
             new_Restaurant.setRestaurant(found_restaurant);
-            fs.readFile(req.files.displayImage.path, function (err, data) {
-                // ...
-                var newPath = "./public/RestaurantsRessources/" + new_Restaurant.getId() + "/restaurant.jpg";//new_Restaurant.getId()
-                mkdirp(getDirName(newPath));
-                console.log(newPath);
-                fs.writeFile(newPath, data, function (err) {
-                    console.log("erreur:");
-                    console.log(err);
+            if(req.files.displayImage) {
+                fs.readFile(req.files.displayImage.path, function (err, data) {
 
+                    var newPath = "./public/RestaurantsRessources/" + new_Restaurant.getId() + "/restaurant.jpg";//new_Restaurant.getId()
+                    mkdirp(getDirName(newPath));
+                    console.log(newPath);
+                    fs.writeFile(newPath, data, function (err) {
+                        console.log("erreur:");
+                        console.log(err);
+
+                    });
                 });
-            });
+            }
             res.redirect('/');
         });
 

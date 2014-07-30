@@ -24,11 +24,11 @@ router.get('/', function(req, res) {
 
     ///////////////////////////////////////////
 
-    var item_1 = {item_name:"poutine", item_price:"1.23", item_id:"0123", item_quantity:"0"};
-    var item_2 = {item_name:"poutine2", item_price:"1.23", item_id:"0123", item_quantity:"0"};
-    var item_3 = {item_name:"poutine3", item_price:"1.23", item_id:"0123", item_quantity:"0"};
-    var item_4 = {item_name:"poutine4", item_price:"1.23", item_id:"0123", item_quantity:"0"};
     var cart = [];
+    if(req.session.cart)
+    {
+        cart = req.session.cart;
+    }
     //////////////////
     if(account) {
         if (1 == account.category)
@@ -100,11 +100,7 @@ router.post('/checkout', function(req, res)
                 new_order.addItem(cart_item["item_id"], cart_item["item_quantity"]);
             });
             new_order.setStatus(1);
-            //new_order.setRestaurantId()
-            console.log(json_data["cart_items"]);
-            console.log(json_data["cart_items"][0]);
-            console.log(json_data["cart_items"][1]);
-
+            new_order.setRestaurantId(req.session.actual_restaurant_id)
 
             new_order.save(function(err)
             {
@@ -162,7 +158,7 @@ router.post('/addItemToCart', function(req, res)
 
                 cart.push({item_name:found_menu_item.name, item_price:found_menu_item.price, item_id:found_menu_item._id, item_quantity:"1"});
 
-
+                req.session.cart = cart;
                 res.render('Cart', {account: logged_account, cart: cart});
             });
 
@@ -180,6 +176,8 @@ router.post('/updateCart', function(req, res)
 
     if (req.method == 'POST') {
         var post_data = '';
+
+
         req.on('data', function (data)
         {
             post_data += data;
@@ -189,6 +187,14 @@ router.post('/updateCart', function(req, res)
             var json_data = JSON.parse(post_data);
 
             var cart = json_data["cart_items"];
+            console.log("iciiiiiiiiiiiiiii");
+            console.log(cart);
+            if( cart.length == 0)
+            {
+                console.log("To nullllllllllllllllll");
+                req.session.actual_restaurant_id = null;
+            }
+            req.session.cart = cart;
             res.render('Cart', {account: logged_account, cart: cart});
         });
     }
@@ -212,13 +218,16 @@ router.post('/showMenus', function(req, res)
         req.on('end', function ()
         {
             var json_data = JSON.parse(post_data);
+            console.log("22222222222222");
+            console.log(req.session.actual_restaurant_id);
+            if((req.session.actual_restaurant_id == null)||(json_data["restaurant_id"] == req.session.actual_restaurant_id)) {
 
-
-            var virtual_menu = new menu.Menu();
-            virtual_menu.getMenuByRestaurantId(json_data["restaurant_id"], function (err, found_menus)
-            {
-                res.render('showMenus', {account: logged_account, menus: found_menus});
-            });
+                req.session.actual_restaurant_id = json_data["restaurant_id"];
+                var virtual_menu = new menu.Menu();
+                virtual_menu.getMenuByRestaurantId(json_data["restaurant_id"], function (err, found_menus) {
+                    res.render('showMenus', {account: logged_account, menus: found_menus});
+                });
+            }
         });
     }
 });
@@ -244,13 +253,14 @@ router.post('/showMenuItems', function(req, res)
         {
             var json_data = JSON.parse(post_data);
 
+                var virtual_menu_item = new menu_item.MenuItem();
+                virtual_menu_item.getMenuItemByMenuId(json_data["menu_id"], function (err, found_menu_items)
+                {
 
-            var virtual_menu_item = new menu_item.MenuItem();
-            virtual_menu_item.getMenuItemByMenuId(json_data["menu_id"], function (err, found_menu_items)
-            {
+                    res.render('showMenuItems', {account: logged_account, menu_items: found_menu_items});
+                });
 
-                res.render('showMenuItems', {account: logged_account, menu_items: found_menu_items});
-            });
+
         });
     }
 });

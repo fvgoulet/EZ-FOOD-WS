@@ -20,8 +20,15 @@ function closeConfirmation(){
 }
 
 function confirmationCommandModal(){
-    var modal = document.getElementById('confirmationCommandModal');
-    modalVisbility(modal);
+    var node_list = document.getElementsByName("cart_item");
+
+    if(node_list.length > 0) {
+        var modal = document.getElementById('confirmationCommandModal');
+        modalVisbility(modal);
+    }
+    else{
+        alert("Your cart is empty !!!");
+    }
 }
 
 function modalVisbility(modal){
@@ -30,26 +37,10 @@ function modalVisbility(modal){
 
 function checkout()
 {
-    var delivery_time_radio_button = document.getElementsByName("delivery_time");
-
-    var delivery_type = "unknown";
-
-    for(var i = 0; i < delivery_time_radio_button.length; i++)
-    {
-        if(delivery_time_radio_button[i].checked)
-        {
-            delivery_type = delivery_time_radio_button[i].value;
-        }
-    }
-
-
-
     var node_list = document.getElementsByName("cart_item");
 
-    var i;
-
     var item_array = [];
-    for (i = 0; i < node_list.length; i++) {
+    for (var i = 0; i < node_list.length; i++) {
         var item = {};
         item["item_id"] = node_list[i].getAttribute("item_id");
         item["item_quantity"] = node_list[i].getAttribute("item_quantity");
@@ -59,37 +50,54 @@ function checkout()
         item_array.push(item);
     }
 
-    var xmlhttp;
-    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp = new XMLHttpRequest();
-    }
-    else {// code for IE6, IE5
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    // Callback on response.e
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            var response = xmlhttp.responseText;
-            document.getElementById("confirmationNumber").innerHTML = response;
-            var modal = document.getElementById('orderConfirmedModal');
-            modalVisbility(modal);
-        }
-    };
+    if(item_array.length > 0) {
 
-    xmlhttp.open("POST", "/checkout", true);
-    var query = {};
-    query["cart_items"] = item_array;
-    if("user_defined" == delivery_type)
-    {
-        query["delivery_type"] = "user_defined";
-        query["delivery_date_time"] = document.getElementsByName("date_time_picker")[0].value;
+
+        var delivery_time_radio_button = document.getElementsByName("delivery_time");
+
+        var delivery_type = "unknown";
+
+        for (var i = 0; i < delivery_time_radio_button.length; i++) {
+            if (delivery_time_radio_button[i].checked) {
+                delivery_type = delivery_time_radio_button[i].value;
+            }
+        }
+
+
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        // Callback on response.e
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var response = xmlhttp.responseText;
+                document.getElementById("confirmationNumber").innerHTML = response;
+                var modal = document.getElementById('orderConfirmedModal');
+                modalVisbility(modal);
+            }
+        };
+
+        xmlhttp.open("POST", "/checkout", true);
+        var query = {};
+        query["cart_items"] = item_array;
+        if ("user_defined" == delivery_type) {
+            query["delivery_type"] = "user_defined";
+            query["delivery_date_time"] = document.getElementsByName("date_time_picker")[0].value;
+        }
+        else {
+            query["delivery_type"] = "ASAP";
+        }
+
+        xmlhttp.send(JSON.stringify(query));
     }
     else
     {
-        query["delivery_type"] = "ASAP";
+        alert("Your cart is empty !!");
     }
-
-    xmlhttp.send(JSON.stringify(query));
 
 }
 

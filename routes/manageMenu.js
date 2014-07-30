@@ -67,6 +67,8 @@ router.post('/createMenu', function(req, res)
         });
 
         req.on('end', function (){
+            var json_data = JSON.parse(post_data);
+
             console.log(json_data.restaurantId);
             var schemaRestaurant = new restaurant.Restaurant();
             schemaRestaurant.getRestaurantById(json_data.restaurantId,function(err, foundRestaurant)

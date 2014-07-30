@@ -160,6 +160,11 @@ function Restaurant()
     {
         return this.restaurant.zipCode;
     };
+    this.getAddress = function()
+    {
+        var compAdd = this.restaurant.civicNo + " " + this.restaurant.street + ", "+ this.restaurant.city + ", " + this.restaurant.province + ", " + this.restaurant.zipCode;
+        return compAdd;
+    }
 }
 
 module.exports.Restaurant = Restaurant;

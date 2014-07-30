@@ -8,6 +8,7 @@ $(document).ready(function()
 });
 
 
+
 // Functions =============================================================
 function toggleDeleveryTimePickerVisibility(){
     var modal = document.getElementById('delevery_time_picker');

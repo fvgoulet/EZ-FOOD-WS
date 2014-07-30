@@ -6,10 +6,7 @@ $(document).ready(function()
 
     //$('#btnSubmitModifications').on('click', validateAccountFields);
 });
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 
 // Functions =============================================================
 function toggleDeleveryTimePickerVisibility(){
@@ -17,25 +14,6 @@ function toggleDeleveryTimePickerVisibility(){
     modalVisbility(modal);
 }
 
-<<<<<<< Updated upstream
-// Functions =============================================================
-function confirmationCommandModal(){
-    var modal = document.getElementById('confirmationCommandModal');
-    modalVisbility(modal);
-}
-
-function modalVisbility(modal){
-    modal.style.visibility = (modal.style.visibility == "visible")?"hidden":"visible";
-}
-
-function checkout()
-{
-
-    var node_list = document.getElementsByName("cart_item");
-
-    var i;
-
-=======
 function closeConfirmation(){
     var modal = document.getElementById('orderConfirmedModal');
     modalVisbility(modal);
@@ -70,47 +48,11 @@ function checkout()
 
     var i;
 
->>>>>>> Stashed changes
     var item_array = [];
     for (i = 0; i < node_list.length; i++) {
         var item = {};
         item["item_id"] = node_list[i].getAttribute("item_id");
         item["item_quantity"] = node_list[i].getAttribute("item_quantity");
-<<<<<<< Updated upstream
-        //item["item_name"] = node_list[i].getAttribute("item_name");
-        //item["item_price"] = node_list[i].getAttribute("item_price");
-
-        item_array.push(item);
-    }
-
-    var xmlhttp;
-    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp = new XMLHttpRequest();
-    }
-    else {// code for IE6, IE5
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    // Callback on response.e
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            document.getElementById("content").innerHTML = xmlhttp.responseText;
-        }
-    };
-
-    xmlhttp.open("POST", "/checkout", true);
-    var query = {};
-    query["cart_items"] = item_array;
-    xmlhttp.send(JSON.stringify(query));
-
-}
-
-function addItemToCart(item_id)
-{
-    var node_list = document.getElementsByName("cart_item");
-
-    var i;
-
-=======
         item["item_name"] = node_list[i].getAttribute("item_name");
         item["item_price"] = node_list[i].getAttribute("item_price");
 
@@ -236,21 +178,10 @@ function updateQuantity(item_id, quantity)
 {
     var node_list = document.getElementsByName("cart_item");
     var i;
->>>>>>> Stashed changes
     var item_array = [];
     for (i = 0; i < node_list.length; i++)
     {
         var item = {};
-<<<<<<< Updated upstream
-        item["item_id"] = node_list[i].getAttribute("item_id");
-        item["item_quantity"] = node_list[i].getAttribute("item_quantity");
-        item["item_name"] = node_list[i].getAttribute("item_name");
-        item["item_price"] = node_list[i].getAttribute("item_price");
-
-        item_array.push(item);
-    }
-
-=======
 
         item["item_id"] = node_list[i].getAttribute("item_id");
         item["item_name"] = node_list[i].getAttribute("item_name");
@@ -268,7 +199,6 @@ function updateQuantity(item_id, quantity)
         item_array.push(item);
 
     }
->>>>>>> Stashed changes
 
     var xmlhttp;
     if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -284,20 +214,10 @@ function updateQuantity(item_id, quantity)
         }
     };
 
-<<<<<<< Updated upstream
-    xmlhttp.open("POST", "/addItemToCart", true);
-    var query = {};
-    query["item_id"] = item_id;
-    query["cart_items"] = item_array;
-
-    xmlhttp.send(JSON.stringify(query));
-
-=======
     xmlhttp.open("POST", "/updateCart", true);
     var query = {};
     query["cart_items"] = item_array;
     xmlhttp.send(JSON.stringify(query));
->>>>>>> Stashed changes
 }
 
 function toggleVisibilityCartContent()
@@ -366,6 +286,30 @@ function listRestaurant()
     };
 
     xmlhttp.open("GET","/listRestaurant",true);
+    xmlhttp.send();
+}
+
+function demandeLivraison()
+{
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    // Callback on response.e
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            document.getElementById("content").innerHTML = xmlhttp.responseText;
+        }
+    };
+
+    xmlhttp.open("GET","/demandeLivraison",true);
     xmlhttp.send();
 }
 
@@ -463,7 +407,6 @@ function showAddNewRestaurateur()
     xmlhttp.send();
 }
 
-
 function deleteRestaurant() {
     var e = document.getElementById("avalaibleRestaurant");
     var strRes = e.options[e.selectedIndex].text;
@@ -492,7 +435,7 @@ function deleteRestaurant() {
         }
     }
 }
-// Delete User
+
 function deleteUser()
 {
     var e = document.getElementById("avalaibleRestaurateur");
@@ -524,7 +467,6 @@ function deleteUser()
     }
 }
 
-// Delete User
 function modifyUser()
 {
     var e = document.getElementById("avalaibleRestaurateur");
@@ -553,7 +495,6 @@ function modifyUser()
     }
 }
 
-// Delete User
 function modifyAccount()
 {
     var xmlhttp;
@@ -579,7 +520,6 @@ function modifyAccount()
     xmlhttp.send();
 }
 
-// Delete User
 function addRestaurant()
 {
     var xmlhttp;
@@ -655,8 +595,7 @@ function createAccount()
     xmlhttp.send();
 }
 
-function addToSelectedRestaurants()
-{
+function addToSelectedRestaurants(){
     var available_restaurants = document.getElementById("available_restaurants");
     var selected_restaurants = document.getElementById("selected_restaurants");
     var new_option = document.createElement("option");
@@ -668,8 +607,7 @@ function addToSelectedRestaurants()
 
 }
 
-function deleteFromSelectedRestaurants()
-{
+function deleteFromSelectedRestaurants(){
     var available_restaurants = document.getElementById("available_restaurants");
     var selected_restaurants = document.getElementById("selected_restaurants");
     var new_option = document.createElement("option");

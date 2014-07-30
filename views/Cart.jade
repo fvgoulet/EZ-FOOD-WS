@@ -8,8 +8,6 @@ if cart != null
 
         div#cart_items
             ul(class="cart-items")
-<<<<<<< Updated upstream
-=======
                 table(width="100%")
                     col(width="60%")
                     col(width="20%")
@@ -24,18 +22,11 @@ if cart != null
                             h3 Item Price(Unit)
                         td
                             h3 Delete Item
->>>>>>> Stashed changes
                 - for (var x = 0; x < cart.length ; x++)
 
                     div(class="cart-item", name="cart_item", item_id="#{cart[x].item_id}", item_quantity="#{cart[x].item_quantity}",
                     item_name="#{cart[x].item_name}",item_price="#{cart[x].item_price}")
                         li
-<<<<<<< Updated upstream
-                            h4 #{cart[x].item_name}
-                            h4 #{cart[x].item_quantity}
-                            h4 #{cart[x].item_price} $
-                            h4 Delete
-=======
                             table(width="100%")
                                 col(width="60%")
                                 col(width="20%")
@@ -59,22 +50,10 @@ if cart != null
             p An e-mail will be send to you with your order informations.
 
             button(type='button', onClick="closeConfirmation();") Close
->>>>>>> Stashed changes
 
     div#confirmationCommandModal.modal
         div.modalHolder
             h2 Confirmation
-<<<<<<< Updated upstream
-            p Here is the summary of your command, do you confirm ?
-            - var total = 0;
-            - for (var x = 0; x < cart.length ; x++)
-                div(class="cart-item")
-                    li
-                        h4 #{cart[x].item_name}
-                        h4 #{cart[x].item_quantity}
-                        h4 #{cart[x].item_price} $
-                        - total = (cart[x].item_quantity * cart[x].item_price) + total
-=======
             p Here is the summary of your order, do you confirm ?
             - var total = 0;
             - for (var x = 0; x < cart.length ; x++)
@@ -94,19 +73,11 @@ if cart != null
                                     td
                                         h4 #{cart[x].item_price} $
                             - total = (cart[x].item_quantity * cart[x].item_price) + total
->>>>>>> Stashed changes
 
             h4 Ho lucky you ! You don't have to pay taxes this time ! :D
             h2 Total : #{total} $
 
             h3 Choose the delivery time :
-<<<<<<< Updated upstream
-            input(name="delivery_time", type="Radio", value="ASAP", checked)
-            | ASAP !
-            input(name="delivery_time", type="Radio", value="user_defined")
-            | Someday...
-            br
-=======
             input(name="delivery_time", type="Radio", value="ASAP", checked, onchange="toggleDeleveryTimePickerVisibility();")
             | ASAP !
             input(name="delivery_time", type="Radio", value="user_defined", onchange="toggleDeleveryTimePickerVisibility();")
@@ -116,7 +87,6 @@ if cart != null
                 | Select the date and time :
                 input(type="datetime-local", name="date_time_picker", value="#{moment(Date.now()).format('YYYY-MM-DDThh:mm:ss')}", min="#{moment(Date.now()).format('YYYY-MM-DDThh:mm:ss')}")
 
->>>>>>> Stashed changes
             button(type='button', onClick="checkout();confirmationCommandModal();") Gimme that Food !
             button(type='button', onClick="confirmationCommandModal();") Nop
 

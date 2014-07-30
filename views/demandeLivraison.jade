@@ -1,0 +1,12 @@
+//
+   Created by Gabriel on 2014-07-25.
+block content
+
+    h2 Demande de Livraison
+    br
+    div#AvailableDelivery
+        | Available deliveries :
+        select#avalaibleDeliveries
+            - for (var x = 0; x < orders.length ; x++)
+                option(etatCommande='#{orders[x].status}') #{orders[x].status}
+        button(type='button', onClick="acceptDelivery();") Accept

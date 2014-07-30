@@ -7,9 +7,7 @@ schema = mongoose.Schema({
     client_id : String,
     restaurant_id : String,
     order_timestamp : { type : Date, default: Date.now },
-
     delivery_time: { type : Date, default: Date.now },
-
     items : [{item_id:String, quantity:Number}],
     status : Number
 });
@@ -25,6 +23,7 @@ var order_model = mongoose.model( 'Orders', schema);
 
 function Order()
 {
+
     //Constructor
 
     this.order = new order_model();
@@ -45,12 +44,10 @@ function Order()
     {
         this.order.restaurant_id = id;
     };
-
     this.setDeliveryTime = function(time)
     {
         this.order.delivery_time = time;
     };
-
     this.addItem = function(item_id, item_quantity)
     {
         this.order.items.push({item_id:item_id, quantity:item_quantity});
@@ -69,7 +66,6 @@ function Order()
     {
         order_model.find( { address : address }, callback);
     };
-
 
     this.getId = function()
     {

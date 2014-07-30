@@ -119,7 +119,7 @@ router.post('/checkout', function(req, res)
                 json_data["cart_items"].forEach(function(cart_item)
                 {
                     content = content + cart_item["item_name"] + "    "+ cart_item["item_quantity"] + "    "+ cart_item["item_price"] + "$\n";
-                    total_price = total_price + (parseInt(cart_item["item_quantity"]) * parseInt(cart_item["item_price"]));
+                    total_price = total_price + (parseInt(cart_item["item_quantity"]) * parseFloat(cart_item["item_price"]).toFixed(2));
                 });
                 content = content + "\nThat make a total of : " + total_price + "$.\n"
                 mail_sender.sendMail(client_name, client_email, subject, content);

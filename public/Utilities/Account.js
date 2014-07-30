@@ -51,6 +51,8 @@ function Account()
         var address = this.getAddressByName(name);
         if(null == address)
         {
+            console.log("iciiiiiiiiiiiiiiiiiiiiiiiiiiii");
+            console.log(address);
             address = {};
             address['name'] = name;
             address['civicNo'] = civicNo;

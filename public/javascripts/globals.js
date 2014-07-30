@@ -126,7 +126,12 @@ function addNewAddress()
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             //document.getElementById("cart").innerHTML = xmlhttp.responseText;
             modalVisbility(document.getElementById('addNewAddress'));
+            var new_address_name = document.getElementById('name').value;
+
             document.getElementById("cart").innerHTML = xmlhttp.responseText;
+            var new_option = document.getElementById(new_address_name);
+
+            new_option.setAttribute("selected","selected");
             modalVisbility(document.getElementById('confirmationCommandModal'));
         }
     };

@@ -84,12 +84,9 @@ if cart != null
                         td ZIP Code *:
                         td
                             input(id='zipCode', name='userZipCode', type='text', placeholder='ZIP Code',class='form-control', required autofocus, autocomplete="off")
-                    tr
-                        td
-                            input#btnSubmitNewAddress(type="button", value="Add Address",class="btn btn-lg btn-primary btn-block", onclick="addNewAddress();")
-                        td
 
-
+                button(type='button', onClick="addNewAddress();") Add Address
+                button(type='button', onClick="showAddNewAddress();") Cancel
 
     div#confirmationCommandModal.modal
         div.modalHolder
@@ -130,7 +127,7 @@ if cart != null
             select#address(name="address") Address :
                 option Default
                 - for (var x = 0; x < account.deliveryAddresses.length ; x++)
-                    option #{account.deliveryAddresses[x].name}
+                    option(id="#{account.deliveryAddresses[x].name}") #{account.deliveryAddresses[x].name}
             button(type='button', onclick="showAddNewAddress();") Add new address
             br
             button(type='button', onClick="checkout();confirmationCommandModal();") Gimme that Food !

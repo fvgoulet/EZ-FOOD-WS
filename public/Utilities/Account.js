@@ -1,6 +1,14 @@
 /**
  * Created by Alex on 2014-06-11.
  */
+
+
+// Differents categories
+// admin - 0
+// entrepreneur -1
+// restaurateur -2
+// client - 3
+// livreur - 4
 var mongoose = require( 'mongoose' );
 general_schema = mongoose.Schema({
     username : String,

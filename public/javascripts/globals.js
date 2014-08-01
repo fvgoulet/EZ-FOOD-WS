@@ -459,7 +459,7 @@ function showAddNewRestaurateur()
             document.getElementById("content").innerHTML = xmlhttp.responseText;
 
         }
-    }
+    };
 
     xmlhttp.open("GET","/manageRestaurateur/addNewRestaurateur",true);
     xmlhttp.send();
@@ -572,7 +572,7 @@ function modifyAccount()
             document.getElementById("content").innerHTML = xmlhttp.responseText;
 
         }
-    }
+    };
 
     xmlhttp.open("GET","/modifyAccount",true);
     xmlhttp.send();
@@ -597,7 +597,7 @@ function addRestaurant()
             document.getElementById("content").innerHTML = xmlhttp.responseText;
 
         }
-    }
+    };
 
     xmlhttp.open("GET","/addRestaurant",true);
     xmlhttp.send();
@@ -622,7 +622,7 @@ function signIn()
             document.getElementById("content").innerHTML = xmlhttp.responseText;
 
         }
-    }
+    };
 
     xmlhttp.open("GET","/signIn",true);
     xmlhttp.send();
@@ -647,7 +647,7 @@ function createAccount()
             document.getElementById("content").innerHTML = xmlhttp.responseText;
 
         }
-    }
+    };
 
     xmlhttp.open("GET","/createAccount",true);
     xmlhttp.send();

@@ -62,6 +62,11 @@ function Order()
         this.order.status = Number;
     };
 
+    this.getRelatedOrdersByRestaurant = function(restaurateurId, callback)
+    {
+        order_model.find({restaurant_id : restaurateurId}, callback)
+    };
+
     this.getOrdersByStatus = function(status, callback) //where callback = function ( err, found_account )
     {
         order_model.find( { status : status }, callback);

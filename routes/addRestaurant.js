@@ -40,7 +40,7 @@ router.post('/confirmRestaurant', function(req, res) {
         'city': req.body.city,
         'province': req.body.province,
         'zipCode': req.body.zipCode
-    }
+    };
 
     res.render('confirmRestaurant', newRestaurant );
 });
@@ -105,7 +105,7 @@ router.post('/', function(req, res) {
         'city': req.body.city,
         'province': req.body.province,
         'zipCode': req.body.zipCode
-    }
+    };
 
     res.render('addRestaurant', newRestaurant );
 

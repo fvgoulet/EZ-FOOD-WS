@@ -58,10 +58,10 @@ router.get('/', function(req, res)
                                 break;
                             }
                         }
+                    });
+                    console.log(orders);
 
-                        console.log(orders);
-
-                        res.render('ordersManagement',
+                    res.render('ordersManagement',
                         {
                             account: actual_account,
                             pendingOrders: pendingOrders,
@@ -69,7 +69,6 @@ router.get('/', function(req, res)
                             readyOrders: readyOrders,
                             deliveredOrders: deliveredOrders
                         });
-                    });
                 });
             });
         }

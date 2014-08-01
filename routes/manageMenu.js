@@ -38,13 +38,13 @@ router.post('/', function(req, res)
                                 schemaMenu.getMenuByRestaurantId(foundRestaurant._id, function(err, foundMenus){
                                     if (err) return console.error(err);
                                     var menus = [];
-                                    console.log(foundMenus);
+
                                     if(foundMenus != null && foundMenus != []){
                                         foundMenus.forEach(function(menu) {
                                             menus.push(menu);
                                         });
                                     }
-                                    console.log(menus);
+
                                     res.render('manageMenu', {menus: menus, restaurant: foundRestaurant});
                                 });
                             }
@@ -69,7 +69,7 @@ router.post('/createMenu', function(req, res)
         req.on('end', function (){
             var json_data = JSON.parse(post_data);
 
-            console.log(json_data.restaurantId);
+
             var schemaRestaurant = new restaurant.Restaurant();
             schemaRestaurant.getRestaurantById(json_data.restaurantId,function(err, foundRestaurant)
             {
@@ -98,7 +98,6 @@ router.post('/confirmedMenuCreation', function(req, res)
     schemaMenu.save(function(err){
         if ( err ) return console.error( err );
 
-        if ( err ) return console.error( err );
         var menuId = schemaMenu.getId();
 
         var menuItems = [];

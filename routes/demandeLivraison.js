@@ -17,23 +17,20 @@ router.get('/', function(req, res) {
         var restaurantsID = [];
         foundOrders.forEach(function(Order){
             if(restaurantsID.indexOf(Order.restaurant_id)==-1){
-                console.log(Order.restaurant_id);
+
                 restaurantsID.push(Order.restaurant_id);
             }
         });
-        console.log(restaurantsID);
+
         var listRestaurant = [];
         restaurantsID.forEach(function(id){
             schemaRestaurant.getRestaurantById(id, function(err, foundRestaurant){
                 if ( err ) return console.error( err );
-                console.log(foundRestaurant);
+
                 listRestaurant.push(foundRestaurant);
-                console.log("dans la boucle");
-                console.log(listRestaurant);
+
             });
         });
-        console.log("a lextereieur");
-        console.log(listRestaurant);
     });
 
 

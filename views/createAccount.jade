@@ -4,7 +4,7 @@ block content
         legend Account Creation
         div#mandatoy.warningCreateAccount Fields with an "*" are mandatory
         div#error.warningCreateAccount
-        form(name="account", action="/createAccount/confirmed", method="post")
+        form(name="account" ,id="account" , action="/createAccount/confirmed", method="post")
             if username
                 table
                     tr
@@ -137,4 +137,4 @@ block content
             div#accountInformations
 
             button(onclick="modalVisbility(document.getElementById('confirmationCreateAccountModal'));") Edit
-            button(onclick="document.account.submit();") Confirm
+            button(onclick="document.getElementById('account').submit();") Confirm

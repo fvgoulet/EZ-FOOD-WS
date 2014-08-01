@@ -234,8 +234,7 @@ router.post('/addNewAddress', function(req, res)
                 if ( err ) return console.error( err );
                 if(null != found_account)
                 {
-                    console.log('Found account : ');
-                    console.log(found_account);
+
                     actual_account.setAccount(found_account);
                 }
 
@@ -276,8 +275,7 @@ router.post('/showMenus', function(req, res)
         req.on('end', function ()
         {
             var json_data = JSON.parse(post_data);
-            console.log("22222222222222");
-            console.log(req.session.actual_restaurant_id);
+
             if((req.session.actual_restaurant_id == null)||(json_data["restaurant_id"] == req.session.actual_restaurant_id)) {
 
                 req.session.actual_restaurant_id = json_data["restaurant_id"];

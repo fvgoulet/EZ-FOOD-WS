@@ -320,11 +320,10 @@ router.post('/confirmedModifications', function(req, res)
                         associated_restaurant.setRestaurant(restaurant_found);
                     }
                     associated_restaurant.setRestaurateurId(restaurateur_account.getId());
-                    console.log(restaurateur_account.getId());
-                    console.log(associated_restaurant.getName());
+
                     associated_restaurant.save(function(err)
                     {
-                        console.log("SAVED");
+
                         if (err) return console.error(err);
                     });
                 });
@@ -346,7 +345,7 @@ router.post('/confirmedModifications', function(req, res)
         {
             found_restaurants.forEach(function (restaurant)
             {
-                console.log(" DELETE USERRRRRRRR");
+
                 restaurant.restaurateur_id = null;
 
                 restaurant.save();

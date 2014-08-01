@@ -24,8 +24,6 @@ router.post('/validate', function(req, res) {
         if ( err ) return console.error( err );
         if(null != found_account)
         {
-            console.log('Found account : ');
-            console.log(found_account);
             actual_account.setAccount(found_account);
             req.session.account = JSON.stringify(actual_account);
         }

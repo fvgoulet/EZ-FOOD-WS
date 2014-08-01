@@ -7,6 +7,9 @@ var account = require('../public/Utilities/Account');
 var order = require('../public/Utilities/Order');
 var restaurant = require('../public/Utilities/Restaurant');
 
+/*
+ * GET .
+ */
 router.get('/', function(req, res) {
     var waitingForDelivery = 3;
     var schemaOrder = new order.Order();

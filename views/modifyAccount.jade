@@ -1,9 +1,9 @@
-
 block content
 
     fieldset
         legend Modify Account
-        form(name="account", action="/modifyAccount/confirmed", method="post")
+        form(name="account", id="account", action="/modifyAccount/confirmed", method="post")
+
             table
                 input(name='username', type='hidden', value='#{account.username}')
                 tr
@@ -56,7 +56,7 @@ block content
                         input(name='userZipCode',id='userZipCode', type='text', placeholder='ZIP Code', value='#{account.zipCode}',class='form-control', required autofocus, autocomplete="off")
                 tr
                     td
-                        input#btnSubmitModifications(type="button", value="Modify Account", onclick="showAccountConfirmation();")
+                        input(type="button", value="Modify Account", onclick="showAccountConfirmation();")
                     td
 
     div#confirmationCreateAccountModal.modal
@@ -65,4 +65,4 @@ block content
             p Here is the summary of your account information :
             div#accountInformations
             button(onclick="modalVisbility(document.getElementById('confirmationCreateAccountModal'));") Edit
-            button(onclick="document.account.submit();") Confirm
+            button(onclick="document.getElementById('account').submit();") Confirm

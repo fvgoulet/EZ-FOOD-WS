@@ -77,7 +77,7 @@ router.post('/confirmed', function(req, res) {
 
                     var newPath = "./public/RestaurantsRessources/" + new_Restaurant.getId() + "/restaurant.jpg";//new_Restaurant.getId()
                     mkdirp(getDirName(newPath));
-                    console.log(newPath);
+
                     fs.writeFile(newPath, data, function (err) {
                         console.log("erreur:");
                         console.log(err);

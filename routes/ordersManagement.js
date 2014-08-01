@@ -15,10 +15,10 @@ router.get('/', function(req, res)
     {
         actual_account = JSON.parse(req.session.account).account;
 
-        if(actual_account.category === 3)
+        if(actual_account.category === 2)
         {
             var schemaRestaurant = new restaurant.Restaurant();
-            schemaRestaurant.getRestaurantsByRestaurateurId(actual_account._id, function(err, restaurant)
+            schemaRestaurant.getRestaurantsByRestaurateurId( actual_account._id, function(err, restaurant)
             {
                 if(err) {
                     console.error("Error in Orders getRestaurantsByRestaurateurId: ", err);
@@ -72,6 +72,10 @@ router.get('/', function(req, res)
                 });
             });
         }
+        else
+        {
+            res.redirect('index', req);
+        }
     }
 });
 
@@ -93,8 +97,5 @@ router.delete('/deleteOrder/:id', function(req, res)
     });
 });
 */
-
-
-
 
 module.exports = router;

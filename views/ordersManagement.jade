@@ -1,0 +1,79 @@
+
+block content
+    script(type='text/javascript', src='/javascripts/clientOrdersManagement.js')
+
+    h2 Orders Management
+    br
+    div#ordersPending
+        h3 Pending Orders
+        table
+            thead
+                th OrderId
+                th ClientId
+                th Delivery Address
+                th Reception
+                th Due
+                th Items
+                th Status
+                th Modify/Delete
+            tbody
+                tr
+                    each order, i in pendingOrders
+                        td #{order._id}
+                        td #{order.client_id}
+                        td #{order.delivery_address_name}
+                        td #{order.order_timestamp}
+                        td #{order.delivery_time}
+                        td
+                            fieldset
+                                select#inputOrderStatus
+                                    option(value='1', selected) Pending
+                                    option(value='2') In Progress
+                                    option(value='3') Ready
+                                    option(value='4') Delivered
+                        td
+                            each item, i in order.items
+                                #{item.item_id} X #{item.quantity} <br>
+                        td
+                            button#updateOrder Update
+                            button#deleteOrder Delete
+
+
+    br
+    div#ordersInPreparation
+        h3 Orders In Preparation
+        table
+            thead
+                th ClientId
+                th Delivery Address
+                th Reception
+                th Due
+                th Items
+                th Modify/Delete
+            tbody
+
+    br
+    div#ordersReady
+        h3 Orders Ready
+        table
+            thead
+                th ClientId
+                th Delivery Address
+                th Reception
+                th Due
+                th Items
+                th Modify/Delete
+            tbody
+
+    br
+    div#ordersDelivered
+        h3 Delivered Orders
+        table
+            thead
+                th ClientId
+                th Delivery Address
+                th Reception
+                th Due
+                th Items
+                th Modify/Delete
+            tbody

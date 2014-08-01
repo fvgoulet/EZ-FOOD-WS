@@ -6,7 +6,7 @@ block content
         p Please fill the fields to add the restaurateur.
         div#mandatoy.warningCreateAccount Fields with an "*" are mandatory
         div#error.warningCreateAccount
-        form(name="account", action="/manageRestaurateur/addNewRestaurateur/addUser", method="post")
+        form(name="account",id="account", action="/manageRestaurateur/addNewRestaurateur/addUser", method="post")
             table
 
                 tr
@@ -91,3 +91,9 @@ block content
             div#accountInformations
             button(onclick="modalVisbility(document.getElementById('confirmationCreateRestaurateurModal'));") Edit
             button(onclick="document.getElementById('account').submit();") Confirm
+
+    div#noRestaurant.modal
+        div.modalHolder
+            h2 Why no restaurant?
+            p This is just insulting...
+            button(onclick="modalVisbility(document.getElementById('noRestaurant'));showAccountConfirmation();") OK, I'm sorry

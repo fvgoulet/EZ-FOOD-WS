@@ -44,14 +44,7 @@ function validateAccountFields(event) {
     var select_restaurant = document.getElementById('selected_restaurants') ;
     var errorMessage = '';
 
-    if(select_restaurant)
-    {
-        var value = select_restaurant.value;
-        if(value == "")
-        {
-            alert("The account has been created, BUT you didn't assign a restaurant !");
-        }
-    }
+
     // Check if the format of all fields are okay.
     if(MIN_USERNAME_LENGTH > username.toString().length)
     {
@@ -87,8 +80,24 @@ function validateAccountFields(event) {
     }
     else
     {
+        if(select_restaurant)
+        {
+            var value = select_restaurant.value;
+            if(value == "")
+            {
+                modalVisbility(document.getElementById('noRestaurant'));
 
-        showAccountConfirmation();
+            }
+            else
+            {
+                showAccountConfirmation();
+            }
+        }
+        else
+        {
+            showAccountConfirmation();
+        }
+
 
     }
 }

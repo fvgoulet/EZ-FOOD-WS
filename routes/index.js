@@ -115,7 +115,7 @@ router.post('/checkout', function(req, res)
 
                 res.send(new_order.getId());
 
-                mail_sender = new mail_sender.MailSender();
+                var mailSender = new mail_sender.MailSender();
                 var client_name = logged_account.firstName + " " + logged_account.lastName;
                 var client_email = logged_account.email;
                 var subject = "EZ-Food : Your order has been passed !";
@@ -129,7 +129,7 @@ router.post('/checkout', function(req, res)
                     total_price = total_price + (parseInt(cart_item["item_quantity"]) * parseFloat(cart_item["item_price"]).toFixed(2));
                 });
                 content = content + "\nThat make a total of : " + total_price + "$.\n"
-                mail_sender.sendMail(client_name, client_email, subject, content);
+                mailSender.sendMail(client_name, client_email, subject, content);
             });
 
         });

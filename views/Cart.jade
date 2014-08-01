@@ -1,9 +1,8 @@
 if cart != null
     div#cart(class="cart")
         div#cart_header(class="cart-header", onclick="toggleVisibilityCartContent();")
-            h2(class="cart-header") Cart
-            h2(class="cart-header") Total :
-            h2(class="cart-header") $
+            h2(class="cart-header") Cart(Click Here To See your items !)
+
             button(class="cart-header", onclick="confirmationCommandModal();") Checkout
 
         div#cart_items
@@ -113,7 +112,13 @@ if cart != null
 
             h4 Ho lucky you ! You don't have to pay taxes this time ! :D
             h2 Total : #{total} $
-
+            h3 Choose the delivery address :
+            select#address(name="address") Address :
+                option Default
+                - for (var x = 0; x < account.deliveryAddresses.length ; x++)
+                    option(id="#{account.deliveryAddresses[x].name}") #{account.deliveryAddresses[x].name}
+            button(type='button', onclick="showAddNewAddress();") Add new address
+            br
             h3 Choose the delivery time :
             input(name="delivery_time", type="Radio", value="ASAP", checked, onchange="toggleDeleveryTimePickerVisibility();")
             | ASAP !
@@ -123,12 +128,6 @@ if cart != null
             div#delevery_time_picker.hidden
                 | Select the date and time :
                 input(type="datetime-local", name="date_time_picker", value="#{moment(Date.now()).format('YYYY-MM-DDThh:mm:ss')}", min="#{moment(Date.now()).format('YYYY-MM-DDThh:mm:ss')}")
-            h3 Choose the delivery address :
-            select#address(name="address") Address :
-                option Default
-                - for (var x = 0; x < account.deliveryAddresses.length ; x++)
-                    option(id="#{account.deliveryAddresses[x].name}") #{account.deliveryAddresses[x].name}
-            button(type='button', onclick="showAddNewAddress();") Add new address
             br
             button(type='button', onClick="checkout();confirmationCommandModal();") Gimme that Food !
             button(type='button', onClick="confirmationCommandModal();") Nop

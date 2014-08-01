@@ -65,7 +65,7 @@ block content
                             input(id='userZipCode', name='userZipCode', type='text', placeholder='ZIP Code', value='#{userZipCode}',class='form-control', required autofocus, autocomplete="off")
                     tr
                         td
-                            input#btnSubmitAccount(type="submit", value="Create Account",class="btn btn-lg btn-primary btn-block", onclick="validateAccountFields();", disabled)
+                            input#btnSubmitAccount(type="button", value="Create Account", onclick="validateAccountFields();showAccountConfirmation();", disabled)
                         td
             else
                 table

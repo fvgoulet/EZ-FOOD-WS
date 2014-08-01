@@ -125,8 +125,13 @@ function checkAccountExist()
 
 function showAccountConfirmation()
 {
-    var username = document.getElementById('username').value ;
-    var passwprd = document.getElementById('userPassword').value ;
+    var username = document.getElementById('username');
+    if(null != username)
+    {
+        username = username.value;
+    }
+
+    var password = document.getElementById('userPassword').value ;
     var firstName = document.getElementById('userFirstName').value ;
     var secondName = document.getElementById('userSecondName').value ;
     var birthDate = document.getElementById('userBirthDate').value ;
@@ -142,13 +147,17 @@ function showAccountConfirmation()
     var informations_div = document.getElementById('accountInformations');
     informations_div.innerHTML = "";
 
-    var info_paragraph = document.createElement('p');
-    info_paragraph.innerHTML = "Username : " + username;
-    informations_div.appendChild(info_paragraph);
+    if(null != username) {
+        var info_paragraph = document.createElement('p');
+        info_paragraph.innerHTML = "Username : " + username;
+        informations_div.appendChild(info_paragraph);
+    }
 
     info_paragraph = document.createElement('p');
-    info_paragraph.innerHTML = "Password : " + passwprd;
+    info_paragraph.innerHTML = "Password : " + password;
     informations_div.appendChild(info_paragraph);
+
+
 
     info_paragraph = document.createElement('p');
     info_paragraph.innerHTML = "First Name : " + firstName;

@@ -62,13 +62,13 @@ router.get('/', function(req, res)
                     console.log(orders);
 
                     res.render('ordersManagement',
-                        {
-                            account: actual_account,
-                            pendingOrders: pendingOrders,
-                            inPreparationOrders: inPreparationOrders,
-                            readyOrders: readyOrders,
-                            deliveredOrders: deliveredOrders
-                        });
+                    {
+                        account: actual_account,
+                        pendingOrders: pendingOrders,
+                        inPreparationOrders: inPreparationOrders,
+                        readyOrders: readyOrders,
+                        deliveredOrders: deliveredOrders
+                    });
                 });
             });
         }

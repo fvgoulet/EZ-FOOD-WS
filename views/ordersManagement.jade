@@ -6,17 +6,16 @@ block content
     br
     div#ordersManagement
         table
-            thead
-                tr
-                    th(colspan="7") Pending Orders
-                tr
-                    th OrderId
-                    th ClientId
-                    th Delivery Address
-                    th Reception
-                    th Due
-                    th Items
-                    th Action
+            tr
+                th(colspan="7") Pending Orders
+            tr
+                th OrderId
+                th ClientId
+                th Delivery Address
+                th Reception
+                th Due
+                th Items
+                th Action
             tbody
                 each order, i in pendingOrders
                     tr
@@ -36,17 +35,16 @@ block content
 
         br
         table
-            thead
-                tr
-                    th(colspan="7") Orders In Preparation
-                tr
-                    th OrderId
-                    th ClientId
-                    th Delivery Address
-                    th Reception
-                    th Due
-                    th Items
-                    th Action
+            tr
+                th(colspan="7") Orders In Preparation
+            tr
+                th OrderId
+                th ClientId
+                th Delivery Address
+                th Reception
+                th Due
+                th Items
+                th Action
             tbody
                 each order, i in inPreparationOrders
                     tr
@@ -63,18 +61,16 @@ block content
                             button(type='button', onClick="changeOrderStatus('#{order._id}', 3);") Set order to ready
 
         br
-        h3 Orders Ready
         table
-            thead
-                tr
-                    th(colspan="6") Orders Ready
-                tr
-                    th OrderId
-                    th ClientId
-                    th Delivery Address
-                    th Reception
-                    th Due
-                    th Items
+            tr
+                th(colspan="6") Orders Ready
+            tr
+                th OrderId
+                th ClientId
+                th Delivery Address
+                th Reception
+                th Due
+                th Items
             tbody
                 each order, i in readyOrders
                     tr
@@ -90,16 +86,15 @@ block content
 
         br
         table
-            thead
-                tr
-                    th(colspan="6") Delivered Orders
-                tr
-                    th OrderId
-                    th ClientId
-                    th Delivery Address
-                    th Reception
-                    th Due
-                    th Items
+            tr
+                th(colspan="6") Delivered Orders
+            tr
+                th OrderId
+                th ClientId
+                th Delivery Address
+                th Reception
+                th Due
+                th Items
             tbody
                 each order, i in deliveredOrders
                     tr

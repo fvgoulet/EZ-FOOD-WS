@@ -63,8 +63,7 @@
     border-top: 1.5px solid black;
     font-size: 10px;
 }
-#ordersManagement td:hover{
-    cursor:pointer;
-    background: rgba(0,0,0,0.5);
+#ordersManagement tr:hover{
+    background: rgba(0,0,0,0.2);
     color:white;
 }

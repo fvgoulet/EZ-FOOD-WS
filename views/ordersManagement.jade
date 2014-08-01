@@ -5,16 +5,18 @@ block content
     h2 Orders Management
     br
     div#ordersManagement
-        h3 Pending Orders
         table
             thead
-                th OrderId
-                th ClientId
-                th Delivery Address
-                th Reception
-                th Due
-                th Items
-                th Action
+                tr
+                    th(colspan="7") Pending Orders
+                tr
+                    th OrderId
+                    th ClientId
+                    th Delivery Address
+                    th Reception
+                    th Due
+                    th Items
+                    th Action
             tbody
                 each order, i in pendingOrders
                     tr
@@ -33,15 +35,18 @@ block content
 
 
         br
-        h3 Orders In Preparation
         table
             thead
-                th ClientId
-                th Delivery Address
-                th Reception
-                th Due
-                th Items
-                th Action
+                tr
+                    th(colspan="7") Orders In Preparation
+                tr
+                    th OrderId
+                    th ClientId
+                    th Delivery Address
+                    th Reception
+                    th Due
+                    th Items
+                    th Action
             tbody
                 each order, i in inPreparationOrders
                     tr
@@ -61,11 +66,15 @@ block content
         h3 Orders Ready
         table
             thead
-                th ClientId
-                th Delivery Address
-                th Reception
-                th Due
-                th Items
+                tr
+                    th(colspan="6") Orders Ready
+                tr
+                    th OrderId
+                    th ClientId
+                    th Delivery Address
+                    th Reception
+                    th Due
+                    th Items
             tbody
                 each order, i in readyOrders
                     tr
@@ -80,14 +89,17 @@ block content
 
 
         br
-        h3 Delivered Orders
-        table#ordersDeliveredT
-            thead#ordersDeliveredH
-                th ClientId
-                th Delivery Address
-                th Reception
-                th Due
-                th Items
+        table
+            thead
+                tr
+                    th(colspan="6") Delivered Orders
+                tr
+                    th OrderId
+                    th ClientId
+                    th Delivery Address
+                    th Reception
+                    th Due
+                    th Items
             tbody
                 each order, i in deliveredOrders
                     tr

@@ -25,16 +25,16 @@ block content
                         td #{order.order_timestamp}
                         td #{order.delivery_time}
                         td
+                            each item, i in order.items
+                                p #{item.item_id} X #{item.quantity}
+                                br
+                        td
                             fieldset
                                 select#inputOrderStatus
                                     option(value='1', selected) Pending
                                     option(value='2') In Preparation
                                     option(value='3') Ready
                                     option(value='4') Delivered
-                        td
-                            each item, i in order.items
-                                p #{item.item_id} X #{item.quantity}
-                                br
                         td
                             button#updateOrder Update
                             button#deleteOrder Delete
@@ -53,6 +53,27 @@ block content
                 th Items
                 th Modify/Delete
             tbody
+                each order, i in inPreparationOrders
+                    tr
+                        td #{order._id}
+                        td #{order.client_id}
+                        td #{order.delivery_address_name}
+                        td #{order.order_timestamp}
+                        td #{order.delivery_time}
+                        td
+                            each item, i in order.items
+                                p #{item.item_id} X #{item.quantity}
+                                br
+                        td
+                            fieldset
+                                select#inputOrderStatus
+                                    option(value='1', selected) Pending
+                                    option(value='2') In Preparation
+                                    option(value='3') Ready
+                                    option(value='4') Delivered
+                        td
+                            button#updateOrder Update
+                            button#deleteOrder Delete
 
     br
     div#ordersReady
@@ -66,6 +87,27 @@ block content
                 th Items
                 th Modify/Delete
             tbody
+                each order, i in readyOrders
+                    tr
+                        td #{order._id}
+                        td #{order.client_id}
+                        td #{order.delivery_address_name}
+                        td #{order.order_timestamp}
+                        td #{order.delivery_time}
+                        td
+                            each item, i in order.items
+                                p #{item.item_id} X #{item.quantity}
+                                br
+                        td
+                            fieldset
+                                select#inputOrderStatus
+                                    option(value='1', selected) Pending
+                                    option(value='2') In Preparation
+                                    option(value='3') Ready
+                                    option(value='4') Delivered
+                        td
+                            button#updateOrder Update
+                            button#deleteOrder Delete
 
     br
     div#ordersDelivered
@@ -79,3 +121,24 @@ block content
                 th Items
                 th Modify/Delete
             tbody
+                each order, i in deliveredOrders
+                    tr
+                        td #{order._id}
+                        td #{order.client_id}
+                        td #{order.delivery_address_name}
+                        td #{order.order_timestamp}
+                        td #{order.delivery_time}
+                        td
+                            each item, i in order.items
+                                p #{item.item_id} X #{item.quantity}
+                                br
+                        td
+                            fieldset
+                                select#inputOrderStatus
+                                    option(value='1', selected) Pending
+                                    option(value='2') In Preparation
+                                    option(value='3') Ready
+                                    option(value='4') Delivered
+                        td
+                            button#updateOrder Update
+                            button#deleteOrder Delete

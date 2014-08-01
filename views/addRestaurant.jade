@@ -10,49 +10,56 @@ block content
     #myDiv
     if name
 
-        form(name="restaurant", action="/addRestaurant/confirmRestaurant", method="post")
+        form(name="restaurant", id="restaurant", action="/addRestaurant/confirmed", method="post")
             br
             | Name :
-            input(name='name', type='text', placeholder='Name', value='#{name}',class='form-control', required autofocus, autocomplete="off")
+            input(name='name',id='name', type='text', placeholder='Name', value='#{name}',class='form-control', required autofocus, autocomplete="off")
             | Phone Number :
-            input(name='phoneNumber', type='text', placeholder='###-###-####', value='#{phoneNumber}',class='form-control', required autofocus, autocomplete="off")
+            input(name='phoneNumber',id='phoneNumber', type='text', placeholder='###-###-####', value='#{phoneNumber}',class='form-control', required autofocus, autocomplete="off")
 
             br
             | Civic No. :
-            input(name='civicNumber', type='text', placeholder='Civic No.', value='#{civicNumber}',class='form-control', required autofocus, autocomplete="off")
+            input(name='civicNumber',id='civicNumber', type='text', placeholder='Civic No.', value='#{civicNumber}',class='form-control', required autofocus, autocomplete="off")
             | Street :
-            input(name='street', type='text', placeholder='Street', value='#{street}',class='form-control', required autofocus, autocomplete="off")
+            input(name='street',id='street', type='text', placeholder='Street', value='#{street}',class='form-control', required autofocus, autocomplete="off")
             | City :
-            input(name='city', type='text', placeholder='City', value='#{city}',class='form-control', required autofocus, autocomplete="off")
+            input(name='city',id='city', type='text', placeholder='City', value='#{city}',class='form-control', required autofocus, autocomplete="off")
             | Province :
-            input(name='province', type='text', placeholder='Province', value='#{province}',class='form-control', required autofocus, autocomplete="off")
+            input(name='province',id='province', type='text', placeholder='Province', value='#{province}',class='form-control', required autofocus, autocomplete="off")
             | ZIP Code :
-            input(name='zipCode', type='text', placeholder='ZIP Code', value='#{zipCode}',class='form-control', required autofocus, autocomplete="off")
+            input(name='zipCode',id='zipCode', type='text', placeholder='ZIP Code', value='#{zipCode}',class='form-control', required autofocus, autocomplete="off")
             br
 
             br
-            input#btnSubmitAccount(name="submit_button", type="submit", value="Add Rerstaurant",class="btn btn-lg btn-primary btn-block")
+            input#btnSubmitRestaurant(name="submit_button",type="button", value="Add Restaurant", onclick="showRestaurantConfirmation();")
     else
-        form(name="Restaurant", action="/addRestaurant/confirmRestaurant", method="post", enctype="multipart/form-data")
+        form(name="restaurant",id="restaurant", action="/addRestaurant/confirmed", method="post", enctype="multipart/form-data")
             br
             | Name :
-            input(name='name',class='form-control' , type='text', placeholder='Name', required autofocus, autocomplete="off")
+            input(name='name',id='name',class='form-control' , type='text', placeholder='Name', required autofocus, autocomplete="off")
             | Phone Number :
-            input(name='phoneNumber',class='form-control', type='text', placeholder='###-###-####', required autofocus, autocomplete="off")
+            input(name='phoneNumber',id='phoneNumber',class='form-control', type='text', placeholder='###-###-####', required autofocus, autocomplete="off")
             br
             | Civic No. :
-            input(name='civicNumber',class='form-control', type='text', placeholder='Civic No.', required autofocus, autocomplete="off")
+            input(name='civicNumber',id='civicNumber',class='form-control', type='text', placeholder='Civic No.', required autofocus, autocomplete="off")
             | Street :
-            input(name='street',class='form-control', type='text', placeholder='Street', required autofocus, autocomplete="off")
+            input(name='street',id='street',class='form-control', type='text', placeholder='Street', required autofocus, autocomplete="off")
             | City :
-            input(name='city',class='form-control', type='text', placeholder='City', required autofocus, autocomplete="off")
+            input(name='city',id='city',class='form-control', type='text', placeholder='City', required autofocus, autocomplete="off")
             | Province :
-            input(name='province',class='form-control', type='text', placeholder='Province', required autofocus, autocomplete="off")
+            input(name='province',id='province',class='form-control', type='text', placeholder='Province', required autofocus, autocomplete="off")
             | ZIP Code :
-            input(name='zipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
+            input(name='zipCode',id='zipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
             br
-            //| Restaurant picture :
-            //input(type="file",  name="displayImage")
-            //br
-            input#btnSubmitRestaurant(name="submit_button",type="submit", value="Add Restaurant", class="btn btn-lg btn-primary btn-block")
+            | Restaurant picture :
+            input(type="file",  name="displayImage")
+            br
+            input#btnSubmitRestaurant(name="submit_button",type="button", value="Add Restaurant", onclick="showRestaurantConfirmation();")
 
+    div#confirmationCreateRestaurantModal.modal
+        div.modalHolder
+            h2 Confirm your informations
+            p Here is the summary of your restaurant informations :
+            div#restaurantInformations
+            button(onclick="modalVisbility(document.getElementById('confirmationCreateRestaurantModal'));") Edit
+            button(onclick="document.getElementById('restaurant').submit();") Confirm

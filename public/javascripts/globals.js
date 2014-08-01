@@ -10,6 +10,50 @@ $(document).ready(function()
 
 // Functions =============================================================
 
+function showRestaurantConfirmation()
+{
+    var name = document.getElementById('name').value ;
+    var phoneNumber = document.getElementById('phoneNumber').value ;
+    var civicNumber = document.getElementById('civicNumber').value ;
+    var street = document.getElementById('street').value ;
+    var city = document.getElementById('city').value ;
+    var province = document.getElementById('province').value ;
+    var zipCode = document.getElementById('zipCode').value ;
+
+    var informations_div = document.getElementById('restaurantInformations');
+    informations_div.innerHTML = "";
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "Name : " + name;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "Phone number : " + phoneNumber;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "Civic Number : " + civicNumber;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "Street : " + street;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "City : " + city;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "Province : " + province;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "ZIP Code : " + zipCode;
+    informations_div.appendChild(info_paragraph);
+
+    var modal = document.getElementById('confirmationCreateRestaurantModal');
+    modalVisbility(modal);
+}
 
 function showAddNewAddress()
 {

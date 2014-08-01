@@ -4,7 +4,8 @@ block content
     fieldset
         legend Add Restaurateur
         p Please fill the fields to add the restaurateur.
-
+        div#mandatoy.warningCreateAccount Fields with an "*" are mandatory
+        div#error.warningCreateAccount
         form(name="account", action="/manageRestaurateur/addNewRestaurateur/addUser", method="post")
             table
 
@@ -20,66 +21,73 @@ block content
                 tr
                     td Username :
                     td
-                        input(name='username',class='form-control' , type='text', placeholder='Username', required autofocus, autocomplete="off", onblur="checkAccountExist();")
+                        input(name='username',id='username',class='form-control' , type='text', placeholder='Username', required autofocus, autocomplete="off", onblur="checkAccountExist();")
 
                 tr
                     td Password :
                     td
-                        input(name='userPassword',class='form-control', type='password', placeholder='Password', required autofocus, autocomplete="off")
+                        input(name='userPassword',id='userPassword',class='form-control', type='password', placeholder='Password', required autofocus, autocomplete="off")
                 tr
                     td First Name :
                     td
-                        input(name='userFirstName',class='form-control', type='text', placeholder='First Name', required autofocus, autocomplete="off")
+                        input(name='userFirstName',id='userFirstName',class='form-control', type='text', placeholder='First Name', required autofocus, autocomplete="off")
                 tr
                     td Last Name :
                     td
-                       input(name='userSecondName',class='form-control', type='text', placeholder='Last Name', required autofocus, autocomplete="off")
+                       input(name='userSecondName',id='userSecondName',class='form-control', type='text', placeholder='Last Name', required autofocus, autocomplete="off")
 
                 tr
                     td Birth Date :
                     td
-                        input(name='userBirthDate',class='form-control', type='text', placeholder='YYYY-MM-DD', required autofocus, autocomplete="off")
+                        input(name='userBirthDate',id='userBirthDate',class='form-control', type='text', placeholder='YYYY-MM-DD', required autofocus, autocomplete="off")
                 tr
                     td Email :
                     td
-                        input(name='userEmail',class='form-control', type='text', placeholder='Email', required autofocus, autocomplete="off")
+                        input(name='userEmail',id='userEmail',class='form-control', type='text', placeholder='Email', required autofocus, autocomplete="off")
 
                 tr
                     td Phone Number :
                     td
-                        input(name='userPhoneNumber',class='form-control', type='text', placeholder='###-###-####', required autofocus, autocomplete="off")
+                        input(name='userPhoneNumber',id='userPhoneNumber',class='form-control', type='text', placeholder='###-###-####', required autofocus, autocomplete="off")
                 tr
                     td Civic No. :
                     td
-                        input(name='userCivicNumber',class='form-control', type='text', placeholder='Civic No.', required autofocus, autocomplete="off")
+                        input(name='userCivicNumber',id='userCivicNumber',class='form-control', type='text', placeholder='Civic No.', required autofocus, autocomplete="off")
 
                 tr
                     td Appartment :
                     td
-                        input(name='userAppNumber',class='form-control', type='text', placeholder='App. No.(Optionnal)', autofocus, autocomplete="off")
+                        input(name='userAppNumber',id='userAppNumber',class='form-control', type='text', placeholder='App. No.(Optionnal)', autofocus, autocomplete="off")
                 tr
                     td Street :
                     td
-                        input(name='userStreet',class='form-control', type='text', placeholder='Street', required autofocus, autocomplete="off")
+                        input(name='userStreet',id='userStreet',class='form-control', type='text', placeholder='Street', required autofocus, autocomplete="off")
 
                 tr
                     td City :
                     td
-                        input(name='userCity',class='form-control', type='text', placeholder='City', required autofocus, autocomplete="off")
+                        input(name='userCity',id='userCity',class='form-control', type='text', placeholder='City', required autofocus, autocomplete="off")
 
                 tr
                     td Province :
                     td
-                        input(name='userProvince',class='form-control', type='text', placeholder='Province', required autofocus, autocomplete="off")
+                        input(name='userProvince',id='userProvince',class='form-control', type='text', placeholder='Province', required autofocus, autocomplete="off")
 
                 tr
                     td ZIP Code :
                     td
-                        input(name='userZipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
+                        input(name='userZipCode',id='userZipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
 
                 tr
                     td
-                        input#btnSubmitRestaurateur(name="submit_button",type="submit", value="Add Restaurateur", class="btn btn-lg btn-primary btn-block", onclick="selectAll(document.getElementById('selected_restaurants'),true); validateAccountFields();")
+                        input#btnSubmitRestaurateur(name="submit_button",type="button", value="Add Restaurateur", class="btn btn-lg btn-primary btn-block", onclick="validateAccountFields();")
 
 
     //script(src='/javascripts/validateAccountFields.js')
+    div#confirmationCreateRestaurateurModal.modal
+        div.modalHolder
+            h2 Confirm the informations
+            p Here is the summary of your restaurateur informations :
+            div#accountInformations
+            button(onclick="modalVisbility(document.getElementById('confirmationCreateRestaurateurModal'));") Edit
+            button(onclick="document.getElementById('account').submit();") Confirm

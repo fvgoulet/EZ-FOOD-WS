@@ -41,8 +41,17 @@ function validateAccountFields(event) {
     var email = document.getElementById('userEmail').value ;
     var phoneNumber = document.getElementById('userPhoneNumber').value ;
     var civicNumber = document.getElementById('userCivicNumber').value ;
+    var select_restaurant = document.getElementById('selected_restaurants') ;
     var errorMessage = '';
 
+    if(select_restaurant)
+    {
+        var value = select_restaurant.value;
+        if(value == "")
+        {
+            alert("The account has been created, BUT you didn't assign a restaurant !");
+        }
+    }
     // Check if the format of all fields are okay.
     if(MIN_USERNAME_LENGTH > username.toString().length)
     {
@@ -78,7 +87,9 @@ function validateAccountFields(event) {
     }
     else
     {
+
         showAccountConfirmation();
+
     }
 }
 
@@ -203,7 +214,17 @@ function showAccountConfirmation()
     info_paragraph.innerHTML = "ZIP Code : " + zipCode;
     informations_div.appendChild(info_paragraph);
 
-    var modal = document.getElementById('confirmationCreateAccountModal');
+    var modal = null;
+
+    if(null != document.getElementById('confirmationCreateAccountModal')) {
+        modal = document.getElementById('confirmationCreateAccountModal');
+    }
+    if(null != document.getElementById('confirmationCreateRestaurateurModal'))
+    {
+        modal = document.getElementById('confirmationCreateRestaurateurModal');
+    }
+
+
     modalVisbility(modal);
 }
 

@@ -19,7 +19,7 @@ router.get('/', function(req, res)
         if(actual_account.category === 2)
         {
             var schemaRestaurant = new restaurant.Restaurant();
-            schemaRestaurant.getRestaurantByRestaurateurId(actual_account._id, function(err, restaurant)
+            schemaRestaurant.getRestaurantsByRestaurateurId(actual_account._id, function(err, restaurant)
             {
                 if(err) {
 

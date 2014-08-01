@@ -24,7 +24,10 @@ var order_model = mongoose.model( 'Orders', schema);
 
 function Order()
 {
-
+    this.getOrderById = function(id, callback) //where callback = function ( err, found_account )
+    {
+        order_model.findOne( { _id : id }, callback);
+    };
     //Constructor
 
     this.order = new order_model();

@@ -36,7 +36,11 @@ function changeOrderStatus(id, status)
     }
 
     xmlhttp.open("POST","/ordersManagement/updateOrderStatus",true);
-    xmlhttp.send('{"order_id":"' + id + '"}, {"order_status":"' + status + '"}');
+    var query = {};
+    query["order_id"] = id;
+    query["order_status"] = status;
+
+    xmlhttp.send(JSON.stringify(query));
 
     // Callback on response.e
     xmlhttp.onreadystatechange = function () {

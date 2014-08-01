@@ -28,7 +28,7 @@ block content
                                 p #{item.item_id} X #{item.quantity}
                                 br
                         td
-                            button(type='button', onClick="changeOrdeStatus(order._id, 2);") Prepare Order
+                            button(type='button', onClick="changeOrderStatus('#{order._id}', 2);") Prepare Order
 
 
 
@@ -56,7 +56,7 @@ block content
                                 p #{item.item_id} X #{item.quantity}
                                 br
                         td
-                            button(type='button', onClick="changeOrdeStatus(order._id, 3);") Set order to ready
+                            button(type='button', onClick="changeOrderStatus('#{order._id}', 3);") Set order to ready
 
     br
     div#ordersReady

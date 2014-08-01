@@ -172,6 +172,7 @@ router.post('/addItemToCart', function(req, res)
         });
     }
 });
+
 router.post('/updateCart', function(req, res)
 {
     var logged_account;

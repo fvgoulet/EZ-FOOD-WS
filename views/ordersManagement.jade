@@ -15,10 +15,10 @@ block content
                 th Due
                 th Items
                 th Status
-                th Modify/Delete
+                th Update/Delete
             tbody
-                tr
-                    each order, i in pendingOrders
+                each order, i in pendingOrders
+                    tr
                         td #{order._id}
                         td #{order.client_id}
                         td #{order.delivery_address_name}
@@ -28,15 +28,17 @@ block content
                             fieldset
                                 select#inputOrderStatus
                                     option(value='1', selected) Pending
-                                    option(value='2') In Progress
+                                    option(value='2') In Preparation
                                     option(value='3') Ready
                                     option(value='4') Delivered
                         td
                             each item, i in order.items
-                                #{item.item_id} X #{item.quantity} <br>
+                                p #{item.item_id} X #{item.quantity}
+                                br
                         td
                             button#updateOrder Update
                             button#deleteOrder Delete
+
 
 
     br

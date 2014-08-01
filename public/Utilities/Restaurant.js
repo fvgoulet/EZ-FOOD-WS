@@ -28,6 +28,11 @@ function Restaurant()
 
     };
 
+    this.getRestaurantsByIds= function(ids, callback)
+    {
+        restaurant_model.find( {_id: {$in: ids}}, callback);
+    }
+
     this.getRestaurantById = function(id, callback)
     {
         restaurant_model.findOne( { _id: id}, callback);

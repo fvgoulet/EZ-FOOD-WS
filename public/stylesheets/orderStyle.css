@@ -1,0 +1,46 @@
+#OrdersList{
+    margin:5px;
+    float:left;
+    height:100%;
+    min-height:200px;
+    width:35%;
+    min-width: 500px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+#map-canvas{
+    margin:5px;
+    float:right;
+    height:100%;
+    min-height: 425px;
+    width:60%;
+    min-width: 500px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+#OrderTable{
+    border: 1.5px solid black;
+    border-radius: 5px;
+    margin:5px;
+    width:98%;
+}
+
+#OrderTable td{
+    border-top: 1.5px solid black;
+    font-size: 10px;
+}
+
+#OrderTable td:hover{
+    cursor:pointer;
+    background: rgba(0,0,0,0.5);
+    color:white;
+}
+
+#OrderTableHeader{
+    background-color: black;
+    color:white;
+    font:bold;
+    text-align: center;
+}

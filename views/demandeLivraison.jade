@@ -2,11 +2,88 @@
    Created by Gabriel on 2014-07-25.
 block content
 
-    h2 Demande de Livraison
-    br
-    div#AvailableDelivery
-        | Available deliveries :
-        select#avalaibleDeliveries
-            - for (var x = 0; x < orders.length ; x++)
-                option(etatCommande='#{orders[x].status}') #{orders[x].status}
-        button(type='button', onClick="acceptDelivery();") Accept
+    h2 Order Delivery
+    div#OrdersList
+
+        if(orders != null && orders.length > 0)
+            - for (var i = 0; i < restaurants.length ; i++)
+                table#OrderTable
+                    tr#OrderTableHeader
+                        th(colspan="2") #{restaurants[i].name}
+                    tr
+                        th Order
+                        th Ready since
+                    - for (var j = 0; j < orders.length ; j++)
+                        if(restaurants[i]._id == orders[j].restaurant_id)
+                            - for (var k = 0; k < accounts.length ; k++)
+                                if(accounts[k]._id == orders[j].client_id)
+                                    if(orders[j].delivery_address_name != 'Default')
+                                        - for (var l = 0; l < accounts[k].deliveryAddresses.length ; l++)
+
+
+
+                                            if(accounts[k].deliveryAddresses[l].name == orders[j].delivery_address_name)
+                                                if(accounts[k].deliveryAddresses[l].apartment != null && accounts[k].deliveryAddresses[l].apartment != '')
+                                                    tr(id="Delivery-#{j}", data-orderId="#{orders[j]._id}" ,
+                                                    data-clientAddress="#{accounts[k].deliveryAddresses[l].civicNo} #{accounts[k].deliveryAddresses[l].appartment} #{accounts[k].deliveryAddresses[l].street}, #{accounts[k].deliveryAddresses[l].city}, #{accounts[k].deliveryAddresses[l].province}, #{accounts[k].deliveryAddresses[l].zipCode}",
+                                                    data-restaurantAddress="#{restaurants[i].civicNo} #{restaurants[i].street}, #{restaurants[i].city}, #{restaurants[i].province}, #{restaurants[i].zipCode}",
+                                                    onclick="calculateDelivery('Delivery-#{j}');")
+                                                        td #{orders[j]._id}
+                                                        td #{orders[j].order_timestamp}
+
+
+
+
+                                                else
+                                                    tr(id="Delivery-#{j}", data-orderId="#{orders[j]._id}" ,
+                                                    data-clientAddress="#{accounts[k].deliveryAddresses[l].civicNo} #{accounts[k].deliveryAddresses[l].street}, #{accounts[k].deliveryAddresses[l].city}, #{accounts[k].deliveryAddresses[l].province}, #{accounts[k].deliveryAddresses[l].zipCode}",
+                                                    data-restaurantAddress="#{restaurants[i].civicNo} #{restaurants[i].street}, #{restaurants[i].city}, #{restaurants[i].province}, #{restaurants[i].zipCode}",
+                                                    onclick="calculateDelivery('Delivery-#{j}');")
+                                                        td #{orders[j]._id}
+                                                        td #{orders[j].order_timestamp}
+
+
+
+
+
+
+
+                                    else
+                                        if(accounts[k].appartment != null && accounts[k].appartment != '')
+                                            tr(id="Delivery-#{j}", data-orderId="#{orders[j]._id}" ,
+                                            data-clientAddress="#{accounts[k].civicNo} #{accounts[k].appartment} #{accounts[k].street}, #{accounts[k].city}, #{accounts[k].province}, #{accounts[k].zipCode}",
+                                            data-restaurantAddress="#{restaurants[i].civicNo} #{restaurants[i].street}, #{restaurants[i].city}, #{restaurants[i].province}, #{restaurants[i].zipCode}",
+                                            onclick="calculateDelivery('Delivery-#{j}');")
+                                                td #{orders[j]._id}
+                                                td #{orders[j].order_timestamp}
+                                        else
+                                            tr(id="Delivery-#{j}", data-orderId="#{orders[j]._id}" ,
+                                            data-clientAddress="#{accounts[k].civicNo} #{accounts[k].street}, #{accounts[k].city}, #{accounts[k].province}, #{accounts[k].zipCode}",
+                                            data-restaurantAddress="#{restaurants[i].civicNo} #{restaurants[i].street}, #{restaurants[i].city}, #{restaurants[i].province}, #{restaurants[i].zipCode}",
+                                            onclick="calculateDelivery('Delivery-#{j}');")
+                                                td #{orders[j]._id}
+                                                td #{orders[j].order_timestamp}
+        else
+            table#OrderTable
+                tr
+                    th Order
+                    th Ready since
+                tr
+                    td There is no Order
+                    td Since always...
+        input(id="orderId", name='orderId', type='hidden', value='')
+        button(id="acceptSubmit", type='button', onClick="deliveryModal();", disabled) Accept order
+
+    div#map-canvas
+
+    div#confirmationDeliveryModal.modal
+        div.modalHolder
+            h2 Confirmation
+            p Are you sure you want to deliver this?
+            button(type='button', onClick="acceptDelivery();") SIR, YES SIR!
+            button(type='button', onClick="deliveryModal();") What delivery?
+
+    div#responseModal.modal
+        div.modalHolder
+            p#serverResponse
+            button(type='button', onClick="responseModal(); demandeLivraison();") Ok!

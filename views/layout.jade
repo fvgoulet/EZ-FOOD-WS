@@ -8,11 +8,17 @@ html
         link(rel='stylesheet', href='/stylesheets/menuStyle.css')
         link(rel='stylesheet', href='/stylesheets/modalStyle.css')
         link(rel='stylesheet', href='/stylesheets/cartStyle.css')
+        link(rel='stylesheet', href='/stylesheets/orderStyle.css')
     body
         block content
+        script(type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQSdj4L7sy6OgSqIvd-LIzRLb3mtbCktA")
         script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
         script(src="http://code.jquery.com/jquery-1.10.2.js")
         script(src='/javascripts/globals.js')
         script(src='/javascripts/accountValidation.js')
-        script(src='/javascripts/clientOrdersManagement.js')
         script(src='/javascripts/MenuUtils.js')
+        script(src='/javascripts/orderUtils.js')
+        script(src='/javascripts/googleMapUtils.js')
+        script(src='/javascripts/modalUtils.js')
+        script(src='/javascripts/clientOrdersManagement.js')
+        include Footer

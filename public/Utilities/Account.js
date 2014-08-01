@@ -101,6 +101,11 @@ function Account()
         account_model.findOne( { username: username , password: password}, callback);
     };
 
+    this.getAccountsByIds= function(ids, callback)
+    {
+        account_model.find( {_id: {$in: ids}}, callback);
+    }
+
     this.getAccountFromId = function(id,callback)
     {
         account_model.findOne( { _id: id }, callback);

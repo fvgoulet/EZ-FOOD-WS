@@ -1,0 +1,32 @@
+//
+   Created by Gabriel on 2014-08-01.
+
+block content
+
+    h2 #{account.firstName} #{account.lastName}'s order book
+
+    div#orderBook
+        table#OrderTable
+            tr#OrderTableHeader
+                th(colspan="4") Order List
+            tr
+                th Order
+                th Restaurant
+                th Ready since
+                th Accepted
+            if(orders != null && orders.length > 0)
+                    - for (var i = 0; i < orders.length ; i++)
+                        - for (var j = 0; j < restaurants.length ; j++)
+                            if(restaurants[j]._id == orders[i].restaurant_id)
+                                tr
+                                    td #{orders[i]._id}
+                                    td #{restaurants[j].name}
+                                    td #{orders[i].delivery_time}
+                                    td #{orders[i].deliveryAcceptation_time}
+
+            else
+                tr
+                    td This is not the order you are looking for!
+                    td What restaurant?
+                    td It was never!
+                    td THE CAKE IS A LIE!

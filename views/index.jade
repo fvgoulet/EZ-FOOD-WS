@@ -56,6 +56,6 @@ block content
                     else
                         img(id="#{restaurants[x]._id}", src="RestaurantsRessources/default.jpg", height="200", width="200")
 
-    div#cart
-        include Cart
-    include Footer
+    if account_category == 3
+        div#cart
+            include Cart

@@ -346,8 +346,7 @@ function listRestaurant()
     xmlhttp.send();
 }
 
-function demandeLivraison()
-{
+function orderBook(){
     var xmlhttp;
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -366,9 +365,63 @@ function demandeLivraison()
         }
     };
 
+    xmlhttp.open("GET","/demandeLivraison/orderBook",true);
+    xmlhttp.send();
+}
+
+function demandeLivraison()
+{
+
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    // Callback on response.e
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            document.getElementById("content").innerHTML = xmlhttp.responseText;
+            initializeGoogleMap();
+        }
+    };
+
     xmlhttp.open("GET","/demandeLivraison",true);
     xmlhttp.send();
 }
+
+function acceptDelivery(){
+
+    var orderId = document.getElementById('orderId').value;
+    if(orderId != "")
+    {
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        // Callback on response.e
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                document.getElementById("serverResponse").innerHTML = xmlhttp.responseText;
+                responseModal();
+            }
+        };
+
+        deliveryModal();
+        xmlhttp.open("POST", "/demandeLivraison/acceptDelivery", true);
+        xmlhttp.send('{"orderId":"' + orderId + '"}');
+    }
+}
+
 
 function showMenus(restaurant_id)
 {

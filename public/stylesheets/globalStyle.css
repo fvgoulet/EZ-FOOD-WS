@@ -84,6 +84,14 @@ button:hover{
     cursor:pointer;
 }
 
+.floatLeft{
+    float: left;
+}
+
+.floatRight{
+    float:right;
+}
+
 /*
 #menuMultiSelect{
     border-radius: 5px;

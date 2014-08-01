@@ -111,9 +111,7 @@ function noDescriptionModal(){
     modalVisbility(modal);
 }
 
-function modalVisbility(modal){
-    modal.style.visibility = (modal.style.visibility == "visible")?"hidden":"visible";
-}
+
 
 function addMenuItem(){
     var itemName = document.getElementById("itemName").value;

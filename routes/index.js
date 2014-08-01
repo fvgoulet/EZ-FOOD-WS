@@ -157,7 +157,7 @@ router.post('/checkout', function(req, res)
                         content = content + cart_item["item_name"] + "    "+ cart_item["item_quantity"] + "    "+ cart_item["item_price"] + "$\n";
                         total_price = total_price + (parseInt(cart_item["item_quantity"]) * parseFloat(cart_item["item_price"]).toFixed(2));
                     });
-                    content = content + "\nThat make a total of : " + parseFloat(total_price).toFixed(2) + "$.\n"
+                    content = content + "\nThat make a total of : " + parseFloat(total_price).toFixed(2) + "$.\n";
                     mailSender.sendMail(client_name, client_email, subject, content);
                 });
             });

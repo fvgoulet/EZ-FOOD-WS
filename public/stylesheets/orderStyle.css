@@ -44,3 +44,27 @@
     font:bold;
     text-align: center;
 }
+
+#ordersManagement table{
+    border: 1.5px solid black;
+    border-radius: 5px;
+    margin:5px;
+    width:98%;
+}
+
+#ordersManagement thead{
+    background-color: black;
+    color:white;
+    font:bold;
+    text-align: center;
+}
+
+#ordersManagement td {
+    border-top: 1.5px solid black;
+    font-size: 10px;
+}
+#ordersManagement td:hover{
+    cursor:pointer;
+    background: rgba(0,0,0,0.5);
+    color:white;
+}

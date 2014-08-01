@@ -4,7 +4,7 @@ block content
 
     h2 Orders Management
     br
-    div#ordersPending
+    div#ordersManagement
         h3 Pending Orders
         table
             thead
@@ -32,8 +32,7 @@ block content
 
 
 
-    br
-    div#ordersInPreparation
+        br
         h3 Orders In Preparation
         table
             thead
@@ -58,8 +57,7 @@ block content
                         td
                             button(type='button', onClick="changeOrderStatus('#{order._id}', 3);") Set order to ready
 
-    br
-    div#ordersReady
+        br
         h3 Orders Ready
         table
             thead
@@ -81,11 +79,10 @@ block content
                                 p #{item.item_id} X #{item.quantity}
 
 
-    br
-    div#ordersDelivered
+        br
         h3 Delivered Orders
-        table
-            thead
+        table#ordersDeliveredT
+            thead#ordersDeliveredH
                 th ClientId
                 th Delivery Address
                 th Reception

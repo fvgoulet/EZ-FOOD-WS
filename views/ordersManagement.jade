@@ -26,7 +26,7 @@ block content
                         td
                             each item, i in order.items
                                 p #{item.item_id} X #{item.quantity}
-                                br
+
                         td
                             button(type='button', onClick="changeOrderStatus('#{order._id}', 2);") Prepare Order
 
@@ -54,7 +54,7 @@ block content
                         td
                             each item, i in order.items
                                 p #{item.item_id} X #{item.quantity}
-                                br
+
                         td
                             button(type='button', onClick="changeOrderStatus('#{order._id}', 3);") Set order to ready
 
@@ -79,7 +79,7 @@ block content
                         td
                             each item, i in order.items
                                 p #{item.item_id} X #{item.quantity}
-                                br
+
 
     br
     div#ordersDelivered
@@ -102,4 +102,3 @@ block content
                         td
                             each item, i in order.items
                                 p #{item.item_id} X #{item.quantity}
-                                br

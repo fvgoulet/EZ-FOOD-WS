@@ -135,14 +135,19 @@ router.post('/updateOrderStatus', function(req, res)
                                      */
                                     if(order.status > 1)
                                     {
-                                        mail_sender = new mail_sender.MailSender();
-                                        var client_name = actual_account.firstName + " " + actual_account.lastName;
-                                        var client_email = actual_account.email;
-                                        var subject = "EZ-Food : Your order has been updated !";
-                                        var content = "Hi " + client_name + ",\n your order as been updated.\n";
-                                        content = content + "The status is now :" + order_status_texts[order.status] +" \n"
+                                        var client_account = new account.Account();
+                                        client_account.getAccountFromId(order.client_id, function(err, account)
+                                            {
+                                                mail_sender = new mail_sender.MailSender();
+                                                var client_name = account.firstName + " " + account.lastName;
+                                                var client_email = account.email;
+                                                var subject = "EZ-Food : Your order has been updated !";
+                                                var content = "Hi " + client_name + ",\n your order as been updated.\n";
+                                                content = content + "The status is now :" + order_status_texts[order.status] +" \n"
 
-                                        mail_sender.sendMail(client_name, client_email, subject, content);
+                                                mail_sender.sendMail(client_name, client_email, subject, content);
+                                            }
+                                        );
                                     }
 
                                     schemaOrder.getRelatedOrdersByRestaurant(restaurant._id, function(err, orders)

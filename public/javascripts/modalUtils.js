@@ -15,3 +15,18 @@ function responseModal(){
     var modal = document.getElementById('responseModal');
     modalVisbility(modal);
 }
+
+function responseModal(){
+    var modal = document.getElementById('responseModal');
+    modalVisbility(modal);
+}
+
+function setConfirmationDeleteRestaurantModal(restaurantID){
+    document.getElementById('restaurantToDelete').value = restaurantID;
+    confirmationDeleteRestaurantModal();
+}
+
+function confirmationDeleteRestaurantModal(){
+    var modal = document.getElementById('deletRestaurantModal');
+    modalVisbility(modal);
+}

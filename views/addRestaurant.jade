@@ -4,85 +4,55 @@
 
 block content
 
-
     fieldset
         legend Add Restaurant
-        p Please fill the fields to add a restaurant to your account.
-        if name
+        form(name="restaurant",id="restaurant", action="/addRestaurant/confirmed", method="post", enctype="multipart/form-data")
+            table
+                tr
+                    td Name :
+                    td
+                        input(name='name',id='name',class='form-control' , type='text', placeholder='Name', required autofocus, autocomplete="off")
+                tr
+                    td Phone Number :
+                    td
+                        input(name='phoneNumber',id='phoneNumber',class='form-control', type='text', placeholder='###-###-####', required autofocus, autocomplete="off")
+                tr
+                    td Civic No. :
+                    td
+                        input(name='civicNumber',id='civicNumber',class='form-control', type='text', placeholder='Civic No.', required autofocus, autocomplete="off")
+                tr
+                    td Street :
+                    td
+                        input(name='street',id='street',class='form-control', type='text', placeholder='Street', required autofocus, autocomplete="off")
+                tr
+                    td City :
+                    td
+                        input(name='city',id='city',class='form-control', type='text', placeholder='City', required autofocus, autocomplete="off")
+                tr
+                    td Province :
+                    td
+                        input(name='province',id='province',class='form-control', type='text', placeholder='Province', required autofocus, autocomplete="off")
+                tr
+                    td ZIP Code :
+                    td
+                        input(name='zipCode',id='zipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
+                tr
+                    td Restaurant picture :
+                    td
+                        input(type="file",  name="displayImage")
+                tr
+                    td Restaurateur :
+                    td
+                        select(name="selectRestaurateurs" ,id="selectRestaurateurs")
+                            option(name='Nothing', value="") Nothing
+                            if(restaurateurs != null)
+                                - for (var x = 0; x < restaurateurs.length ; x++)
+                                    option(name='selectRestaurateurs', value='#{restaurateurs[x]._id}') #{restaurateurs[x].firstName} #{restaurateurs[x].lastName}
+                tr
+                    td
+                        input#btnSubmitRestaurant(name="submit_button",type="button", value="Add Restaurant", onclick="showRestaurantConfirmation();")
+                    td
 
-            form(name="restaurant", id="restaurant", action="/addRestaurant/confirmed", method="post")
-                table
-                    tr
-                        td Name :
-                        td
-                            input(name='name',id='name', type='text', placeholder='Name', value='#{name}',class='form-control', required autofocus, autocomplete="off")
-                    tr
-                        td Phone Number :
-                        td
-                            input(name='phoneNumber',id='phoneNumber', type='text', placeholder='###-###-####', value='#{phoneNumber}',class='form-control', required autofocus, autocomplete="off")
-
-                    tr
-                        td Civic No. :
-                        td
-                            input(name='civicNumber',id='civicNumber', type='text', placeholder='Civic No.', value='#{civicNumber}',class='form-control', required autofocus, autocomplete="off")
-                    tr
-                        td Street :
-                        td
-                            input(name='street',id='street', type='text', placeholder='Street', value='#{street}',class='form-control', required autofocus, autocomplete="off")
-                    tr
-                        td City :
-                        td
-                            input(name='city',id='city', type='text', placeholder='City', value='#{city}',class='form-control', required autofocus, autocomplete="off")
-                    tr
-                        td Province :
-                        td
-                            input(name='province',id='province', type='text', placeholder='Province', value='#{province}',class='form-control', required autofocus, autocomplete="off")
-                    tr
-                        td ZIP Code :
-                        td
-                            input(name='zipCode',id='zipCode', type='text', placeholder='ZIP Code', value='#{zipCode}',class='form-control', required autofocus, autocomplete="off")
-                    tr
-                        td
-                            input#btnSubmitRestaurant(name="submit_button",type="button", value="Add Restaurant", onclick="showRestaurantConfirmation();")
-        else
-            form(name="restaurant",id="restaurant", action="/addRestaurant/confirmed", method="post", enctype="multipart/form-data")
-                table
-                    tr
-                        td Name :
-                        td
-                            input(name='name',id='name',class='form-control' , type='text', placeholder='Name', required autofocus, autocomplete="off")
-                    tr
-                        td Phone Number :
-                        td
-                            input(name='phoneNumber',id='phoneNumber',class='form-control', type='text', placeholder='###-###-####', required autofocus, autocomplete="off")
-                    tr
-                        td Civic No. :
-                        td
-                            input(name='civicNumber',id='civicNumber',class='form-control', type='text', placeholder='Civic No.', required autofocus, autocomplete="off")
-                    tr
-                        td Street :
-                        td
-                            input(name='street',id='street',class='form-control', type='text', placeholder='Street', required autofocus, autocomplete="off")
-
-                    tr
-                        td City :
-                        td
-                            input(name='city',id='city',class='form-control', type='text', placeholder='City', required autofocus, autocomplete="off")
-                    tr
-                        td Province :
-                        td
-                            input(name='province',id='province',class='form-control', type='text', placeholder='Province', required autofocus, autocomplete="off")
-                    tr
-                        td ZIP Code :
-                        td
-                            input(name='zipCode',id='zipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
-                    tr
-                        td Restaurant picture :
-                        td
-                            input(type="file",  name="displayImage")
-                    tr
-                        td
-                            input#btnSubmitRestaurant(name="submit_button",type="button", value="Add Restaurant", onclick="showRestaurantConfirmation();")
 
     div#confirmationCreateRestaurantModal.modal
         div.modalHolder
@@ -90,4 +60,10 @@ block content
             p Here is the summary of your restaurant informations :
             div#restaurantInformations
             button(onclick="modalVisbility(document.getElementById('confirmationCreateRestaurantModal'));") Edit
-            button(onclick="document.getElementById('restaurant').submit();") Confirm
+            button(onclick="validateRestaurant();") Confirm
+
+    div#noRestaurateur.modal
+        div.modalHolder
+            h2 Why no restaurateur?
+            p This is just insulting...
+            button(onclick="modalVisbility(document.getElementById('noRestaurateur')); document.getElementById('restaurant').submit();") OK, I'm sorry

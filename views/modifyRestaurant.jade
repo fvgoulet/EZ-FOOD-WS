@@ -3,32 +3,55 @@
 
 block content
 
-    p Please edit the fields.
-    br
+    fieldset
+        legend Modify Restaurant
+        form(name="restaurant", action="/listRestaurant/confirmedModifications", method="post")
+            table
+                tr
+                    td Name:
+                    td
+                        input(name='name', type='text', placeholder='Name', value='#{restaurant.name}', class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td Phone Number :
+                    td
+                        input(name='phoneNumber', type='text', placeholder='###-###-####', value='#{restaurant.phoneNumber}',class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td Civic No. :
+                    td
+                        input(name='civicNumber', type='text', placeholder='Civic No.', value='#{restaurant.civicNo}',class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td Street :
+                    td
+                        input(name='street', type='text', placeholder='Street', value='#{restaurant.street}',class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td City :
+                    td
+                        input(name='city', type='text', placeholder='City', value='#{restaurant.city}',class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td Province :
+                    td
+                        input(name='province', type='text', placeholder='Province', value='#{restaurant.province}',class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td ZIP Code :
+                    td
+                        input(name='zipCode', type='text', placeholder='ZIP Code', value='#{restaurant.zipCode}',class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td Restaurateur :
+                    td
+                        select(name="selectRestaurateurs" ,id="selectRestaurateurs")
+                            option(name='Nothing', value="") Nothing
+                            if(restaurateurs != null)
+                                - for (var x = 0; x < restaurateurs.length ; x++)
+                                    if(restaurateurs[x]._id == restaurant.restaurateur_id)
+                                        option(name='selectRestaurateurs', value='#{restaurateurs[x]._id}', selected=) #{restaurateurs[x].firstName} #{restaurateurs[x].lastName}
+                                    else
+                                        option(name='selectRestaurateurs', value='#{restaurateurs[x]._id}') #{restaurateurs[x].firstName} #{restaurateurs[x].lastName}
+                tr
+                    td
+                        input#btnSubmitModifications(type="submit", value="Modify Restaurant",class="btn btn-lg btn-primary btn-block")
+                    td
 
-    h2 Modify Restaurant
 
-    form(name="restaurant", action="/listRestaurant/confirmedModifications", method="post")
 
-        h3 Restaurant
 
-        | Name
-        input(name='name', type='text', placeholder='Name', value='#{restaurant.name}', class='form-control', required autofocus, autocomplete="off")
-        | Phone Number :
-        input(name='phoneNumber', type='text', placeholder='###-###-####', value='#{restaurant.phoneNumber}',class='form-control', required autofocus, autocomplete="off")
-
-        br
-        | Civic No. :
-        input(name='civicNumber', type='text', placeholder='Civic No.', value='#{restaurant.civicNo}',class='form-control', required autofocus, autocomplete="off")
-        | Street :
-        input(name='street', type='text', placeholder='Street', value='#{restaurant.street}',class='form-control', required autofocus, autocomplete="off")
-        | City :
-        input(name='city', type='text', placeholder='City', value='#{restaurant.city}',class='form-control', required autofocus, autocomplete="off")
-        | Province :
-        input(name='province', type='text', placeholder='Province', value='#{restaurant.province}',class='form-control', required autofocus, autocomplete="off")
-        | ZIP Code :
-        input(name='zipCode', type='text', placeholder='ZIP Code', value='#{restaurant.zipCode}',class='form-control', required autofocus, autocomplete="off")
-
-        br
-        input#btnSubmitModifications(type="submit", value="Modify Restaurant",class="btn btn-lg btn-primary btn-block")
 

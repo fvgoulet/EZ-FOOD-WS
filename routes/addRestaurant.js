@@ -2,6 +2,7 @@ var express = require('express');
 var fs = require('fs');
 var router = express.Router();
 var Restaurant = require('../public/Utilities/Restaurant');
+var account = require('../public/Utilities/Account');
 var mkdirp = require("mkdirp");
 var getDirName = require("path").dirname;
 
@@ -9,13 +10,20 @@ var getDirName = require("path").dirname;
  * GET .
  */
 router.get('/', function(req, res) {
-    var account;
+    var logged_account;
 
-    if((req.session.account)){
-        account = JSON.parse(req.session.account).account;
+    if((req.session.account))
+    {
+        logged_account = JSON.parse(req.session.account).account;
     }
 
-    res.render('addRestaurant', {account: account });
+    var temp_account = new account.Account();
+    temp_account.getAccountsByEntrepreneurId(logged_account._id , function(err, found_accounts)
+    {
+        if ( err ) return console.error( err );
+        console.log(found_accounts);
+        res.render('addRestaurant', {account: account , restaurateurs: found_accounts});
+    });
 });
 
 
@@ -54,7 +62,7 @@ router.post('/confirmed', function(req, res) {
     if((req.session.account)){
         account = JSON.parse(req.session.account).account;
     }
-
+    console.log(req.body.selectRestaurateurs);
     var new_Restaurant = new Restaurant.Restaurant();
 
     new_Restaurant.setName(req.body.name);
@@ -65,6 +73,7 @@ router.post('/confirmed', function(req, res) {
     new_Restaurant.setCity(req.body.city);
     new_Restaurant.setProvince(req.body.province);
     new_Restaurant.setZipCode(req.body.zipCode);
+    new_Restaurant.setRestaurateurId(req.body.selectRestaurateurs);
 
     new_Restaurant.save(function(err)
     {

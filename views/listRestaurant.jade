@@ -3,14 +3,37 @@
 block content
 
     h2 Manage Restaurant
-    br
-    div#existingRetaurant
-        | Available restaurant :
-        select#avalaibleRestaurant
-            - for (var x = 0; x < restaurants.length ; x++)
-                option(name='#{restaurants[x]}') #{restaurants[x]}
-        button(type='button', onClick="modifyRestaurant();") Modify
-        button(type='button', onClick="deleteRestaurant();") Delete
 
     div#addNewRestaurant
         button(type='button', onClick="addRestaurant();") Add new
+
+    table#menuTable
+        if(restaurants != null && restaurants.length > 0)
+            tr
+                td  #{restaurants[0].name}
+                td
+                    button(type='button', onClick="modifyRestaurant('#{restaurants[0]._id}');") Modify
+                td
+                    button(type='button', onClick="setConfirmationDeleteRestaurantModal('#{restaurants[0]._id}');") Delete
+            - for (var i=1; i < restaurants.length ; i++)
+                tr
+                    td.tdTopBorder  #{restaurants[i].name}
+                    td.tdTopBorder
+                        button(type='button', onClick="modifyRestaurant('#{restaurants[i]._id}');") Modify
+                    td.tdTopBorder
+                        button(type='button', onClick="setConfirmationDeleteRestaurantModal('#{restaurants[i]._id}');") Delete
+        else
+            tr
+                td The restaurants were a lie!
+                td
+                    button(type='button', disabled) Modify
+                td
+                    button(type='button', disabled) Delete
+
+    div#deletRestaurantModal.modal
+        div.modalHolder
+            h2 Delete Restaurant
+            p DON'T DO IT JIMMY
+            input(id='restaurantToDelete' ,name='restaurantToDelete', type='hidden', value='')
+            button(type='button', onClick="deleteRestaurant();") I'm firing ma fireball!
+            button(type='button', onClick="confirmationDeleteRestaurantModal();") Boom, counterspell!

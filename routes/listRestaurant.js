@@ -16,18 +16,8 @@ router.get('/', function(req, res) {
     var temp_restaurant = new restaurant.Restaurant();
     temp_restaurant.getRestaurantsByEntrepreneurId(logged_account._id , function(err, found_restaurants)
     {
-        var restaurants = ["None"];
         if ( err ) return console.error( err );
-        if(null != found_restaurants)
-        {
-
-            found_restaurants.forEach(function(restaurant_found) {
-
-                restaurants.push(restaurant_found.name);
-            });
-        }
-
-        res.render('listRestaurant', {restaurants: restaurants});
+        res.render('listRestaurant', {restaurants: found_restaurants});
 
     });
 
@@ -44,13 +34,7 @@ router.post('/addRestaurant/addRestaurant', function(req, res) {
         logged_account = JSON.parse(req.session.account).account;
     }
 
-
-
-    //console.log(req.body.restaurant);
-
-
     var new_restaurant = new restaurant.Restaurant();
-
     new_restaurant.setUsername(req.body.username);
     new_restaurant.setPhoneNumber(req.body.userPhoneNumber);
     new_restaurant.setCivicNo(req.body.userCivicNumber);
@@ -62,7 +46,6 @@ router.post('/addRestaurant/addRestaurant', function(req, res) {
 
     if(new_restaurant.save())
     {
-        // Show a confirmation of the creation.
         res.redirect('/');
     }
     else
@@ -93,28 +76,15 @@ router.post('/deleteRestaurant', function(req, res) {
 
 
             var json_data = JSON.parse(post_data);
-
-
-            virtual_restaurant.getRestaurantByName(json_data.restaurant,function(err, found_restaurant)
+            console.log(json_data);
+            virtual_restaurant.getRestaurantById(json_data.restaurantId,function(err, found_restaurant)
             {
                 found_restaurant.remove();
 
-                virtual_restaurant.getRestaurantsByEntrepreneurId(logged_account._id , function(err, found_restaurant)
+                virtual_restaurant.getRestaurantsByEntrepreneurId(logged_account._id , function(err, restaurantEntrepreneur)
                 {
-                    var restaurant = ["None"];
                     if ( err ) return console.error( err );
-                    if(null != found_restaurant)
-                    {
-
-                        found_restaurant.forEach(function(restaurant_found) {
-
-                            restaurant.push(restaurant_found.name);
-                        });
-
-                    }
-
-                    res.render('listRestaurant', {restaurants: restaurant});
-
+                    res.render('listRestaurant', {restaurants: restaurantEntrepreneur});
                 });
             });
         });
@@ -138,8 +108,14 @@ router.post('/modifyRestaurant', function(req, res) {
 
             var json_data = JSON.parse(post_data);
             var tempRes = new restaurant.Restaurant();
-            tempRes.getRestaurantByName(json_data.restaurant, function(err, foundRestaurant){
-                res.render('modifyRestaurant', {restaurant: foundRestaurant });
+            tempRes.getRestaurantById(json_data.restaurantId, function(err, foundRestaurant){
+                var temp_account = new account.Account();
+                temp_account.getAccountsByEntrepreneurId(admin_account._id , function(err, found_accounts)
+                {
+                    if ( err ) return console.error( err );
+                    res.render('modifyRestaurant', {restaurant: foundRestaurant, restaurateurs: found_accounts});
+                });
+
             });
         });
     };
@@ -166,6 +142,7 @@ router.post('/confirmedModifications', function(req, res) {
 
             restaurant_account.setProvince(req.body.province);
             restaurant_account.setZipCode(req.body.zipCode);
+            restaurant_account.setRestaurateurId(req.body.selectRestaurateurs);
 
             restaurant_account.save(function(err){
                 res.redirect('/');

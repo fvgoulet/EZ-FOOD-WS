@@ -82,8 +82,22 @@ function Order()
     this.getId = function()
     {
         return this.order._id;
-    }
+    };
 
+    this.getAddress = function()
+    {
+        return this.order.delivery_address_name;
+    };
+
+    this.getOrderTime = function()
+    {
+        return this.order.order_timestamp;
+    };
+
+    this.getDeliveryTime = function()
+    {
+        return this.order.delivery_time;
+    };
 }
 
 module.exports.Order = Order;

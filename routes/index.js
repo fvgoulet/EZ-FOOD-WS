@@ -96,6 +96,8 @@ router.post('/checkout', function(req, res)
 
             var new_order = new order.Order();
 
+            var selected_address = json_data["selected_address"];
+
             new_order.setClientId(logged_account._id);
             if("user_defined" == json_data["delivery_type"])
             {
@@ -105,9 +107,9 @@ router.post('/checkout', function(req, res)
             {
                 new_order.addItem(cart_item["item_id"], cart_item["item_quantity"]);
             });
-            new_order.setDeliveryAddressName(json_data["selected_address"]);
+            new_order.setDeliveryAddressName(selected_address);
             new_order.setStatus(1);
-            new_order.setRestaurantId(req.session.actual_restaurant_id)
+            new_order.setRestaurantId(req.session.actual_restaurant_id);
 
             new_order.save(function(err)
             {
@@ -115,21 +117,50 @@ router.post('/checkout', function(req, res)
 
                 res.send(new_order.getId());
 
-                var mailSender = new mail_sender.MailSender();
-                var client_name = logged_account.firstName + " " + logged_account.lastName;
-                var client_email = logged_account.email;
-                var subject = "EZ-Food : Your order has been passed !";
-                var content = "Hi " + client_name + ",\n your order as been passed, here is your confirmation number : " + new_order.getId() + "\n";
-                content = content + "Here is your order : \n"
-                content = content + "Item Name     Quantity     Unit Price \n \n"
-                var total_price = 0;
-                json_data["cart_items"].forEach(function(cart_item)
+                var account_schema = new account.Account();
+                account_schema.getAccountFromId(logged_account._id, function(err, account)
                 {
-                    content = content + cart_item["item_name"] + "    "+ cart_item["item_quantity"] + "    "+ cart_item["item_price"] + "$\n";
-                    total_price = total_price + (parseInt(cart_item["item_quantity"]) * parseFloat(cart_item["item_price"]).toFixed(2));
+                    if(err)
+                        return console.error("Couldn't find account with ID: " + logged_account._id, err);
+
+                    var current_address;
+                    var delivery_address;
+                    account.deliveryAddresses.forEach(function(address)
+                    {
+                        if(address.name === new_order.getAddress())
+                        {
+                            current_address = address;
+                        }
+                    });
+
+                    if(current_address)
+                    {
+                        delivery_address = current_address.civicNo + ", " + current_address.apartment + ", " + current_address.street + ", " + current_address.city + ", " + current_address.province + ", " + current_address.zipCode;
+                    }
+                    else
+                    {
+                        delivery_address = account.civicNo + ", " + account.apartment + ", " + account.street + ", " + account.city + ", " + account.province + ", " + account.zipCode;
+                    }
+
+                    var mailSender = new mail_sender.MailSender();
+                    var client_name = logged_account.firstName + " " + logged_account.lastName;
+                    var client_email = logged_account.email;
+                    var subject = "EZ-Food : Your order has been passed !";
+                    var content = "Hi " + client_name + ",\nYour order as been passed, here is your confirmation number : " + new_order.getId() + "\n";
+                    content = content + "Address to deliver to:    " + delivery_address + "\n \n";
+                    content = content + "Time order taken:         " + new_order.getOrderTime()  + "\n";
+                    content = content + "Desired delivery time:    " + new_order.getDeliveryTime() + "\n \n";
+                    content = content + "Here is your order : \n";
+                    content = content + "Item Name     Quantity     Unit Price \n \n";
+                    var total_price = 0;
+                    json_data["cart_items"].forEach(function(cart_item)
+                    {
+                        content = content + cart_item["item_name"] + "    "+ cart_item["item_quantity"] + "    "+ cart_item["item_price"] + "$\n";
+                        total_price = total_price + (parseInt(cart_item["item_quantity"]) * parseFloat(cart_item["item_price"]).toFixed(2));
+                    });
+                    content = content + "\nThat make a total of : " + total_price + "$.\n";
+                    mailSender.sendMail(client_name, client_email, subject, content);
                 });
-                content = content + "\nThat make a total of : " + total_price + "$.\n"
-                mailSender.sendMail(client_name, client_email, subject, content);
             });
 
         });

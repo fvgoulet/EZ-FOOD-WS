@@ -53,18 +53,14 @@
 }
 
 
-#ordersManagement th {
-    background-color: black;
-    color:white;
-    font:bold;
-    text-align: center;
-}
+
 
 #ordersManagement td {
     border-top: 1.5px solid black;
     font-size: 10px;
 }
-#ordersManagement tr:hover{
+
+#orderTableRow:hover{
     background: rgba(0,0,0,0.5);
     color:white;
 }

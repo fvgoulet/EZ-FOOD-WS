@@ -28,7 +28,7 @@ block content
                                 p #{item.item_id} X #{item.quantity}
                                 br
                         td
-                            button#prepareOrder Prepare Order
+                            button(type='button', onClick="changeOrdeStatus(order._id, 2);") Prepare Order
 
 
 
@@ -42,8 +42,7 @@ block content
                 th Reception
                 th Due
                 th Items
-                th Status
-                th Modify/Delete
+                th Action
             tbody
                 each order, i in inPreparationOrders
                     tr
@@ -57,15 +56,7 @@ block content
                                 p #{item.item_id} X #{item.quantity}
                                 br
                         td
-                            fieldset
-                                select#inputOrderStatus
-                                    option(value='1') Pending
-                                    option(value='2', selected) In Preparation
-                                    option(value='3') Ready
-                                    option(value='4') Delivered
-                        td
-                            button#updateOrder Update
-                            button#deleteOrder Delete
+                            button(type='button', onClick="changeOrdeStatus(order._id, 3);") Set order to ready
 
     br
     div#ordersReady
@@ -77,8 +68,6 @@ block content
                 th Reception
                 th Due
                 th Items
-                th Status
-                th Modify/Delete
             tbody
                 each order, i in readyOrders
                     tr
@@ -91,16 +80,6 @@ block content
                             each item, i in order.items
                                 p #{item.item_id} X #{item.quantity}
                                 br
-                        td
-                            fieldset
-                                select#inputOrderStatus
-                                    option(value='1') Pending
-                                    option(value='2') In Preparation
-                                    option(value='3', selected) Ready
-                                    option(value='4') Delivered
-                        td
-                            button#updateOrder Update
-                            button#deleteOrder Delete
 
     br
     div#ordersDelivered
@@ -112,8 +91,6 @@ block content
                 th Reception
                 th Due
                 th Items
-                th Status
-                th Modify/Delete
             tbody
                 each order, i in deliveredOrders
                     tr
@@ -126,13 +103,3 @@ block content
                             each item, i in order.items
                                 p #{item.item_id} X #{item.quantity}
                                 br
-                        td
-                            fieldset
-                                select#inputOrderStatus
-                                    option(value='1') Pending
-                                    option(value='2') In Preparation
-                                    option(value='3') Ready
-                                    option(value='4', selected) Delivered
-                        td
-                            button#updateOrder Update
-                            button#deleteOrder Delete

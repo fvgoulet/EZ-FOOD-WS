@@ -22,7 +22,7 @@ router.get('/', function(req, res)
             schemaRestaurant.getRestaurantByRestaurateurId(actual_account._id, function(err, restaurant)
             {
                 if(err) {
-                    console.error("Error in Orders getRestaurantsByRestaurateurId: ", err);
+
                     return console.error("Error in orderManagement/ordersLists: Error searching for restaurant from restaurateur._id = " + actual_account._id, err);
                 }
 
@@ -30,10 +30,10 @@ router.get('/', function(req, res)
 
                 schemaOrder.getRelatedOrdersByRestaurant(restaurant._id, function(err, orders)
                 {
-                    console.log(orders);
+
 
                     if(err){
-                        console.error("Error in Orders getRelatedOrdersByRestaurant: ", err);
+
                         return console.error("Error in orderManagement/ordersLists: Error searching for orders from restaurant._id = " + restaurant._id, err);
                     }
 
@@ -110,7 +110,7 @@ router.post('/updateOrderStatus', function(req, res)
                     schemaRestaurant.getRestaurantByRestaurateurId(actual_account._id, function(err, restaurant)
                     {
                         if(err) {
-                            console.error("Error in Orders getRestaurantsByRestaurateurId: ", err);
+
                             return console.error("Error in orderManagement/ordersLists: Error searching for restaurant from restaurateur._id = " + actual_account._id, err);
                         }
 
@@ -118,9 +118,6 @@ router.post('/updateOrderStatus', function(req, res)
 
                         schemaOrder.getOrderById(json_data["order_id"], function(err, order)
                             {
-                                console.log("iciiiiiiiiiiiiiiiiiiiiiiiiii");
-                                console.log(order);
-                                console.log(json_data);
                                 order.status = json_data["order_status"];
 
                                 order.save(function()
@@ -152,10 +149,10 @@ router.post('/updateOrderStatus', function(req, res)
 
                                     schemaOrder.getRelatedOrdersByRestaurant(restaurant._id, function(err, orders)
                                     {
-                                        console.log(orders);
+
 
                                         if(err){
-                                            console.error("Error in Orders getRelatedOrdersByRestaurant: ", err);
+
                                             return console.error("Error in orderManagement/ordersLists: Error searching for orders from restaurant._id = " + restaurant._id, err);
                                         }
 

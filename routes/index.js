@@ -96,8 +96,6 @@ router.post('/checkout', function(req, res)
 
             var new_order = new order.Order();
 
-            var selected_address = json_data["selected_address"];
-
             new_order.setClientId(logged_account._id);
             if("user_defined" == json_data["delivery_type"])
             {
@@ -161,6 +159,8 @@ router.post('/checkout', function(req, res)
                     content = content + "\nThat make a total of : " + total_price + "$.\n";
                     mailSender.sendMail(client_name, client_email, subject, content);
                 });
+                content = content + "\nThat make a total of : " + parseFloat(total_price).toFixed(2) + "$.\n"
+                mailSender.sendMail(client_name, client_email, subject, content);
             });
 
         });

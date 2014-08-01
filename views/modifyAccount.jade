@@ -1,60 +1,68 @@
-
 block content
 
     fieldset
         legend Modify Account
-        form(name="account", action="/modifyAccount/confirmAccount", method="post")
+        form(name="account", id="account", action="/modifyAccount/confirmed", method="post")
+
             table
-                input(name='username', type='hidden', value='#{account.username}',class='form-control')
+                input(name='username', type='hidden', value='#{account.username}')
                 tr
                     td Password :
                     td
-                        input(name='userPassword', type='password', placeholder='Password', value='#{account.password}',class='form-control', required autofocus, autocomplete="off")
+                        input(name='userPassword',id='userPassword', type='password', placeholder='Password', value='#{account.password}',class='form-control', required autofocus, autocomplete="off")
                 tr
                     td First Name :
                     td
-                        input(name='userFirstName', type='text', placeholder='First Name', value='#{account.firstName}',class='form-control', required autofocus, autocomplete="off")
+                        input(name='userFirstName',id='userFirstName', type='text', placeholder='First Name', value='#{account.firstName}',class='form-control', required autofocus, autocomplete="off")
                 tr
                     td Last Name :
                     td
-                        input(name='userSecondName', type='text', placeholder='Last Name', value='#{account.lastName}',class='form-control', required autofocus, autocomplete="off")
+                        input(name='userSecondName',id='userSecondName', type='text', placeholder='Last Name', value='#{account.lastName}',class='form-control', required autofocus, autocomplete="off")
                 tr
                     td Birth Date :
                     td
-                        input(name='userBirthDate', type='text', placeholder='YYYY-MM-DD', value='#{account.birthDate}',class='form-control', required autofocus, autocomplete="off")
+                        input(name='userBirthDate',id='userBirthDate', type='text', placeholder='YYYY-MM-DD', value='#{account.birthDate}',class='form-control', required autofocus, autocomplete="off")
                 tr
                     td Email :
                     td
-                        input(name='userEmail', type='text', placeholder='Email', value='#{account.email}',class='form-control', required autofocus, autocomplete="off")
+                        input(name='userEmail',id='userEmail', type='text', placeholder='Email', value='#{account.email}',class='form-control', required autofocus, autocomplete="off")
                 tr
                     td Phone Number :
                     td
-                        input(name='userPhoneNumber', type='text', placeholder='###-###-####', value='#{account.phoneNumber}',class='form-control', required autofocus, autocomplete="off")
+                        input(name='userPhoneNumber',id='userPhoneNumber', type='text', placeholder='###-###-####', value='#{account.phoneNumber}',class='form-control', required autofocus, autocomplete="off")
                 tr
                     td Civic No. :
                     td
-                        input(name='userCivicNumber', type='text', placeholder='Civic No.', value='#{account.civicNo}',class='form-control', required autofocus, autocomplete="off")
+                        input(name='userCivicNumber',id='userCivicNumber', type='text', placeholder='Civic No.', value='#{account.civicNo}',class='form-control', required autofocus, autocomplete="off")
                 tr
                     td Appartment :
                     td
-                        input(name='userAppNumber', type='text', placeholder='App. No. (Optional)', value='#{account.apartment}',class='form-control', required autofocus, autocomplete="off")
+                        input(name='userAppNumber',id='userAppNumber', type='text', placeholder='App. No. (Optional)', value='#{account.apartment}',class='form-control', required autofocus, autocomplete="off")
                 tr
                     td Street :
                     td
-                        input(name='userStreet', type='text', placeholder='Street', value='#{account.street}',class='form-control', required autofocus, autocomplete="off")
+                        input(name='userStreet',id='userStreet', type='text', placeholder='Street', value='#{account.street}',class='form-control', required autofocus, autocomplete="off")
                 tr
                     td City :
                     td
-                        input(name='userCity', type='text', placeholder='City', value='#{account.city}',class='form-control', required autofocus, autocomplete="off")
+                        input(name='userCity',id='userCity', type='text', placeholder='City', value='#{account.city}',class='form-control', required autofocus, autocomplete="off")
                 tr
                     td Province :
                     td
-                        input(name='userProvince', type='text', placeholder='Province', value='#{account.province}',class='form-control', required autofocus, autocomplete="off")
+                        input(name='userProvince', id='userProvince', type='text', placeholder='Province', value='#{account.province}',class='form-control', required autofocus, autocomplete="off")
                 tr
                     td ZIP Code :
                     td
-                        input(name='userZipCode', type='text', placeholder='ZIP Code', value='#{account.zipCode}',class='form-control', required autofocus, autocomplete="off")
+                        input(name='userZipCode',id='userZipCode', type='text', placeholder='ZIP Code', value='#{account.zipCode}',class='form-control', required autofocus, autocomplete="off")
                 tr
                     td
-                        input#btnSubmitModifications(type="submit", value="Modify Account",class="btn btn-lg btn-primary btn-block")
+                        input(type="button", value="Modify Account", onclick="showAccountConfirmation();")
                     td
+
+    div#confirmationCreateAccountModal.modal
+        div.modalHolder
+            h2 Confirm your informations
+            p Here is the summary of your account information :
+            div#accountInformations
+            button(onclick="modalVisbility(document.getElementById('confirmationCreateAccountModal'));") Edit
+            button(onclick="document.getElementById('account').submit();") Confirm

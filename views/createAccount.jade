@@ -4,7 +4,7 @@ block content
         legend Account Creation
         div#mandatoy.warningCreateAccount Fields with an "*" are mandatory
         div#error.warningCreateAccount
-        form(name="account", action="/createAccount/confirmAccount", method="post")
+        form(name="account" ,id="account" , action="/createAccount/confirmed", method="post")
             if username
                 table
                     tr
@@ -65,7 +65,7 @@ block content
                             input(id='userZipCode', name='userZipCode', type='text', placeholder='ZIP Code', value='#{userZipCode}',class='form-control', required autofocus, autocomplete="off")
                     tr
                         td
-                            input#btnSubmitAccount(type="submit", value="Create Account",class="btn btn-lg btn-primary btn-block", onclick="validateAccountFields();", disabled)
+                            input#btnSubmitAccount(type="button", value="Create Account", onclick="validateAccountFields();showAccountConfirmation();", disabled)
                         td
             else
                 table
@@ -127,5 +127,14 @@ block content
                             input(id='userZipCode', name='userZipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
                     tr
                         td
-                            input#btnSubmitAccount(type="submit", value="Create Account", class="btn btn-lg btn-primary btn-block", onclick="validateAccountFields();", disabled)
+                            input#btnSubmitAccount(type="button", value="Create Account", onclick="validateAccountFields();showAccountConfirmation();", disabled)
                         td
+
+    div#confirmationCreateAccountModal.modal
+        div.modalHolder
+            h2 Confirm your informations
+            p Here is the summary of your account information :
+            div#accountInformations
+
+            button(onclick="modalVisbility(document.getElementById('confirmationCreateAccountModal'));") Edit
+            button(onclick="document.getElementById('account').submit();") Confirm

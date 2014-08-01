@@ -12,7 +12,7 @@ router.get('/', function(req, res) {
  * GET .
  */
 router.post('/isAccountExist', function(req, res) {
-    console.log("is account exist");
+
     if (req.method == 'POST') {
         var post_data = '';
         req.on('data', function (data) {
@@ -22,17 +22,15 @@ router.post('/isAccountExist', function(req, res) {
         req.on('end', function () {
 
 
-            console.log('RECEIVED THIS DATA:\n' + post_data);
+
             var json_data = JSON.parse(post_data);
-            console.log(json_data);
-            console.log(json_data.username);
+
 
             var virtual_account = new account.Account();
             virtual_account.getAccountFromUsername(json_data.username,function(err, found_account)
             {
                 if ( err ) return console.error( err );
-                console.log('Found account : ');
-                console.log(found_account);
+
                 if(null != found_account)
                 {
 
@@ -56,7 +54,7 @@ router.post('/isAccountExist', function(req, res) {
  */
 router.post('/confirmAccount', function(req, res) {
     //var db = req.db;
-    console.log(req.body.username);
+
     var newUser = {
         'username' : req.body.username ,
         'userPassword': req.body.userPassword,
@@ -82,7 +80,7 @@ router.post('/confirmAccount', function(req, res) {
  */
 router.post('/confirmed', function(req, res) {
     //var db = req.db;
-    console.log('Add user to DB');
+
 
 
     var new_account = new account.Account();
@@ -130,7 +128,7 @@ router.post('/', function(req, res) {
         'userEmail':req.body.userEmail
     };
 
-    console.log(newUser);
+
 
     res.render('createAccount', newUser );
 

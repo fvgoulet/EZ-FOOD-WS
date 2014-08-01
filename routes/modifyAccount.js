@@ -11,8 +11,7 @@ router.get('/', function(req, res) {
     if((req.session.account)){
         actual_account = JSON.parse(req.session.account).account;
     }
-    console.log("Modify account :");
-    console.log(actual_account);
+
 
     res.render('modifyAccount', {account: actual_account });
 });
@@ -27,7 +26,7 @@ router.post('/confirmAccount', function(req, res) {
     if((req.session.account)){
         actual_account = JSON.parse(req.session.account).account;
     }
-    console.log(req.body.username);
+
     var user = {
         'username' : actual_account.username ,
         'userPassword': req.body.userPassword,
@@ -53,7 +52,7 @@ router.post('/confirmAccount', function(req, res) {
  */
 router.post('/confirmed', function(req, res) {
     //var db = req.db;
-    console.log('Add user to DB');
+
 
 
     var old_account;
@@ -68,8 +67,7 @@ router.post('/confirmed', function(req, res) {
         if ( err ) return console.error( err );
         if(null != found_account)
         {
-            console.log('Found account : ');
-            console.log(found_account);
+
             actual_account.setAccount(found_account);
         }
 
@@ -104,8 +102,7 @@ router.post('/', function(req, res) {
     if((req.session.account)){
         actual_account = JSON.parse(req.session.account).account;
     }
-    console.log("Modify account :");
-    console.log(actual_account);
+
 
     res.render('modifyAccount', {account: actual_account });
 });

@@ -42,7 +42,7 @@ router.post('/confirmAccount', function(req, res) {
         'userProvince': req.body.userProvince,
         'userZipCode': req.body.userZipCode,
         'userEmail':req.body.userEmail
-    }
+    };
 
     res.render('confirmAccountModifications', user );
 

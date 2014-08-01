@@ -78,7 +78,7 @@ function validateAccountFields(event) {
     }
     else
     {
-        //document.account.submit();
+        showAccountConfirmation();
     }
 }
 

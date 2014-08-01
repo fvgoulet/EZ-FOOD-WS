@@ -1,68 +1,77 @@
 
 block content
 
-    p Please edit the fields.
-    br
-    // Create Account
-    h2 Modify Account
+    fieldset
+        legend Modify Account of #{account.username}
+        p Please edit the fields.
+        form(name="account", action="/manageRestaurateur/confirmedModifications", method="post")
+            table
+                tr
 
-    form(name="account", action="/manageRestaurateur/confirmedModifications", method="post")
-        h3 Restaurant(Optional)
-        br
-        div
+                    td Restaurant(optional) :
+                    td
+                        select(name="selected_restaurants" ,id="selected_restaurants")
+                            option
+                            - for (var x = 0; x < available_restaurants.length ; x++)
+                                - if(available_restaurants[x] == selected_restaurants[0])
+                                    option(name='#{available_restaurants[x]}', selected="selected") #{available_restaurants[x]}
+                                - else
+                                    option(name='#{available_restaurants[x]}') #{available_restaurants[x]}
 
-            div(style="float:left;")
-                | Available restaurants :
-                br
-                select(id="available_restaurants", multiple="multiple")
-                    - for (var x = 0; x < available_restaurants.length ; x++)
-                        option(name='#{available_restaurants[x]}') #{available_restaurants[x]}
-            div(style="float:left;")
-                button(type="button", onClick="deleteFromSelectedRestaurants();") <--
-                br
-                button(type="button", onClick="addToSelectedRestaurants();") -->
-            div(style="float:left;")
-                | Assigned restaurants :
-                br
-                select(name="selected_restaurants" ,id="selected_restaurants", multiple="multiple")
-                    - for (var x = 0; x < selected_restaurants.length ; x++)
-                        option(name='#{selected_restaurants[x]}') #{selected_restaurants[x]}
+                input(name='username', type='hidden', value='#{account.username}',class='form-control')
+                tr
+                    td Password *:
+                    td
+                        input(name='userPassword', type='password', placeholder='Password', value='#{account.password}',class='form-control', required autofocus, autocomplete="off")
 
-        hr(align="center", width="85%", size="10", noshade)
-        h3 Account
+                tr
+                    td First Name *:
+                    td
+                        input(name='userFirstName', type='text', placeholder='First Name', value='#{account.firstName}',class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td Last Name *:
+                    td
+                        input(name='userSecondName', type='text', placeholder='Last Name', value='#{account.lastName}',class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td Birth Date *:
+                    td
+                        input(name='userBirthDate', type='text', placeholder='YYYY-MM-DD', value='#{account.birthDate}',class='form-control', required autofocus, autocomplete="off")
 
-        input(name='username', type='hidden', value='#{account.username}',class='form-control')
-        | Password :
-        input(name='userPassword', type='password', placeholder='Password', value='#{account.password}',class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td Email *:
+                    td
+                        input(name='userEmail', type='text', placeholder='Email', value='#{account.email}',class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td Phone Number *:
+                    td
+                        input(name='userPhoneNumber', type='text', placeholder='###-###-####', value='#{account.phoneNumber}',class='form-control', required autofocus, autocomplete="off")
 
-        br
-        | First Name :
-        input(name='userFirstName', type='text', placeholder='First Name', value='#{account.firstName}',class='form-control', required autofocus, autocomplete="off")
-        | Last Name :
-        input(name='userSecondName', type='text', placeholder='Last Name', value='#{account.lastName}',class='form-control', required autofocus, autocomplete="off")
-        | Birth Date :
-        input(name='userBirthDate', type='text', placeholder='YYYY-MM-DD', value='#{account.birthDate}',class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td Civic No. *:
+                    td
+                        input(name='userCivicNumber', type='text', placeholder='Civic No.', value='#{account.civicNo}',class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td Appartment :
+                    td
+                        input(name='userAppNumber', type='text', placeholder='App. No. (Optional)', value='#{account.apartment}',class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td Street *:
+                    td
+                        input(name='userStreet', type='text', placeholder='Street', value='#{account.street}',class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td City *:
+                    td
+                        input(name='userCity', type='text', placeholder='City', value='#{account.city}',class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td Province *:
+                    td
+                        input(name='userProvince', type='text', placeholder='Province', value='#{account.province}',class='form-control', required autofocus, autocomplete="off")
+                tr
+                    td ZIP Code *:
+                    td
+                        input(name='userZipCode', type='text', placeholder='ZIP Code', value='#{account.zipCode}',class='form-control', required autofocus, autocomplete="off")
 
-        br
-        | Email :
-        input(name='userEmail', type='text', placeholder='Email', value='#{account.email}',class='form-control', required autofocus, autocomplete="off")
-        | Phone Number :
-        input(name='userPhoneNumber', type='text', placeholder='###-###-####', value='#{account.phoneNumber}',class='form-control', required autofocus, autocomplete="off")
-
-        br
-        | Civic No. :
-        input(name='userCivicNumber', type='text', placeholder='Civic No.', value='#{account.civicNo}',class='form-control', required autofocus, autocomplete="off")
-        | Appartment :
-        input(name='userAppNumber', type='text', placeholder='App. No. (Optional)', value='#{account.apartment}',class='form-control', required autofocus, autocomplete="off")
-        | Street :
-        input(name='userStreet', type='text', placeholder='Street', value='#{account.street}',class='form-control', required autofocus, autocomplete="off")
-        | City :
-        input(name='userCity', type='text', placeholder='City', value='#{account.city}',class='form-control', required autofocus, autocomplete="off")
-        | Province :
-        input(name='userProvince', type='text', placeholder='Province', value='#{account.province}',class='form-control', required autofocus, autocomplete="off")
-        | ZIP Code :
-        input(name='userZipCode', type='text', placeholder='ZIP Code', value='#{account.zipCode}',class='form-control', required autofocus, autocomplete="off")
-
-        br
-        input#btnSubmitModifications(type="submit", value="Modify Account",class="btn btn-lg btn-primary btn-block", onClick="selectAll(document.getElementById('selected_restaurants'),true);")
+                tr
+                    td
+                        input#btnSubmitModifications(type="submit", value="Modify Account",class="btn btn-lg btn-primary btn-block", onClick="selectAll(document.getElementById('selected_restaurants'),true);")
 

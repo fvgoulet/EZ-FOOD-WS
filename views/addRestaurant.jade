@@ -4,57 +4,85 @@
 
 block content
 
-    h2 Add Restaurant
-    br
-    p Please fill the fields to add a restaurant to your account.
-    #myDiv
-    if name
 
-        form(name="restaurant", id="restaurant", action="/addRestaurant/confirmed", method="post")
-            br
-            | Name :
-            input(name='name',id='name', type='text', placeholder='Name', value='#{name}',class='form-control', required autofocus, autocomplete="off")
-            | Phone Number :
-            input(name='phoneNumber',id='phoneNumber', type='text', placeholder='###-###-####', value='#{phoneNumber}',class='form-control', required autofocus, autocomplete="off")
+    fieldset
+        legend Add Restaurant
+        p Please fill the fields to add a restaurant to your account.
+        if name
 
-            br
-            | Civic No. :
-            input(name='civicNumber',id='civicNumber', type='text', placeholder='Civic No.', value='#{civicNumber}',class='form-control', required autofocus, autocomplete="off")
-            | Street :
-            input(name='street',id='street', type='text', placeholder='Street', value='#{street}',class='form-control', required autofocus, autocomplete="off")
-            | City :
-            input(name='city',id='city', type='text', placeholder='City', value='#{city}',class='form-control', required autofocus, autocomplete="off")
-            | Province :
-            input(name='province',id='province', type='text', placeholder='Province', value='#{province}',class='form-control', required autofocus, autocomplete="off")
-            | ZIP Code :
-            input(name='zipCode',id='zipCode', type='text', placeholder='ZIP Code', value='#{zipCode}',class='form-control', required autofocus, autocomplete="off")
-            br
+            form(name="restaurant", id="restaurant", action="/addRestaurant/confirmed", method="post")
+                table
+                    tr
+                        td Name :
+                        td
+                            input(name='name',id='name', type='text', placeholder='Name', value='#{name}',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td Phone Number :
+                        td
+                            input(name='phoneNumber',id='phoneNumber', type='text', placeholder='###-###-####', value='#{phoneNumber}',class='form-control', required autofocus, autocomplete="off")
 
-            br
-            input#btnSubmitRestaurant(name="submit_button",type="button", value="Add Restaurant", onclick="showRestaurantConfirmation();")
-    else
-        form(name="restaurant",id="restaurant", action="/addRestaurant/confirmed", method="post", enctype="multipart/form-data")
-            br
-            | Name :
-            input(name='name',id='name',class='form-control' , type='text', placeholder='Name', required autofocus, autocomplete="off")
-            | Phone Number :
-            input(name='phoneNumber',id='phoneNumber',class='form-control', type='text', placeholder='###-###-####', required autofocus, autocomplete="off")
-            br
-            | Civic No. :
-            input(name='civicNumber',id='civicNumber',class='form-control', type='text', placeholder='Civic No.', required autofocus, autocomplete="off")
-            | Street :
-            input(name='street',id='street',class='form-control', type='text', placeholder='Street', required autofocus, autocomplete="off")
-            | City :
-            input(name='city',id='city',class='form-control', type='text', placeholder='City', required autofocus, autocomplete="off")
-            | Province :
-            input(name='province',id='province',class='form-control', type='text', placeholder='Province', required autofocus, autocomplete="off")
-            | ZIP Code :
-            input(name='zipCode',id='zipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
-            br
-            | Restaurant picture :
-            input(type="file",  name="displayImage")
-            br
-            input#btnSubmitRestaurant(name="submit_button",type="button", value="Add Restaurant", onclick="showRestaurantConfirmation();")
+                    tr
+                        td Civic No. :
+                        td
+                            input(name='civicNumber',id='civicNumber', type='text', placeholder='Civic No.', value='#{civicNumber}',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td Street :
+                        td
+                            input(name='street',id='street', type='text', placeholder='Street', value='#{street}',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td City :
+                        td
+                            input(name='city',id='city', type='text', placeholder='City', value='#{city}',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td Province :
+                        td
+                            input(name='province',id='province', type='text', placeholder='Province', value='#{province}',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td ZIP Code :
+                        td
+                            input(name='zipCode',id='zipCode', type='text', placeholder='ZIP Code', value='#{zipCode}',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td
+                            input#btnSubmitRestaurant(name="submit_button",type="button", value="Add Restaurant", onclick="showRestaurantConfirmation();")
+        else
+            form(name="restaurant",id="restaurant", action="/addRestaurant/confirmed", method="post", enctype="multipart/form-data")
+                table
+                    tr
+                        td Name :
+                        td
+                            input(name='name',id='name',class='form-control' , type='text', placeholder='Name', required autofocus, autocomplete="off")
+                    tr
+                        td Phone Number :
+                        td
+                            input(name='phoneNumber',id='phoneNumber',class='form-control', type='text', placeholder='###-###-####', required autofocus, autocomplete="off")
+                    tr
+                        td Civic No. :
+                        td
+                            input(name='civicNumber',id='civicNumber',class='form-control', type='text', placeholder='Civic No.', required autofocus, autocomplete="off")
+                    tr
+                        td Street :
+                        td
+                            input(name='street',id='street',class='form-control', type='text', placeholder='Street', required autofocus, autocomplete="off")
+
+                    tr
+                        td City :
+                        td
+                            input(name='city',id='city',class='form-control', type='text', placeholder='City', required autofocus, autocomplete="off")
+                    tr
+                        td Province :
+                        td
+                            input(name='province',id='province',class='form-control', type='text', placeholder='Province', required autofocus, autocomplete="off")
+                    tr
+                        td ZIP Code :
+                        td
+                            input(name='zipCode',id='zipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
+                    tr
+                        td Restaurant picture :
+                        td
+                            input(type="file",  name="displayImage")
+                    tr
+                        td
+                            input#btnSubmitRestaurant(name="submit_button",type="button", value="Add Restaurant", onclick="showRestaurantConfirmation();")
 
     div#confirmationCreateRestaurantModal.modal
         div.modalHolder

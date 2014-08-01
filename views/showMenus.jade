@@ -1,7 +1,8 @@
 
 block content
-    - for (var x = 0; x < menus.length ; x++)
-        li.restaurantLink
-            a(onclick="showMenuItems('#{menus[x]._id}');")
-                h4 #{menus[x].name}
-                h4 #{menus[x].description}
+    ul
+        - for (var x = 0; x < menus.length ; x++)
+            li.restaurantLink
+                a(onclick="showMenuItems('#{menus[x]._id}');")
+                    h4 #{menus[x].name}
+                    h4 #{menus[x].description}

@@ -1,59 +1,85 @@
 
 block content
 
+    fieldset
+        legend Add Restaurateur
+        p Please fill the fields to add the restaurateur.
 
-    h2 Add Restaurateur
-    br
-    p Please fill the fields to add the restaurateur.
-    br
-    form(name="account", action="/manageRestaurateur/addNewRestaurateur/addUser", method="post")
-        h3 Restaurant(Optional)
-        br
-        | Available restaurants :
-        select(id="available_restaurants", multiple="multiple")
-            - for (var x = 0; x < available_restaurants.length ; x++)
-              option(name='#{available_restaurants[x]}') #{available_restaurants[x]}
-        button(type="button", onClick="deleteFromSelectedRestaurants();") <--
-        button(type="button", onClick="addToSelectedRestaurants();") -->
-        | Selected restaurants :
-        select(name="selected_restaurants" ,id="selected_restaurants", multiple="multiple")
-        //    - for (var x = 0; x < selected_restaurants.length ; x++)
-        //        option(name='#{selected_restaurants[x]}') #{selected_restaurants[x]}
+        form(name="account", action="/manageRestaurateur/addNewRestaurateur/addUser", method="post")
+            table
 
-        hr(align="center", width="85%", size="10", noshade)
-        h3 Account
-        br
-        | Username :
-        input(name='username',class='form-control' , type='text', placeholder='Username', required autofocus, autocomplete="off", onblur="checkAccountExist();")
-        | Password :
-        input(name='userPassword',class='form-control', type='password', placeholder='Password', required autofocus, autocomplete="off")
-        br
-        | First Name :
-        input(name='userFirstName',class='form-control', type='text', placeholder='First Name', required autofocus, autocomplete="off")
-        | Last Name :
-        input(name='userSecondName',class='form-control', type='text', placeholder='Last Name', required autofocus, autocomplete="off")
-        | Birth Date :
-        input(name='userBirthDate',class='form-control', type='text', placeholder='YYYY-MM-DD', required autofocus, autocomplete="off")
-        br
-        | Email :
-        input(name='userEmail',class='form-control', type='text', placeholder='Email', required autofocus, autocomplete="off")
-        | Phone Number :
-        input(name='userPhoneNumber',class='form-control', type='text', placeholder='###-###-####', required autofocus, autocomplete="off")
-        br
-        | Civic No. :
-        input(name='userCivicNumber',class='form-control', type='text', placeholder='Civic No.', required autofocus, autocomplete="off")
-        | Appartment :
-        input(name='userAppNumber',class='form-control', type='text', placeholder='App. No.(Optionnal)', autofocus, autocomplete="off")
-        | Street :
-        input(name='userStreet',class='form-control', type='text', placeholder='Street', required autofocus, autocomplete="off")
-        | City :
-        input(name='userCity',class='form-control', type='text', placeholder='City', required autofocus, autocomplete="off")
-        | Province :
-        input(name='userProvince',class='form-control', type='text', placeholder='Province', required autofocus, autocomplete="off")
-        | ZIP Code :
-        input(name='userZipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
-        br
-        input#btnSubmitRestaurateur(name="submit_button",type="submit", value="Add Restaurateur", class="btn btn-lg btn-primary btn-block", onclick="selectAll(document.getElementById('selected_restaurants'),true); validateAccountFields();")
+                tr
+                    td Restaurant(Optional) :
+                    td
+                        select(name="selected_restaurants" ,id="selected_restaurants")
+                            option
+                            - for (var x = 0; x < available_restaurants.length ; x++)
+                                option(name='#{available_restaurants[x]}') #{available_restaurants[x]}
+
+
+                tr
+                    td Username :
+                    td
+                        input(name='username',class='form-control' , type='text', placeholder='Username', required autofocus, autocomplete="off", onblur="checkAccountExist();")
+
+                tr
+                    td Password :
+                    td
+                        input(name='userPassword',class='form-control', type='password', placeholder='Password', required autofocus, autocomplete="off")
+                tr
+                    td First Name :
+                    td
+                        input(name='userFirstName',class='form-control', type='text', placeholder='First Name', required autofocus, autocomplete="off")
+                tr
+                    td Last Name :
+                    td
+                       input(name='userSecondName',class='form-control', type='text', placeholder='Last Name', required autofocus, autocomplete="off")
+
+                tr
+                    td Birth Date :
+                    td
+                        input(name='userBirthDate',class='form-control', type='text', placeholder='YYYY-MM-DD', required autofocus, autocomplete="off")
+                tr
+                    td Email :
+                    td
+                        input(name='userEmail',class='form-control', type='text', placeholder='Email', required autofocus, autocomplete="off")
+
+                tr
+                    td Phone Number :
+                    td
+                        input(name='userPhoneNumber',class='form-control', type='text', placeholder='###-###-####', required autofocus, autocomplete="off")
+                tr
+                    td Civic No. :
+                    td
+                        input(name='userCivicNumber',class='form-control', type='text', placeholder='Civic No.', required autofocus, autocomplete="off")
+
+                tr
+                    td Appartment :
+                    td
+                        input(name='userAppNumber',class='form-control', type='text', placeholder='App. No.(Optionnal)', autofocus, autocomplete="off")
+                tr
+                    td Street :
+                    td
+                        input(name='userStreet',class='form-control', type='text', placeholder='Street', required autofocus, autocomplete="off")
+
+                tr
+                    td City :
+                    td
+                        input(name='userCity',class='form-control', type='text', placeholder='City', required autofocus, autocomplete="off")
+
+                tr
+                    td Province :
+                    td
+                        input(name='userProvince',class='form-control', type='text', placeholder='Province', required autofocus, autocomplete="off")
+
+                tr
+                    td ZIP Code :
+                    td
+                        input(name='userZipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
+
+                tr
+                    td
+                        input#btnSubmitRestaurateur(name="submit_button",type="submit", value="Add Restaurateur", class="btn btn-lg btn-primary btn-block", onclick="selectAll(document.getElementById('selected_restaurants'),true); validateAccountFields();")
 
 
     //script(src='/javascripts/validateAccountFields.js')

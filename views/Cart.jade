@@ -49,7 +49,7 @@ if cart != null
             p#confirmationNumber
             p An e-mail will be send to you with your order informations.
 
-            button(type='button', onClick="closeConfirmation();") Close
+            button(type='button', onClick="closeConfirmation();window.location = '/';") Close
 
     div#addNewAddress.modal
         div.modalHolder
@@ -133,3 +133,9 @@ if cart != null
             button(type='button', onClick="checkout();confirmationCommandModal();") Gimme that Food !
             button(type='button', onClick="confirmationCommandModal();") Nop
 
+    div#alertCartEmpty.modal
+        div.modalHolder
+            h2 ERROR !
+            p Your cart is empty...
+
+            button(type='button', onClick="modalVisbility(document.getElementById('alertCartEmpty'));") ok

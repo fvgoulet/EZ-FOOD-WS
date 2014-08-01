@@ -10,6 +10,16 @@ $(document).ready(function()
 
 // Functions =============================================================
 
+function setConfirmationDeleteRestaurateur(account_name){
+
+    document.getElementById('accountToDelete').value = account_name;
+    var modal = document.getElementById('deleteAccountModal');
+    modalVisbility(modal);
+}
+
+
+
+
 function showRestaurantConfirmation()
 {
     var name = document.getElementById('name').value ;
@@ -78,7 +88,8 @@ function confirmationCommandModal(){
         modalVisbility(modal);
     }
     else{
-        alert("Your cart is empty !!!");
+        var modal = document.getElementById('alertCartEmpty');
+        modalVisbility(modal);
     }
 }
 
@@ -152,7 +163,8 @@ function checkout()
     }
     else
     {
-        alert("Your cart is empty !!");
+        var modal = document.getElementById('alertCartEmpty');
+        modalVisbility(modal);
     }
 
 }
@@ -266,7 +278,15 @@ function deleteItem(item_id)
     // Callback on response.e
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            document.getElementById("cart").innerHTML = xmlhttp.responseText;
+            if("cart_empty" == xmlhttp.responseText)
+            {
+                window.location = "/";
+            }
+            else
+            {
+                document.getElementById("cart").innerHTML = xmlhttp.responseText;
+            }
+
         }
     };
 
@@ -590,42 +610,36 @@ function deleteRestaurant() {
     }
 }
 
-function deleteUser()
+function deleteRestaurateur()
 {
-    var e = document.getElementById("avalaibleRestaurateur");
-    var strUser = e.options[e.selectedIndex].text;
+
+    var strUser = document.getElementById("accountToDelete").value;
     if("None" != strUser) {
-        // Pop up a confirmation dialog
-        var confirmation = confirm('Are you sure you want to delete the user ' + strUser + '?');
 
-        // Check and make sure the user confirmed
-        if (confirmation === true) {
-            var xmlhttp;
-            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            }
-            else {// code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            // Callback on response.e
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState==4 && xmlhttp.status==200)
-                {
-                    document.getElementById("content").innerHTML = xmlhttp.responseText;
-                }
-            };
-
-            xmlhttp.open("POST", "/manageRestaurateur/deleteUser", true);
-            xmlhttp.send('{"username":"' + strUser + '"}');
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
         }
+        else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        // Callback on response.e
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                document.getElementById("content").innerHTML = xmlhttp.responseText;
+            }
+        };
+
+        xmlhttp.open("POST", "/manageRestaurateur/deleteUser", true);
+        xmlhttp.send('{"username":"' + strUser + '"}');
+
     }
 }
 
-function modifyUser()
+function modifyRestaurateur(name)
 {
-    var e = document.getElementById("avalaibleRestaurateur");
-    var strUser = e.options[e.selectedIndex].text;
-    if("None" != strUser)
+    if("None" != name)
     {
 
         var xmlhttp;
@@ -644,7 +658,7 @@ function modifyUser()
         };
 
         xmlhttp.open("POST", "/manageRestaurateur/modifyUser", true);
-        xmlhttp.send('{"username":"' + strUser + '"}');
+        xmlhttp.send('{"username":"' + name + '"}');
 
     }
 }

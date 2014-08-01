@@ -17,7 +17,7 @@ router.get('/', function(req, res)
     var temp_account = new account.Account();
     temp_account.getAccountsByEntrepreneurId(logged_account._id , function(err, found_accounts)
     {
-        var accounts = ["None"];
+        var accounts = [];
         if ( err ) return console.error( err );
         if(null != found_accounts)
         {
@@ -171,21 +171,24 @@ router.post('/deleteUser', function(req, res)
 
             virtual_account.getAccountFromUsername(json_data.username,function(err, found_account)
             {
-                found_account.remove();
-
-                virtual_account.getAccountsByEntrepreneurId(logged_account._id , function(err, found_accounts)
+                found_account.remove(function()
                 {
-                    var accounts = ["None"];
-                    if ( err ) return console.error( err );
-                    if(null != found_accounts)
+                    virtual_account.getAccountsByEntrepreneurId(logged_account._id , function(err, found_accounts)
                     {
-                        found_accounts.forEach(function(account_found)
+                        var accounts = [];
+                        if ( err ) return console.error( err );
+                        if(null != found_accounts)
                         {
-                            accounts.push(account_found.username);
-                        });
-                    }
-                    res.render('manageRestaurateur', {accounts: accounts});
+                            found_accounts.forEach(function(account_found)
+                            {
+                                accounts.push(account_found.username);
+                            });
+                        }
+                        res.render('manageRestaurateur', {accounts: accounts});
+                    });
                 });
+
+
             });
         });
     }
@@ -244,16 +247,14 @@ router.post('/modifyUser', function(req, res)
                         if (err) return console.error(err);
                         if (null != found_restaurants)
                         {
-                            found_restaurants.forEach(function (restaurant)
-                            {
-                                selected_restaurants.push(restaurant.name);
-                            });
+
+                            selected_restaurants.push(found_restaurants.name);
 
                         }
 
-                        restaurants = restaurants.filter(function(used_restaurant) {
+                        /*restaurants = restaurants.filter(function(used_restaurant) {
                             return selected_restaurants.indexOf(used_restaurant) === -1;
-                        });
+                        });*/
 
                         res.render('modifyRestaurateurAccount', {account: found_account, available_restaurants: restaurants, selected_restaurants: selected_restaurants});
 
@@ -343,14 +344,8 @@ router.post('/confirmedModifications', function(req, res)
         var associated_restaurants = new restaurant.Restaurant();
         associated_restaurants.getRestaurantsByRestaurateurId(restaurateur_id , function(err, found_restaurants)
         {
-            found_restaurants.forEach(function (restaurant)
-            {
-
-                restaurant.restaurateur_id = null;
-
-                restaurant.save();
-            });
-
+            found_restaurants.restaurateur_id = null;
+            found_restaurants.save();
 
         });
     };

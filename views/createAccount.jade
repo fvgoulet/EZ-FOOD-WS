@@ -65,7 +65,7 @@ block content
                             input(id='userZipCode', name='userZipCode', type='text', placeholder='ZIP Code', value='#{userZipCode}',class='form-control', required autofocus, autocomplete="off")
                     tr
                         td
-                            input#btnSubmitAccount(type="button", value="Create Account", onclick="validateAccountFields();showAccountConfirmation();", disabled)
+                            input#btnSubmitAccount(type="button", value="Create Account", onclick="validateAccountFields();", disabled)
                         td
             else
                 table
@@ -127,7 +127,7 @@ block content
                             input(id='userZipCode', name='userZipCode',class='form-control', type='text', placeholder='ZIP Code', required autofocus, autocomplete="off")
                     tr
                         td
-                            input#btnSubmitAccount(type="button", value="Create Account", onclick="validateAccountFields();showAccountConfirmation();", disabled)
+                            input#btnSubmitAccount(type="button", value="Create Account", onclick="validateAccountFields();", disabled)
                         td
 
     div#confirmationCreateAccountModal.modal

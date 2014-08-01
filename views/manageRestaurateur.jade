@@ -1,15 +1,36 @@
+
 block content
-
     h2 Manage Restaurateur
-    br
-    div#exitingRetaurateur
-        | Available restaurateur :
-        select#avalaibleRestaurateur
-            - for (var x = 0; x < accounts.length ; x++)
-                option(name='#{accounts[x]}') #{accounts[x]}
-        button(type='button', onClick="modifyUser();") Modify
-        button(type='button', onClick="deleteUser();") Delete
+    div#buttonholder
+        button(type='button', onClick="showAddNewRestaurateur();") Create
 
-    div#addNewRestaurateur
-        button(type='button', onClick="showAddNewRestaurateur();") Add new
+    table#menuTable
+        if(accounts != null && accounts.length > 0)
+            tr
+                td  #{accounts[0]}
+                td
+                    button(type='button', onClick="modifyRestaurateur('#{accounts[0]}');") Modify
+                td
+                    button(type='button', onClick="setConfirmationDeleteRestaurateur('#{accounts[0]}');") Delete
+            - for (var i=1; i<accounts.length ; i++)
+                tr
+                    td.tdTopBorder  #{accounts[i]}
+                    td.tdTopBorder
+                        button(type='button', onClick="modifyRestaurateur('#{accounts[i]}');") Modify
+                    td.tdTopBorder
+                        button(type='button', onClick="setConfirmationDeleteRestaurateur('#{accounts[i]}');") Delete
+        else
+            tr
+                td This is not the restaurateur you are looking for!
+                td
+                    button(type='button', disabled) Modify
+                td
+                    button(type='button', disabled) Delete
 
+    div#deleteAccountModal.modal
+        div.modalHolder
+            h2 Delete restaurateur
+            p DON'T DO IT JIMMY
+            input(id='accountToDelete' ,name='accountToDelete', type='hidden', value='')
+            button(type='button', onClick="deleteRestaurateur()") I'm firing ma fireball!
+            button(type='button', onClick="modalVisbility(document.getElementById('deleteAccountModal'));") Boom, counterspell!

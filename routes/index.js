@@ -32,6 +32,9 @@ router.get('/', function(req, res) {
     {
         cart = req.session.cart;
     }
+    if( cart.length == 0) {
+        req.session.actual_restaurant_id = null;
+    }
     //////////////////
     if(account) {
         if (1 == account.category)
@@ -43,7 +46,7 @@ router.get('/', function(req, res) {
         }
         else if (2 == account.category)
         {
-            virtual_restaurant.getRestaurantByRestaurateurId(account._id, function (err, found_restaurant)
+            virtual_restaurant.getRestaurantsByRestaurateurId(account._id, function (err, found_restaurant)
             {
                 var found_restaurants = [];
                 found_restaurants.push(found_restaurant);
@@ -113,7 +116,7 @@ router.post('/checkout', function(req, res)
             new_order.save(function(err)
             {
                 if ( err ) return console.error( err );
-
+                req.session.cart = [];
                 res.send(new_order.getId());
 
                 var account_schema = new account.Account();
@@ -188,11 +191,22 @@ router.post('/addItemToCart', function(req, res)
             var virtual_menu_item = new menu_item.MenuItem();
             virtual_menu_item.getMenuItemById(json_data["item_id"], function (err, found_menu_item)
             {
-
                 var cart = json_data["cart_items"];
 
+                var item_is_in_cart = false;
+                for(var x = 0; x < cart.length; x++)
+                {
+                    if(found_menu_item.name == cart[x].item_name)
+                    {
+                        item_is_in_cart = true;
+                        cart[x].item_quantity = (parseInt(cart[x].item_quantity) + 1).toString();
+                    }
+                }
+                if(item_is_in_cart == false)
+                {
+                    cart.push({item_name:found_menu_item.name, item_price:found_menu_item.price, item_id:found_menu_item._id, item_quantity:"1"});
+                }
 
-                cart.push({item_name:found_menu_item.name, item_price:found_menu_item.price, item_id:found_menu_item._id, item_quantity:"1"});
 
                 req.session.cart = cart;
                 res.render('Cart', {account: logged_account, cart: cart});
@@ -214,7 +228,6 @@ router.post('/updateCart', function(req, res)
     if (req.method == 'POST') {
         var post_data = '';
 
-
         req.on('data', function (data)
         {
             post_data += data;
@@ -224,14 +237,19 @@ router.post('/updateCart', function(req, res)
             var json_data = JSON.parse(post_data);
 
             var cart = json_data["cart_items"];
-
+            req.session.cart = cart;
             if( cart.length == 0)
             {
-
                 req.session.actual_restaurant_id = null;
+                res.send('cart_empty');
             }
-            req.session.cart = cart;
-            res.render('Cart', {account: logged_account, cart: cart});
+            else
+            {
+                res.render('Cart', {account: logged_account, cart: cart});
+            }
+
+
+
         });
     }
 });

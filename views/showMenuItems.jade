@@ -1,8 +1,9 @@
 
 block content
-    - for (var x = 0; x < menu_items.length ; x++)
-        li.restaurantLink
-            h4 #{menu_items[x].name}
-            h4 #{menu_items[x].description}
-            h4 #{menu_items[x].price}$
-            button(onclick="addItemToCart('#{menu_items[x]._id}');") Add
+    ul
+        - for (var x = 0; x < menu_items.length ; x++)
+            li.restaurantLink
+                h4 #{menu_items[x].name}
+                h4 #{menu_items[x].description}
+                h4 #{menu_items[x].price}$
+                button(onclick="addItemToCart('#{menu_items[x]._id}');") Add

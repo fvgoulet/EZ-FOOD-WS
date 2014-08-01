@@ -6,6 +6,7 @@ var menu_item = require('../public/Utilities/MenuItem');
 var order = require('../public/Utilities/Order');
 var mail_sender = require('../public/Utilities/MailSender');
 var fs = require('fs');
+var account = require('../public/Utilities/Account');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -42,8 +43,10 @@ router.get('/', function(req, res) {
         }
         else if (2 == account.category)
         {
-            virtual_restaurant.getRestaurantsByRestaurateurId(account._id, function (err, found_restaurants)
+            virtual_restaurant.getRestaurantByRestaurateurId(account._id, function (err, found_restaurant)
             {
+                var found_restaurants = [];
+                found_restaurants.push(found_restaurant);
                 res.render('index', {account: account, restaurants: found_restaurants, fs_module:fs});
             });
         }
@@ -101,6 +104,7 @@ router.post('/checkout', function(req, res)
             {
                 new_order.addItem(cart_item["item_id"], cart_item["item_quantity"]);
             });
+            new_order.setDeliveryAddressName(json_data["selected_address"]);
             new_order.setStatus(1);
             new_order.setRestaurantId(req.session.actual_restaurant_id)
 
@@ -110,7 +114,7 @@ router.post('/checkout', function(req, res)
 
                 res.send(new_order.getId());
 
-                mail_sender = new mail_sender.MailSender();
+                var mailSender = new mail_sender.MailSender();
                 var client_name = logged_account.firstName + " " + logged_account.lastName;
                 var client_email = logged_account.email;
                 var subject = "EZ-Food : Your order has been passed !";
@@ -123,8 +127,8 @@ router.post('/checkout', function(req, res)
                     content = content + cart_item["item_name"] + "    "+ cart_item["item_quantity"] + "    "+ cart_item["item_price"] + "$\n";
                     total_price = total_price + (parseInt(cart_item["item_quantity"]) * parseFloat(cart_item["item_price"]).toFixed(2));
                 });
-                content = content + "\nThat make a total of : " + total_price + "$.\n"
-                mail_sender.sendMail(client_name, client_email, subject, content);
+                content = content + "\nThat make a total of : " + parseFloat(total_price).toFixed(2) + "$.\n"
+                mailSender.sendMail(client_name, client_email, subject, content);
             });
 
         });
@@ -166,6 +170,7 @@ router.post('/addItemToCart', function(req, res)
         });
     }
 });
+
 router.post('/updateCart', function(req, res)
 {
     var logged_account;
@@ -188,11 +193,10 @@ router.post('/updateCart', function(req, res)
             var json_data = JSON.parse(post_data);
 
             var cart = json_data["cart_items"];
-            console.log("iciiiiiiiiiiiiiii");
-            console.log(cart);
+
             if( cart.length == 0)
             {
-                console.log("To nullllllllllllllllll");
+
                 req.session.actual_restaurant_id = null;
             }
             req.session.cart = cart;
@@ -200,6 +204,57 @@ router.post('/updateCart', function(req, res)
         });
     }
 });
+
+router.post('/addNewAddress', function(req, res)
+{
+    var logged_account;
+
+    if ((req.session.account))
+    {
+        logged_account = JSON.parse(req.session.account).account;
+    }
+
+    if (req.method == 'POST') {
+        var post_data = '';
+
+
+        req.on('data', function (data)
+        {
+            post_data += data;
+        });
+        req.on('end', function ()
+        {
+            var json_data = JSON.parse(post_data);
+
+            var actual_account = new account.Account();
+            actual_account.getAccount(logged_account.username, logged_account.password, function(err, found_account)
+            {
+                if ( err ) return console.error( err );
+                if(null != found_account)
+                {
+                    console.log('Found account : ');
+                    console.log(found_account);
+                    actual_account.setAccount(found_account);
+                }
+
+                actual_account.addDeliveryAddress(json_data['address_name'], json_data['address_civicNumber'],
+                    json_data['address_appNumber'], json_data['address_street'],
+                    json_data['address_city'],json_data['address_province'],json_data['address_zipCode']);
+
+
+
+                if(actual_account.save())
+                {
+                    req.session.account = JSON.stringify(actual_account);
+
+                    res.render('Cart', {account: found_account, cart: req.session.cart});
+                }
+            });
+
+        });
+    }
+});
+
 router.post('/showMenus', function(req, res)
 {
 

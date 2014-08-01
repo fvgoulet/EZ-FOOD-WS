@@ -1,0 +1,104 @@
+
+block content
+    script(type='text/javascript', src='/javascripts/clientOrdersManagement.js')
+
+    h2 Orders Management
+    br
+    div#ordersPending
+        h3 Pending Orders
+        table
+            thead
+                th OrderId
+                th ClientId
+                th Delivery Address
+                th Reception
+                th Due
+                th Items
+                th Action
+            tbody
+                each order, i in pendingOrders
+                    tr
+                        td #{order._id}
+                        td #{order.client_id}
+                        td #{order.delivery_address_name}
+                        td #{order.order_timestamp}
+                        td #{order.delivery_time}
+                        td
+                            each item, i in order.items
+                                p #{item.item_id} X #{item.quantity}
+
+                        td
+                            button(type='button', onClick="changeOrderStatus('#{order._id}', 2);") Prepare Order
+
+
+
+    br
+    div#ordersInPreparation
+        h3 Orders In Preparation
+        table
+            thead
+                th ClientId
+                th Delivery Address
+                th Reception
+                th Due
+                th Items
+                th Action
+            tbody
+                each order, i in inPreparationOrders
+                    tr
+                        td #{order._id}
+                        td #{order.client_id}
+                        td #{order.delivery_address_name}
+                        td #{order.order_timestamp}
+                        td #{order.delivery_time}
+                        td
+                            each item, i in order.items
+                                p #{item.item_id} X #{item.quantity}
+
+                        td
+                            button(type='button', onClick="changeOrderStatus('#{order._id}', 3);") Set order to ready
+
+    br
+    div#ordersReady
+        h3 Orders Ready
+        table
+            thead
+                th ClientId
+                th Delivery Address
+                th Reception
+                th Due
+                th Items
+            tbody
+                each order, i in readyOrders
+                    tr
+                        td #{order._id}
+                        td #{order.client_id}
+                        td #{order.delivery_address_name}
+                        td #{order.order_timestamp}
+                        td #{order.delivery_time}
+                        td
+                            each item, i in order.items
+                                p #{item.item_id} X #{item.quantity}
+
+
+    br
+    div#ordersDelivered
+        h3 Delivered Orders
+        table
+            thead
+                th ClientId
+                th Delivery Address
+                th Reception
+                th Due
+                th Items
+            tbody
+                each order, i in deliveredOrders
+                    tr
+                        td #{order._id}
+                        td #{order.client_id}
+                        td #{order.delivery_address_name}
+                        td #{order.order_timestamp}
+                        td #{order.delivery_time}
+                        td
+                            each item, i in order.items
+                                p #{item.item_id} X #{item.quantity}

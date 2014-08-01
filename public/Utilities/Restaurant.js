@@ -41,9 +41,9 @@ function Restaurant()
     {
         restaurant_model.find( { entrepreneur_id: entrepreneur_id }, callback);
     };
-    this.getRestaurantsByRestaurateurId = function(restaurateur_id , callback)
+    this.getRestaurantByRestaurateurId = function(restaurateur_id , callback)
     {
-        restaurant_model.find( { restaurateur_id: restaurateur_id }, callback);
+        restaurant_model.findOne( { restaurateur_id: restaurateur_id }, callback);
     };
     this.getAllRestaurants = function(callback) 
     {

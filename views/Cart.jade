@@ -51,6 +51,43 @@ if cart != null
 
             button(type='button', onClick="closeConfirmation();") Close
 
+    div#addNewAddress.modal
+        div.modalHolder
+            h2 Add a new delivery address :
+            form(name="account")
+                table
+                    tr
+                        td Name *:
+                        td
+                            input(id='name', name='userCivicNumber',type='text', placeholder='Name',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td Civic No. *:
+                        td
+                            input(id='civicNumber', name='userCivicNumber',type='text', placeholder='Civic No.',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td Appartment :
+                        td
+                            input(id='appNumber', name='userAppNumber',type='text', placeholder='App. No. (Optional)',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td Street *:
+                        td
+                            input(id='street', name='userStreet', type='text', placeholder='Street',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td City *:
+                        td
+                            input(id='city', name='userCity', type='text', placeholder='City',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td Province *:
+                        td
+                            input(id='province', name='userProvince', type='text', placeholder='Province',class='form-control', required autofocus, autocomplete="off")
+                    tr
+                        td ZIP Code *:
+                        td
+                            input(id='zipCode', name='userZipCode', type='text', placeholder='ZIP Code',class='form-control', required autofocus, autocomplete="off")
+
+                button(type='button', onClick="addNewAddress();") Add Address
+                button(type='button', onClick="showAddNewAddress();") Cancel
+
     div#confirmationCommandModal.modal
         div.modalHolder
             h2 Confirmation
@@ -87,8 +124,11 @@ if cart != null
                 | Select the date and time :
                 input(type="datetime-local", name="date_time_picker", value="#{moment(Date.now()).format('YYYY-MM-DDThh:mm:ss')}", min="#{moment(Date.now()).format('YYYY-MM-DDThh:mm:ss')}")
             h3 Choose the delivery address :
-            select(name="address") Address :
-            button(type='button') Add new address
+            select#address(name="address") Address :
+                option Default
+                - for (var x = 0; x < account.deliveryAddresses.length ; x++)
+                    option(id="#{account.deliveryAddresses[x].name}") #{account.deliveryAddresses[x].name}
+            button(type='button', onclick="showAddNewAddress();") Add new address
             br
             button(type='button', onClick="checkout();confirmationCommandModal();") Gimme that Food !
             button(type='button', onClick="confirmationCommandModal();") Nop

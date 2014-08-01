@@ -6,6 +6,7 @@ var mongoose = require( 'mongoose' );
 schema = mongoose.Schema({
     client_id : String,
     restaurant_id : String,
+    delivery_address_name : String,
     order_timestamp : { type : Date, default: Date.now },
     delivery_time: { type : Date, default: Date.now },
     items : [{item_id:String, quantity:Number}],
@@ -23,7 +24,10 @@ var order_model = mongoose.model( 'Orders', schema);
 
 function Order()
 {
-
+    this.getOrderById = function(id, callback) //where callback = function ( err, found_account )
+    {
+        order_model.findOne( { _id : id }, callback);
+    };
     //Constructor
 
     this.order = new order_model();
@@ -39,7 +43,10 @@ function Order()
     {
         this.order.client_id = id;
     };
-
+    this.setDeliveryAddressName = function(name)
+    {
+        this.order.delivery_address_name = name;
+    };
     this.setRestaurantId = function(id)
     {
         this.order.restaurant_id = id;
@@ -56,6 +63,11 @@ function Order()
     this.setStatus = function(Number)
     {
         this.order.status = Number;
+    };
+
+    this.getRelatedOrdersByRestaurant = function(restaurateurId, callback)
+    {
+        order_model.find({restaurant_id : restaurateurId}, callback)
     };
 
     this.getOrdersByStatus = function(status, callback) //where callback = function ( err, found_account )

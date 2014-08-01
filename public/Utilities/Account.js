@@ -1,6 +1,14 @@
 /**
  * Created by Alex on 2014-06-11.
  */
+
+
+// Differents categories
+// admin - 0
+// entrepreneur -1
+// restaurateur -2
+// client - 3
+// livreur - 4
 var mongoose = require( 'mongoose' );
 general_schema = mongoose.Schema({
     username : String,
@@ -45,19 +53,47 @@ function Account()
 {
     this.account = new account_model();
 
+
+    this.addDeliveryAddress = function(name, civicNo, apartment, street, city, province, zipCode)
+    {
+        var address = this.getAddressByName(name);
+        if(null == address)
+        {
+            address = {};
+            address['name'] = name;
+            address['civicNo'] = civicNo;
+            address['apartment'] = apartment;
+            address['street'] = street;
+            address['city'] = city;
+            address['province'] = province;
+            address['zipCode'] = zipCode;
+
+            this.account.deliveryAddresses.push(address);
+        }
+    };
+
     this.save = function()
     {
-        console.log('Save Account.');
-        console.log(this.account);
         this.account.save(function(err)
         {
-           console.log('Account saved.');
            if(err)
            {
                console.log(err);
            }
         });
         return true;
+    };
+
+    this.getAddressByName = function(name)
+    {
+        for(var x=0; x < this.account.deliveryAddresses.length; x++)
+        {
+            if (this.account.deliveryAddresses[x].name == name)
+            {
+                return this.account.deliveryAddresses[x];
+            }
+        }
+        return null;
     };
 
     this.getAccount = function(username, password, callback)//function ( err, found_account )

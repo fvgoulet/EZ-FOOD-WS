@@ -32,6 +32,7 @@ var signIn = require('./routes/signIn');
 var listRestaurant = require('./routes/listRestaurant');
 var manageMenu = require('./routes/manageMenu');
 var demandeLivraison = require('./routes/demandeLivraison');
+var ordersManagement = require('./routes/ordersManagement');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -47,7 +48,7 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: '1234567890QWERTY'}));
-app.use(multer({ dest: './uploads/'}))
+app.use(multer({ dest: './uploads/'}));
 
 app.use('/', routes);
 app.use('/createAccount', createAccount);
@@ -59,6 +60,7 @@ app.use('/manageRestaurateur', manageRestaurateur);
 app.use('/listRestaurant', listRestaurant);
 app.use('/manageMenu', manageMenu);
 app.use('/demandeLivraison', demandeLivraison);
+app.use('/ordersManagement', ordersManagement);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

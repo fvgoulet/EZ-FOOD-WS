@@ -118,9 +118,6 @@ router.post('/updateOrderStatus', function(req, res)
 
                         schemaOrder.getOrderById(json_data["order_id"], function(err, order)
                             {
-                                console.log("iciiiiiiiiiiiiiiiiiiiiiiiiii");
-                                console.log(order);
-                                console.log(json_data);
                                 order.status = json_data["order_status"];
 
                                 order.save(function()

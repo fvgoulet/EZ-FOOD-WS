@@ -59,8 +59,6 @@ function Account()
         var address = this.getAddressByName(name);
         if(null == address)
         {
-            console.log("iciiiiiiiiiiiiiiiiiiiiiiiiiiii");
-            console.log(address);
             address = {};
             address['name'] = name;
             address['civicNo'] = civicNo;
@@ -78,7 +76,6 @@ function Account()
     {
         this.account.save(function(err)
         {
-           console.log('Account saved.');
            if(err)
            {
                console.log(err);
@@ -93,7 +90,6 @@ function Account()
         {
             if (this.account.deliveryAddresses[x].name == name)
             {
-                console.log("foundddddddddddddddddddddddddddddddddd");
                 return this.account.deliveryAddresses[x];
             }
         }

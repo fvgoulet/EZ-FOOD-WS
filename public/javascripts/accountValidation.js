@@ -78,7 +78,7 @@ function validateAccountFields(event) {
     }
     else
     {
-        document.account.submit();
+        //document.account.submit();
     }
 }
 
@@ -121,4 +121,83 @@ function checkAccountExist()
     };
     xmlhttp.open("POST","/createAccount/isAccountExist",true);
     xmlhttp.send('{"username":"' + username + '"}');
+}
+
+function showAccountConfirmation()
+{
+    var username = document.getElementById('username').value ;
+    var passwprd = document.getElementById('userPassword').value ;
+    var firstName = document.getElementById('userFirstName').value ;
+    var secondName = document.getElementById('userSecondName').value ;
+    var birthDate = document.getElementById('userBirthDate').value ;
+    var email = document.getElementById('userEmail').value ;
+    var phoneNumber = document.getElementById('userPhoneNumber').value ;
+    var civicNumber = document.getElementById('userCivicNumber').value ;
+    var appNumber = document.getElementById('userAppNumber').value ;
+    var street = document.getElementById('userStreet').value ;
+    var city = document.getElementById('userCity').value ;
+    var province = document.getElementById('userProvince').value ;
+    var zipCode = document.getElementById('userZipCode').value ;
+
+    var informations_div = document.getElementById('accountInformations');
+    informations_div.innerHTML = "";
+
+    var info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "Username : " + username;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "Password : " + passwprd;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "First Name : " + firstName;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "Last Name : " + secondName;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "Birth Date : " + birthDate;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "E-mail : " + email;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "Phone Number : " + phoneNumber;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "Civic Number : " + civicNumber;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "App. No. : " + appNumber;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "Street : " + street;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "City : " + city;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "Province : " + province;
+    informations_div.appendChild(info_paragraph);
+
+    info_paragraph = document.createElement('p');
+    info_paragraph.innerHTML = "ZIP Code : " + zipCode;
+    informations_div.appendChild(info_paragraph);
+
+    var modal = document.getElementById('confirmationCreateAccountModal');
+    modalVisbility(modal);
+}
+
+function modalVisbility(modal){
+    modal.style.visibility = (modal.style.visibility == "visible")?"hidden":"visible";
 }

@@ -43,8 +43,10 @@ router.get('/', function(req, res) {
         }
         else if (2 == account.category)
         {
-            virtual_restaurant.getRestaurantsByRestaurateurId(account._id, function (err, found_restaurants)
+            virtual_restaurant.getRestaurantByRestaurateurId(account._id, function (err, found_restaurant)
             {
+                var found_restaurants = [];
+                found_restaurants.push(found_restaurant);
                 res.render('index', {account: account, restaurants: found_restaurants, fs_module:fs});
             });
         }

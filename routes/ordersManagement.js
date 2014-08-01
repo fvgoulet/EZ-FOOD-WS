@@ -13,14 +13,12 @@ router.get('/', function(req, res)
     var deliveredOrders = [];
     if(req.session.account)
     {
-        console.log("iciiiiiiiiiiiiiiiiiiiii");
         actual_account = JSON.parse(req.session.account).account;
 
         if(actual_account.category === 2)
         {
-            console.log("iciiiiiiiiiiiiiiiiiiiii");
             var schemaRestaurant = new restaurant.Restaurant();
-            schemaRestaurant.getRestaurantsByRestaurateurId(actual_account._id, function(err, restaurant)
+            schemaRestaurant.getRestaurantByRestaurateurId(actual_account._id, function(err, restaurant)
             {
                 if(err) {
                     console.error("Error in Orders getRestaurantsByRestaurateurId: ", err);
@@ -28,9 +26,12 @@ router.get('/', function(req, res)
                 }
 
                 var schemaOrder = new order.Order();
+                console.log("iciiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+                console.log(restaurant);
                 schemaOrder.getRelatedOrdersByRestaurant(restaurant._id, function(err, orders)
                 {
-                    console.log("iciiiiiiiiiiiiiiiiiiiii");
+                    console.log(orders);
+
                     if(err){
                         console.error("Error in Orders getRelatedOrdersByRestaurant: ", err);
                         return console.error("Error in orderManagement/ordersLists: Error searching for orders from restaurant._id = " + restaurant._id, err);
@@ -62,7 +63,7 @@ router.get('/', function(req, res)
                             }
                         }
                     });
-                    console.log(orders);
+
 
                     res.render('ordersManagement',
                         {

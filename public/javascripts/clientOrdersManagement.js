@@ -23,7 +23,7 @@ function showOrderManagement()
     xmlhttp.send();
 }
 
-function changeOrdeStatus(id, status)
+function changeOrderStatus(id, status)
 {
     var xmlhttp;
     if (window.XMLHttpRequest)
